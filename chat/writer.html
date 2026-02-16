@@ -455,7 +455,7 @@ a.button.menu {
       <P style="display: none;">DeepAI</P>
     </a>
     <div class="nav-buttons">
-        <a class="button headerbutton aichat" href="${apiResultHtml[i].url_handle}.html">Chat</a>
+        <a class="button headerbutton aichat" href="gpt-chat.html">Chat</a>
         <a class="button headerbutton imagegenerator" href="../machine-learning-model/text2img.html">Image Generator</a>
         <a class="button headerbutton videogenerator" href="../video.html">Video</a>
         <a class="button headerbutton audiogenerator" href="../music.html">Music</a>
@@ -467,8 +467,8 @@ a.button.menu {
             <ul>
                 <li class="dropdown">
                     <button class="drop-menu-button" id="dropMenuButton">
-                        <img src="static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
-                        <img src="static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
+                        <img src="../static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
+                        <img src="../static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
                     </button>
                     <ul id="mainNavDropdown">
                         <div class="exit">
@@ -486,24 +486,24 @@ a.button.menu {
                           </svg>
                         </div>
                         <div id="navProfileSection" class="nav-profile-section">
-                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/dashboard/profile')" src="static/images/dolphin-icon.jpeg" />
+                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')" src="../static/images/dolphin-icon.jpeg" />
                           <div class="nav-usernames">
                             <p class="nav-profilename" id="navUserName"></p>
                             <p class="nav-username" id="navUserEmail"></p>
                           </div>
                         </div>
-                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/dashboard/profile')">Account Settings</button>
+                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')">Account Settings</button>
                         <div class="menu-options">
                           <div class="pages">
                             <a href="../machine-learning-model/text2img.html" class="ai-generators">Image Generator</a>
                             <a href="../video.html" class="ai-generators">Video Generator</a>
                             <a href="../music.html" class="ai-generators">Music Generator</a>
-                            <a href="${apiResultHtml[i].url_handle}.html" class="ai-generators">Chat</a>
+                            <a href="gpt-chat.html" class="ai-generators">Chat</a>
                             <a href="../machine-learning-model/image-editor.html" class="ai-generators">Photo Editor</a>
                             <a href="../pricing.html" class="pricing">Pricing</a>
                             <a href="definitions" class="glossary">Glossary</a>
                             <a href="../docs.html" class="apidocs">Docs</a>
-                            <a href="writer.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
+                            <a href="writer.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="../static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
                             <a href="../privacy-policy.html" class="privacy-policy" target="_blank">Privacy Policy</a>
                           </div>
                           <div class="menu-settings">
@@ -569,11 +569,11 @@ a.button.menu {
         </script>
         
         
-<script async src="static/js/marked.js"></script>
-<script async src="static/js/marked-highlight.js"></script>
-<script async src="static/js/highlight.js"></script>
-<script async src="static/js/maquette.js"></script>
-<script async src="static/js/katex.js"></script>
+<script async src="../static/js/marked.js"></script>
+<script async src="../static/js/marked-highlight.js"></script>
+<script async src="../static/js/highlight.js"></script>
+<script async src="../static/js/maquette.js"></script>
+<script async src="../static/js/katex.js"></script>
 <script>
   function loadCSS(href) {
     const link = document.createElement('link');
@@ -583,8 +583,8 @@ a.button.menu {
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    loadCSS("/static/js/sunburst.css");
-    loadCSS("/static/js/katex.css");
+    loadCSS("../static/js/sunburst.css");
+    loadCSS("../static/js/katex.css");
   });
 
 </script>
@@ -594,7 +594,7 @@ a.button.menu {
   <!-- Chat History Button (top left) -->
   <div class="sidebar-toggle-container">
     <button class="sidebar-toggle" id="sidebarToggle">
-      <img src="static/images/history.svg" alt="history" class="history-icon"/>
+      <img src="../static/images/history.svg" alt="history" class="history-icon"/>
       <svg class="close-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14 3.5L7 11L14 18.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -715,7 +715,7 @@ a.button.menu {
       <span class="message">Summarizing!</span>
     </div>
     <div id="errorpopup">
-      <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+      <img class="errorIcon" src="../static/images/error-icon.svg" alt="Error Icon" />
       <span class="message">An error has occurred</span>
     </div>
     <!-- Persistent Compose Area -->
@@ -771,7 +771,7 @@ a.button.menu {
             </svg>
           </button>
           <button id="recordButton" title="Speech To Text">
-            <img src="static/images/mic.svg" alt="Mic Icon" class="mic-icon">
+            <img src="../static/images/mic.svg" alt="Mic Icon" class="mic-icon">
           </button>
           <button id="chatSubmitButton" type="button" onclick="chatSubmit('', '', true)">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -810,15 +810,15 @@ a.button.menu {
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="genius" data-locked="true">
             <span>Genius</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="supergenius" data-locked="true">
             <span>Super Genius</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="onlinegenius" data-locked="true">
             <span>Online Genius</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="deepseek-v3.2">
             <span>DeepSeek V3.2</span>
@@ -828,23 +828,23 @@ a.button.menu {
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="gemini-3-pro-preview" data-locked="true">
             <span>Gemini 3 Pro</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="claude-4.5-opus" data-locked="true">
             <span>Claude 4.5 Opus</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="chatgpt-4o-latest" data-locked="true">
             <span>ChatGPT 4o</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="grok-4" data-locked="true">
             <span>Grok 4</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
           <a href="javascript:void(0)" class="chat-chip chat-model-chip" data-model="gpt-5.2" data-locked="true">
             <span>GPT-5.2</span>
-            <img src="static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
+            <img src="../static/images/lock-icon.png" class="lock-icon" alt="Pro" style="width: 12px; height: 12px; opacity: 0.6; position: static; transform: none; border: none; padding: 0; pointer-events: auto;">
           </a>
 
           <!-- Chat Presets (initially hidden) -->
@@ -1162,7 +1162,7 @@ a.button.menu {
             <span class="message">Success!</span>
         </div>
         <div id="errorpopup">
-            <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+            <img class="errorIcon" src="../static/images/error-icon.svg" alt="Error Icon" />
             <span class="message">An error occurred</span>
         </div>
 
@@ -1174,26 +1174,26 @@ a.button.menu {
                     <div class="social-icon">
                         <div class="icon-container x">
                             <a id="x-link" target="_blank">
-                            <img src="static/images/social-x-icon.svg">
+                            <img src="../static/images/social-x-icon.svg">
 
                             </a>
                             <p class="social-name">X</p>
                         </div>
                     <div class="icon-container facebook">
                         <a id="facebook-link" target="_blank">
-                        <img src="static/images/social-facebook-icon.svg">
+                        <img src="../static/images/social-facebook-icon.svg">
                         </a>
                         <p class="social-name">Facebook</p>
                     </div>
                     <div class="icon-container linkedin">
                         <a id="linkedin-link" target="_blank">
-                        <img src="static/images/social-linkedin-icon.svg">
+                        <img src="../static/images/social-linkedin-icon.svg">
                         </a>
                         <p class="social-name">Linkedin</p>
                     </div>
                     <div class="icon-container reddit">
                         <a id="reddit-link" target="_blank">
-                        <img src="static/images/social-reddit-icon.svg">
+                        <img src="../static/images/social-reddit-icon.svg">
                         </a>
                         <p class="social-name">Reddit</p>
                     </div>
@@ -1201,7 +1201,7 @@ a.button.menu {
                     <div class="social-link-copy">
                         <input type="text" id="social-link-input" readonly>
                         <button class="copy-button" onclick="navigator.clipboard.writeText(document.getElementById('social-link-input').value)">
-                            <img src="static/images/social-copy-icon.svg" alt="Copy">
+                            <img src="../static/images/social-copy-icon.svg" alt="Copy">
                         </button>
                     </div>
                 </div>
@@ -1267,7 +1267,7 @@ a.button.menu {
             </div>
             <div class="nudge-popup-body" style="padding: 0px 25px 20px 25px;">
                 <div class="nudge-pro-body-title">
-                    <img class="profile-pro-icon nudge-pro-icon" src="static/images/pro-badge.svg" />
+                    <img class="profile-pro-icon nudge-pro-icon" src="../static/images/pro-badge.svg" />
                     <h2>Consider DeepAI Pro</h2>
                 </div>
                 <ul class="pro-features-list" style="list-style: none; padding: 0; margin: 0 0 20px 0;">
@@ -1362,15 +1362,15 @@ a.button.menu {
   <span>|</span>
   <span>DPO: <a href="mailto:dpo@deepai.org" style="color:rgba(255,255,255,0.65);">dpo@deepai.org</a></span>
   <span>|</span>
-  <a href="privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
+  <a href="../privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
   <span>|</span>
-  <a href="cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
+  <a href="../cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
   <span>|</span>
   <a href="terms-of-service/terms-of-service.html" style="color:rgba(255,255,255,0.65);">Terms of Service</a>
   <span>|</span>
-  <a href="dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
+  <a href="../dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
   <span>|</span>
-  <a href="data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
+  <a href="../data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
 </div>
 
 </footer>
@@ -1415,7 +1415,7 @@ hideElementsById(["forgot-password","user-email-error"]);const reenterPwdDisplay
 reenterPwd.setAttribute('style',`display: ${reenterPwdDisplay};`);}}
 function authOptions(toggle){hideElementsById(['user-email-error']);const moreOptions={true:{visible:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"],hidden:["switch-to-email","social-auth-google"]},false:{visible:["switch-to-email","social-auth-google"],hidden:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"]}};const isMoreOptions=toggle==="moreOptions";showElementsById(moreOptions[String(isMoreOptions)].visible);hideElementsById(moreOptions[String(isMoreOptions)].hidden);const userEmailInput=document.getElementById('user-email');if(userEmailInput)
 userEmailInput.focus();const loginButton=document.getElementById('login-via-email-id');if(toggle==="moreOptions"&&loginButton&&loginButton.innerHTML==="Login"){hideElementsById(["reenter-password-container-id"]);}}
-function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/pricing')){return;}
+function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/deepai-eu/pricing')){return;}
 const userProfile=getUserProfile();if(userProfile){if(!(userProfile.user_has_deepai_pro||userProfile.user_is_pay_as_you_go)){openSubscription();}}}
 function openSubscribeFromGenius(tag){const modalId=tag==="image"?"genius-images-modal":"genius-chat-modal";const geniusModal=document.getElementById(modalId);if(geniusModal&&typeof geniusModal.close==='function'){geniusModal.close();openSubscription();}
 else{console.warn(`Modal with ID '${modalId}' not found or is not a closeable element.`);openSubscription();}}
@@ -1437,7 +1437,7 @@ else if(pagePathCookie.length>100000){}
 else{const newPagePathCookie=[pagePathCookie,thisLocation];localStorage.setItem('pagePath',newPagePathCookie.toString());}
 const localLatestPagePathCookie=localStorage.getItem('pagePath');cookieUserReeferrer=localCookieUserReeferrer||undefined;latestPagePathCookie=localLatestPagePathCookie||undefined;}
 catch(e){console.log("error in reeferrer madness: "+e);}
-if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="/static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
+if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="../static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
 else{console.log('not loading dialog polyfill');}
 try{if(!window.localStorage||!window.sessionStorage)
 (function(){const Storage=function(type){function createCookie(name,value,days){let date,expires;if(days){date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));expires="; expires="+date.toUTCString();}
@@ -1484,8 +1484,8 @@ dropdownUser.style.display="flex";if(profileSecNav)
 profileSecNav.style.display="flex";if(profileButtonNav)
 profileButtonNav.style.display="flex";if(navUsername&&user_object.username)
 navUsername.textContent=user_object.username;if(navUseremail&&user_object.email)
-navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/dashboard/profile')");button.innerHTML="My Profile";}
-const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/dashboard/profile')");signupDropdownLi.innerHTML="My Profile";}
+navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");button.innerHTML="My Profile";}
+const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");signupDropdownLi.innerHTML="My Profile";}
 for(const loginButton of Array.from(document.getElementsByClassName('login-button'))){const button=loginButton;button.setAttribute('onclick',"logout()");button.innerHTML="Log Out";}
 const loginDropdown=document.getElementById('login-button-dropdown');if(loginDropdown){loginDropdown.setAttribute('onclick',"logout()");loginDropdown.innerHTML="Logout";}
 applyCachedHeartsToHeartsOnPage();await refreshHeartsFromServer();}
@@ -1608,7 +1608,7 @@ return;login_user_email.classList.add('loading');const response=await fetch(app_
 login_modal.close();if(nudgeLoginModal)
 nudgeLoginModal.classList.remove("active");await auth();subscriptionPopupAfterAuth();}
 else{login_user_email.classList.remove('loading');const login_fail="Hmm, something went wrong. Let's try that again.";const p=document.getElementById('user-email-error');if(p){p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}}
-async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/';}
+async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/deepai-eu/index.html';}
 async function resetPassword(e){const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
 const login_user_email=document.getElementById('user-email');if(!login_user_email)
 return;const login_user_email_value=login_user_email.value;const formData=new FormData();formData.append('email',login_user_email_value);const response=await fetch(app_base_url+"/password_reset_trigger",{method:'POST',credentials:'include',body:formData,});console.log(response);if(response.ok==true&&p){const submission_success="Check your email inbox to reset password.";console.log(p);p.innerHTML=submission_success;p.className='good-auth-error';p.setAttribute('style','display: flex;');}
@@ -1687,7 +1687,7 @@ fetchFromAPI();return cached.data;}
 return await fetchFromAPI();}
 catch(error){console.error('Error reading geo IP cache:',error);return await fetchFromAPI();}};</script>
 
-        <script>const chat_style="writer";const splitterJsUrl="/static/js/splitter.js";;</script>
+        <script>const chat_style="writer";const splitterJsUrl="../static/js/splitter.js";;</script>
 
         <script>;var contextualAdProvider='nobody';const forceAdProvider=new URLSearchParams(window.location.search).get('forceAdProvider');var koahReadyCallbacks=[];var koahLoaded=false;function onKoahReady(callback){if(koahLoaded){callback();}
 else{koahReadyCallbacks.push(callback);}}
@@ -1712,7 +1712,7 @@ gtag('event','exp_contextual_ads_variant_B');}
 catch(e){}}
 notifyAdProviderReady();};document.head.appendChild(script);})();}
 else{console.log('user has paid for no ads, not loading contextual ads');notifyAdProviderReady();}}}}).catch((error)=>{console.error('Failed to load geo IP data:',error);geoData=null;});function loadProrataAds(){console.log('Prorata ads enabled - API-based integration ready');}
-function loadKoahAds(){const script=document.createElement('script');script.async=true;script.type='module';script.src='https://app.koah.ai/js?token=8a686266-fd49-462b-8480-f7326a2566f7';script.onload=function(){koahLoaded=true;koahReadyCallbacks.forEach(cb=>cb());};document.head.appendChild(script);}
+function loadKoahAds(){if(!window._eu_marketing_consent)return;const script=document.createElement('script');script.async=true;script.type='module';script.src='https://app.koah.ai/js?token=8a686266-fd49-462b-8480-f7326a2566f7';script.onload=function(){koahLoaded=true;koahReadyCallbacks.forEach(cb=>cb());};document.head.appendChild(script);}
 function loadThradAds(){console.log('Thrad ads enabled - API-based integration ready');};;"use strict";const baseChatModes=[{value:"standard",label:"Standard",locked:false},{value:"online",label:"Online",locked:false},{value:"math",label:"Math",locked:false},{value:"genius",label:"Genius",locked:true},{value:"supergenius",label:"Super Genius",locked:true},{value:"onlinegenius",label:"Online Genius",locked:true},];const additionalModels=[{value:"deepseek-v3.2",label:"DeepSeek V3.2",locked:false},{value:"gpt-4o-mini",label:"GPT-4o mini",locked:true},{value:"gemini-2.5-flash-lite",label:"Gemini 2.5 Flash Lite",locked:false},{value:"gpt-4.1",label:"GPT-4.1",locked:true},{value:"o4-mini",label:"o4 Mini",locked:true},{value:"o3",label:"o3",locked:true},{value:"gpt-4.1-nano",label:"GPT-4.1 Nano",locked:false},{value:"gpt-oss-120b",label:"GPT OSS 120B",locked:false},{value:"gemma-3-12b-it",label:"Gemma 3 12B",locked:false},{value:"gemini-3-pro-preview",label:"Gemini 3 Pro",locked:true},{value:"claude-4.5-opus",label:"Claude 4.5 Opus",locked:true},{value:"qwen3-30b-a3b",label:"Qwen3 30B",locked:false},{value:"gpt-5-nano",label:"GPT-5 Nano",locked:false},{value:"llama-3.3-70b-instruct",label:"Llama 3.3 70B Instruct",locked:false},{value:"llama-3.1-8b-instant",label:"Llama 3.1 8B Instant",locked:false},{value:"llama-4-scout",label:"Llama 4 Scout",locked:false},{value:"grok-4",label:"Grok 4",locked:true},{value:"gpt-5-chat-latest",label:"GPT-5 Chat Latest",locked:true},{value:"gpt-5.2",label:"GPT-5.2",locked:true},{value:"gemma2-9b-it",label:"Gemma2 9B",locked:false},{value:"chatgpt-4o-latest",label:"ChatGPT 4o Latest",locked:true},];const allChatModes=[...baseChatModes,...additionalModels];const modelState={selectedModel:'',listeners:new Set(),setModel(model){this.selectedModel=model;sessionStorage.setItem("selectedChatMode",model);this.notifyListeners(model);},getModel(){if(!this.selectedModel){const storedMode=sessionStorage.getItem("selectedChatMode");if(storedMode){const mode=allChatModes.find(m=>m.value===storedMode);if(mode&&mode.locked&&!getUserHasPro()){this.selectedModel=getDefaultModel();sessionStorage.setItem("selectedChatMode",this.selectedModel);}
 else{this.selectedModel=storedMode;}}
 else{this.selectedModel=getDefaultModel();}}
@@ -1767,7 +1767,7 @@ return;menu.innerHTML='';allMenuItems=[];const searchContainer=document.createEl
       flex-direction: column;
     `;menu.appendChild(scrollContainer);menu.appendChild(searchContainer);const searchInput=menu.querySelector("#modelSearchInput");const clearButton=menu.querySelector("#modelSearchClear");const searchIcon=menu.querySelector(".chat-history-search-icon");const savedMode=modelState.getModel();const canUseGenius=getUserHasPro();allChatModes.forEach((mode)=>{const item=document.createElement("div");item.className="chat-mode-menu-item";if(mode.value===savedMode){item.classList.add('selected');}
 const shouldBeLocked=mode.locked&&!canUseGenius;if(shouldBeLocked){item.classList.add('chat-mode-locked');}
-if(shouldBeLocked){const lockIcon=document.createElement("img");lockIcon.src="/static/images/lock-icon.png";lockIcon.style.cssText='width: 16px; height: 16px; margin-right: 8px; opacity: 0.6;';lockIcon.alt="Pro subscription required";item.appendChild(lockIcon);}
+if(shouldBeLocked){const lockIcon=document.createElement("img");lockIcon.src="../static/images/lock-icon.png";lockIcon.style.cssText='width: 16px; height: 16px; margin-right: 8px; opacity: 0.6;';lockIcon.alt="Pro subscription required";item.appendChild(lockIcon);}
 const modelName=document.createElement("span");modelName.textContent=mode.label;modelName.style.cssText='flex: 1;';item.appendChild(modelName);if(mode.locked){const geniusBadge=document.createElement("span");geniusBadge.innerHTML='✦ Genius';geniusBadge.style.cssText='background-color: #CBA8FF; color: #552896; padding: 3px 8px; border-radius: 12px; font-size: 12px; white-space: nowrap; flex-shrink: 0;';item.appendChild(geniusBadge);}
 item.addEventListener("click",(e)=>{if(mode.locked&&!canUseGenius){e.stopPropagation();openSubscription();return;}
 modelState.setModel(mode.value);currentLabel.textContent=mode.label;menu.querySelectorAll('.chat-mode-menu-item').forEach(el=>el.classList.remove('selected'));item.classList.add('selected');menu.style.display='none';triggerBtn.classList.remove('open');triggerBtn.classList.remove('menu-below');if(previousFocus instanceof HTMLElement&&previousFocus!==document.body)
@@ -2353,14 +2353,14 @@ historyList.insertBefore(newRow,newChatLabel.nextSibling);}
 const firstLabel=historyList.querySelector('.history-heading-label');if(firstLabel){firstLabel.style.marginTop='0';}
 updateCurrentChatHighlight();}
 function createChatHistoryItem(session){const wrap=document.createElement('div');wrap.classList.add('chat-history-item-wrapper');wrap.dataset.sessionId=session.uuid;const item=document.createElement('div');item.classList.add('chat-history-item');const labelSpan=document.createElement('span');labelSpan.classList.add('chat-history-label');labelSpan.textContent=session.title||'Untitled Chat';item.appendChild(labelSpan);const dots=document.createElement('div');dots.classList.add('chat-history-dots');dots.textContent='⋮';item.appendChild(dots);wrap.appendChild(item);item.addEventListener('click',async()=>{if(session.uuid===currentChatUUID){return;}
-if(session.chat_style&&session.chat_style!==chat_style){const isDashboard=window.location.pathname.startsWith('/dashboard');const base=isDashboard?'/dashboard/chat':'/chat';const stylePath=session.chat_style==="chat"?base:`${base}/${session.chat_style}`;window.location.href=`${stylePath}#${session.uuid}`;return;}
+if(session.chat_style&&session.chat_style!==chat_style){const isDashboard=window.location.pathname.startsWith('/deepai-eu/dashboard');const base=isDashboard?'/dashboard/chat':'/chat';const stylePath=session.chat_style==="chat"?base:`${base}/${session.chat_style}`;window.location.href=`${stylePath}#${session.uuid}`;return;}
 try{const chatData=await getChatHistory(session.uuid);currentChatUUID=session.uuid;history.replaceState(null,'',window.location.pathname+window.location.search+'#'+session.uuid);document.title=(chatData.title||"Chat")+" - DeepAI Chat";clearChat();displayChatHistory(chatData);updateMarkDown();updateCurrentChatHighlight();}
 catch(error){console.error("Error loading chat from sidebar:",error);if(error instanceof ChatNotFoundError){wrap.remove();}}});dots.addEventListener('click',(e)=>{e.stopPropagation();closeGlobalContextMenu();item.classList.add('menu-open');openGlobalContextMenu(dots.getBoundingClientRect());});return wrap;}
 const UUID_PATTERN=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;async function checkUrlForChatId(){const finishLoading=()=>{document.body.classList.remove('loading-chat-history');const convo=document.getElementById('convo');if(convo)
 convo.style.opacity="1";};let chatId=window.location.hash.substring(1);if(chatId&&!UUID_PATTERN.test(chatId)){history.replaceState(null,'',window.location.pathname+window.location.search);chatId="";}
 if(!chatId){chatId=sessionStorage.getItem('redirect_chat_id')||"";sessionStorage.removeItem('redirect_chat_id');}
 if(!chatId){finishLoading();return;}
-try{const chatData=await getChatHistory(chatId);if(chatData.chat_style&&chatData.chat_style!==chat_style){const isDashboard=window.location.pathname.startsWith('/dashboard');const base=isDashboard?'/dashboard/chat':'/chat';const stylePath=chatData.chat_style==='chat'?base:`${base}/${chatData.chat_style}`;window.location.href=`${stylePath}#${chatId}`;return;}
+try{const chatData=await getChatHistory(chatId);if(chatData.chat_style&&chatData.chat_style!==chat_style){const isDashboard=window.location.pathname.startsWith('/deepai-eu/dashboard');const base=isDashboard?'/dashboard/chat':'/chat';const stylePath=chatData.chat_style==='chat'?base:`${base}/${chatData.chat_style}`;window.location.href=`${stylePath}#${chatId}`;return;}
 currentChatUUID=chatId;history.replaceState(null,'',window.location.pathname+window.location.search+'#'+chatId);document.title=(chatData.title||"Chat")+" - DeepAI Chat";currentlyLoadingChat=true;clearChat();displayChatHistory(chatData);updateMarkDown();updateCurrentChatHighlight();finishLoading();}
 catch(error){console.error("Error loading chat:",error);if(error instanceof ChatNotFoundError){history.replaceState(null,'',window.location.pathname+window.location.search);document.title="New Chat - DeepAI Chat";}
 finishLoading();}}
@@ -2373,7 +2373,7 @@ return'Previous 7 Days';if(daysDiff<30)
 return'Previous 30 Days';const m=["January","February","March","April","May","June","July","August","September","October","November","December"];return m[dateObj.getMonth()]+" "+dateObj.getFullYear();}
 async function save_user_sees_ads_value(){let user_sees_ads=false;if(typeof window.fsprebid==='object'){user_sees_ads=true;}
 console.log('user_sees_ads: ',user_sees_ads);const url=app_base_url+'/set_user_sees_ads';const form=new FormData();form.append('user_sees_ads',user_sees_ads+"");const apiResult=await fetch(url,{method:'POST',body:form,credentials:'include'});if(!apiResult.ok){throw apiResult;}}
-setTimeout(save_user_sees_ads_value,10000);let mediaRecorder;let recordedChunks=[];let isRecording=false;const micIconHTML='<img src="/static/images/mic.svg" alt="Mic Icon" class="mic-icon">';async function handleRecording(){if(!isRecording){await startRecording();}
+setTimeout(save_user_sees_ads_value,10000);let mediaRecorder;let recordedChunks=[];let isRecording=false;const micIconHTML='<img src="../static/images/mic.svg" alt="Mic Icon" class="mic-icon">';async function handleRecording(){if(!isRecording){await startRecording();}
 else{stopRecording();}}
 async function startRecording(){recordedChunks=[];try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);mediaRecorder.ondataavailable=(event)=>{if(event.data.size>0){recordedChunks.push(event.data);}};mediaRecorder.onstop=async()=>{await handleRecordingStop(stream);};mediaRecorder.start();updateButtonForRecording();isRecording=true;}
 catch(err){console.error('Mic access error or unsupported browser:',err);toast("errorpopup","Mic access error or unsupported browser.");}}
@@ -2509,8 +2509,8 @@ catch(err){console.error('Error checking characters enabled:',err);}}})();;</scr
         <strong style="font-size:16px;">Cookie Preferences</strong>
         <p style="margin:8px 0 0; color:rgba(255,255,255,0.75); line-height:1.5;">
           We use cookies to operate this site and improve your experience. Non-essential cookies are only set with your explicit consent.
-          <a href="cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
-          <a href="privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
+          <a href="../cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
+          <a href="../privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
         </p>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
@@ -2569,6 +2569,7 @@ catch(err){console.error('Error checking characters enabled:',err);}}})();;</scr
     // Marketing: Twitter pixel, ad networks
     if (consent.marketing) {
       window._eu_marketing_consent = true;
+      if(typeof contextualAdProvider!=="undefined"&&contextualAdProvider==="koah"&&typeof loadKoahAds==="function")loadKoahAds();
     }
   }
 
@@ -2609,7 +2610,7 @@ catch(err){console.error('Error checking characters enabled:',err);}}})();;</scr
     </svg>
     <span>
       <strong>AI-Generated Content</strong> — Outputs from this tool are produced by artificial intelligence.
-      <a href="ai-transparency.html" style="color:#c764ec; text-decoration:underline;">Learn more</a>
+      <a href="../ai-transparency.html" style="color:#c764ec; text-decoration:underline;">Learn more</a>
     </span>
   </div>
   <button onclick="this.parentElement.parentElement.style.display='none'" style="position:absolute; top:4px; right:8px; background:none; border:none; color:rgba(255,255,255,0.5); cursor:pointer; font-size:14px; line-height:1;">&times;</button>

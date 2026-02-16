@@ -539,7 +539,7 @@ a.button.menu {
       <P style="display: none;">DeepAI</P>
     </a>
     <div class="nav-buttons">
-        <a class="button headerbutton aichat" href="../chat/${apiResultHtml[i].url_handle}.html">Chat</a>
+        <a class="button headerbutton aichat" href="../chat/gpt-chat.html">Chat</a>
         <a class="button headerbutton imagegenerator" href="text2img.html">Image Generator</a>
         <a class="button headerbutton videogenerator" href="../video.html">Video</a>
         <a class="button headerbutton audiogenerator" href="../music.html">Music</a>
@@ -551,8 +551,8 @@ a.button.menu {
             <ul>
                 <li class="dropdown">
                     <button class="drop-menu-button" id="dropMenuButton">
-                        <img src="static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
-                        <img src="static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
+                        <img src="../static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
+                        <img src="../static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
                     </button>
                     <ul id="mainNavDropdown">
                         <div class="exit">
@@ -570,24 +570,24 @@ a.button.menu {
                           </svg>
                         </div>
                         <div id="navProfileSection" class="nav-profile-section">
-                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/dashboard/profile')" src="static/images/dolphin-icon.jpeg" />
+                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')" src="../static/images/dolphin-icon.jpeg" />
                           <div class="nav-usernames">
                             <p class="nav-profilename" id="navUserName"></p>
                             <p class="nav-username" id="navUserEmail"></p>
                           </div>
                         </div>
-                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/dashboard/profile')">Account Settings</button>
+                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')">Account Settings</button>
                         <div class="menu-options">
                           <div class="pages">
                             <a href="text2img.html" class="ai-generators">Image Generator</a>
                             <a href="../video.html" class="ai-generators">Video Generator</a>
                             <a href="../music.html" class="ai-generators">Music Generator</a>
-                            <a href="../chat/${apiResultHtml[i].url_handle}.html" class="ai-generators">Chat</a>
+                            <a href="../chat/gpt-chat.html" class="ai-generators">Chat</a>
                             <a href="image-editor.html" class="ai-generators">Photo Editor</a>
                             <a href="../pricing.html" class="pricing">Pricing</a>
                             <a href="definitions" class="glossary">Glossary</a>
                             <a href="../docs.html" class="apidocs">Docs</a>
-                            <a href="surreal-graphics-generator.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
+                            <a href="surreal-graphics-generator.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="../static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
                             <a href="../privacy-policy.html" class="privacy-policy" target="_blank">Privacy Policy</a>
                           </div>
                           <div class="menu-settings">
@@ -674,7 +674,7 @@ a.button.menu {
       <div class="genius-mode-title">
         <p class="genius-mode-header">Introducing</p>
         Genius Images <img
-        src="static/images/sparkle-title.svg"
+        src="../static/images/sparkle-title.svg"
         alt="sparkle"
         class="title-section-sparkle featured-sparkle"
         loading="lazy"
@@ -684,9 +684,9 @@ a.button.menu {
               Genius images have more detail, more artistic quality, and follow your instructions in the prompt better than ever before! Now with Super Genius mode for ultra-high resolution 2K and 4K images.
           </p>
           <div class="featured-modals">
-              <div class="featured-images dolphin-one"><img src="static/images/dolphin1.svg" loading="lazy" alt="genius-image"class="tier-images" />Standard</div>
-              <div class="featured-images dolphin-two" ><img src="static/images/dolphin2.svg" loading="lazy" alt="genius-image" class="tier-images" />HD</div>
-              <div class="featured-images"><img src="static/images/dolphin3.svg" loading="lazy" alt="genius-image" class="tier-images"/>Genius</div>
+              <div class="featured-images dolphin-one"><img src="../static/images/dolphin1.svg" loading="lazy" alt="genius-image"class="tier-images" />Standard</div>
+              <div class="featured-images dolphin-two" ><img src="../static/images/dolphin2.svg" loading="lazy" alt="genius-image" class="tier-images" />HD</div>
+              <div class="featured-images"><img src="../static/images/dolphin3.svg" loading="lazy" alt="genius-image" class="tier-images"/>Genius</div>
           </div>
 
           <div class="prompting">A dolphin surfing a wave on a bike using a phone with a hat on</div>
@@ -709,7 +709,7 @@ a.button.menu {
 
       <div class="promo-tiers-container">
         <div class="promo-tier-card">
-          <img src="static/images/promo-hd.png" alt="HD example" class="promo-tier-image" loading="lazy" />
+          <img src="../static/images/promo-hd.png" alt="HD example" class="promo-tier-image" loading="lazy" />
           <div class="promo-tier-overlay">
             <span class="promo-tier-badge">HD</span>
             <span class="promo-tier-res">640 × 640</span>
@@ -717,7 +717,7 @@ a.button.menu {
         </div>
 
         <div class="promo-tier-card">
-          <img src="static/images/promo-genius.png" alt="Genius example" class="promo-tier-image" loading="lazy" />
+          <img src="../static/images/promo-genius.png" alt="Genius example" class="promo-tier-image" loading="lazy" />
           <div class="promo-tier-overlay">
             <span class="promo-tier-badge">Genius</span>
             <span class="promo-tier-res">1024 × 1024</span>
@@ -725,7 +725,7 @@ a.button.menu {
         </div>
 
         <div class="promo-tier-card">
-          <img src="static/images/promo-super-genius.png" alt="Super Genius example" class="promo-tier-image" loading="lazy" />
+          <img src="../static/images/promo-super-genius.png" alt="Super Genius example" class="promo-tier-image" loading="lazy" />
           <div class="promo-tier-overlay">
             <span class="promo-tier-badge">Super Genius</span>
             <span class="promo-tier-res">2K</span>
@@ -808,8 +808,8 @@ a.button.menu {
           <div id="model-all-options-container">
           <div class="image-models-container">
             <button id="modelHdButton" type="button" onclick="highlightAndSelectGenerator('modelHdButton')">HD</button>
-            <button id="modelGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectGenerator('modelGeniusModeButton')" style="position:relative;"><img id="imageGeniusLockedIcon" src="static/images/lock-icon.png" alt="locked"/>Genius</button>
-            <button id="modelSuperGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectGenerator('modelSuperGeniusModeButton')" style="position:relative;"><img id="imageSuperGeniusLockedIcon" src="static/images/lock-icon.png" alt="locked"/>Super Genius</button>
+            <button id="modelGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectGenerator('modelGeniusModeButton')" style="position:relative;"><img id="imageGeniusLockedIcon" src="../static/images/lock-icon.png" alt="locked"/>Genius</button>
+            <button id="modelSuperGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectGenerator('modelSuperGeniusModeButton')" style="position:relative;"><img id="imageSuperGeniusLockedIcon" src="../static/images/lock-icon.png" alt="locked"/>Super Genius</button>
           </div>
           <div class="outline-try-it model-priority">
             <h2 id="options-header">Preference</h2>
@@ -879,7 +879,7 @@ a.button.menu {
           <!-- Collapsible sections stacked -->
           <div class="collapsible-sections-container">
             <!-- Style button and content -->
-            <button id="modelStyleButton" type="button" onclick="showStyleOptions()" class="mobile-only-button">Choose a style<img class="downarrow" src="static/images/down-arrow.svg" /></button>
+            <button id="modelStyleButton" type="button" onclick="showStyleOptions()" class="mobile-only-button">Choose a style<img class="downarrow" src="../static/images/down-arrow.svg" /></button>
             <div id="style-options-container" style="display: none;">
               <div id="other-model-links-mobile">
                 
@@ -910,7 +910,7 @@ a.button.menu {
               </div>
             </div>
             <!-- Shape button and content -->
-            <button id="modelEditButton" type="button" onclick="showShapeOptions()">Choose Shape<img class="downarrow" src="static/images/down-arrow.svg" /></button>
+            <button id="modelEditButton" type="button" onclick="showShapeOptions()">Choose Shape<img class="downarrow" src="../static/images/down-arrow.svg" /></button>
             <div id="suboutline-try-it" style="display: none; margin-bottom: 16px;">
           <div id="shape-row">
             <div class="imageShapeButton first-shape"  onclick="selectShape(1)" id="edit_shape_1">
@@ -936,8 +936,8 @@ a.button.menu {
           </div>
           <div class="image-models-container" id="edit-model-selector">
             <button id="editModelHdButton" type="button" onclick="highlightAndSelectEditGenerator('editModelHdButton')">HD</button>
-            <button id="editModelGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectEditGenerator('editModelGeniusModeButton')" style="position:relative;"><img id="editImageGeniusLockedIcon" src="static/images/lock-icon.png" alt="locked"/>Genius</button>
-            <button id="editModelSuperGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectEditGenerator('editModelSuperGeniusModeButton')" style="position:relative;"><img id="editImageSuperGeniusLockedIcon" src="static/images/lock-icon.png" alt="locked"/>Super Genius</button>
+            <button id="editModelGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectEditGenerator('editModelGeniusModeButton')" style="position:relative;"><img id="editImageGeniusLockedIcon" src="../static/images/lock-icon.png" alt="locked"/>Genius</button>
+            <button id="editModelSuperGeniusModeButton" locked="true" type="button" onclick="highlightAndSelectEditGenerator('editModelSuperGeniusModeButton')" style="position:relative;"><img id="editImageSuperGeniusLockedIcon" src="../static/images/lock-icon.png" alt="locked"/>Super Genius</button>
           </div>
           <div class="outline-try-it">
             <h2>Advanced editing options</h2>
@@ -952,8 +952,8 @@ a.button.menu {
             <h2>More editing options</h2>
           </div>
           <div class="edit-options-stack">
-            <button class="edit-option-button" onclick="animate_image()">Animate <img src="static/images/external-link-icon.svg" class="external-link-icon"></button>
-            <button class="edit-option-button" onclick="edit_in_photopea()">Edit In Photopea <img src="static/images/external-link-icon.svg" class="external-link-icon"></button>
+            <button class="edit-option-button" onclick="animate_image()">Animate <img src="../static/images/external-link-icon.svg" class="external-link-icon"></button>
+            <button class="edit-option-button" onclick="edit_in_photopea()">Edit In Photopea <img src="../static/images/external-link-icon.svg" class="external-link-icon"></button>
           </div>
         </div>
 
@@ -994,7 +994,7 @@ a.button.menu {
   </div>
 
   <div id="errorpopup">
-    <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+    <img class="errorIcon" src="../static/images/error-icon.svg" alt="Error Icon" />
     <span class="message">An error has occurred</span>
   </div>
 
@@ -1316,7 +1316,7 @@ a.button.menu {
             <span class="message">Success!</span>
         </div>
         <div id="errorpopup">
-            <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+            <img class="errorIcon" src="../static/images/error-icon.svg" alt="Error Icon" />
             <span class="message">An error occurred</span>
         </div>
 
@@ -1328,26 +1328,26 @@ a.button.menu {
                     <div class="social-icon">
                         <div class="icon-container x">
                             <a id="x-link" target="_blank">
-                            <img src="static/images/social-x-icon.svg">
+                            <img src="../static/images/social-x-icon.svg">
 
                             </a>
                             <p class="social-name">X</p>
                         </div>
                     <div class="icon-container facebook">
                         <a id="facebook-link" target="_blank">
-                        <img src="static/images/social-facebook-icon.svg">
+                        <img src="../static/images/social-facebook-icon.svg">
                         </a>
                         <p class="social-name">Facebook</p>
                     </div>
                     <div class="icon-container linkedin">
                         <a id="linkedin-link" target="_blank">
-                        <img src="static/images/social-linkedin-icon.svg">
+                        <img src="../static/images/social-linkedin-icon.svg">
                         </a>
                         <p class="social-name">Linkedin</p>
                     </div>
                     <div class="icon-container reddit">
                         <a id="reddit-link" target="_blank">
-                        <img src="static/images/social-reddit-icon.svg">
+                        <img src="../static/images/social-reddit-icon.svg">
                         </a>
                         <p class="social-name">Reddit</p>
                     </div>
@@ -1355,7 +1355,7 @@ a.button.menu {
                     <div class="social-link-copy">
                         <input type="text" id="social-link-input" readonly>
                         <button class="copy-button" onclick="navigator.clipboard.writeText(document.getElementById('social-link-input').value)">
-                            <img src="static/images/social-copy-icon.svg" alt="Copy">
+                            <img src="../static/images/social-copy-icon.svg" alt="Copy">
                         </button>
                     </div>
                 </div>
@@ -1421,7 +1421,7 @@ a.button.menu {
             </div>
             <div class="nudge-popup-body" style="padding: 0px 25px 20px 25px;">
                 <div class="nudge-pro-body-title">
-                    <img class="profile-pro-icon nudge-pro-icon" src="static/images/pro-badge.svg" />
+                    <img class="profile-pro-icon nudge-pro-icon" src="../static/images/pro-badge.svg" />
                     <h2>Consider DeepAI Pro</h2>
                 </div>
                 <ul class="pro-features-list" style="list-style: none; padding: 0; margin: 0 0 20px 0;">
@@ -1517,7 +1517,7 @@ a.button.menu {
             <div class="footer-row">
                 <div class="leftfooter">
                     <a href="../dashboard/videos.html">
-                        <img src="static/images/SmallFlops.svg" alt="flops" />
+                        <img src="../static/images/SmallFlops.svg" alt="flops" />
                         <p>Deep AI, Inc. ©</p>
                     </a>
                 </div>
@@ -1526,15 +1526,15 @@ a.button.menu {
                     <a href="mailto:team@deepai.org" class="contact">Contact</a>
                     <a href="../press.html" class="press">Press</a>
                     <a href="../terms-of-service/terms-of-service.html" class="legal">Legal</a>
-                    <a class=" " href="https://twitter.com/DeepAI" target="_blank"><img src="static/images/xLogo.svg" alt="xlogo" class="xlogo" /></a>
+                    <a class=" " href="https://twitter.com/DeepAI" target="_blank"><img src="../static/images/xLogo.svg" alt="xlogo" class="xlogo" /></a>
                     <a class=" " href="https://www.linkedin.com/company/deepai" target="_blank"><img
-                      src="static/images/linkedinLogo.svg"
+                      src="../static/images/linkedinLogo.svg"
                       alt="linkedinlogo"
                       class="linkedinlogo"
                     /></a>
-                    <a class=" " href="https://www.instagram.com/deepai_org/" target="_blank"><img src="static/images/instagramLogo.svg" alt="instagramlogo" class="instagramlogo" /></a>
-                    <a class=" " href="https://www.tiktok.com/@_ai_creations" target="_blank"><img src="static/images/tiktokLogo.svg" alt="tiktoklogo" class="tiktoklogo" /></a>
-                    <a class=" " href="https://www.reddit.com/r/DeepAI/" target="_blank"><img src="static/images/redditLogo.svg" alt="redditlogo" class="redditlogo" /></a>
+                    <a class=" " href="https://www.instagram.com/deepai_org/" target="_blank"><img src="../static/images/instagramLogo.svg" alt="instagramlogo" class="instagramlogo" /></a>
+                    <a class=" " href="https://www.tiktok.com/@_ai_creations" target="_blank"><img src="../static/images/tiktokLogo.svg" alt="tiktoklogo" class="tiktoklogo" /></a>
+                    <a class=" " href="https://www.reddit.com/r/DeepAI/" target="_blank"><img src="../static/images/redditLogo.svg" alt="redditlogo" class="redditlogo" /></a>
                 </div>
             </div>
 
@@ -1549,15 +1549,15 @@ a.button.menu {
   <span>|</span>
   <span>DPO: <a href="mailto:dpo@deepai.org" style="color:rgba(255,255,255,0.65);">dpo@deepai.org</a></span>
   <span>|</span>
-  <a href="privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
+  <a href="../privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
   <span>|</span>
-  <a href="cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
+  <a href="../cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
   <span>|</span>
   <a href="terms-of-service/terms-of-service.html" style="color:rgba(255,255,255,0.65);">Terms of Service</a>
   <span>|</span>
-  <a href="dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
+  <a href="../dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
   <span>|</span>
-  <a href="data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
+  <a href="../data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
 </div>
 
 </footer>
@@ -1602,7 +1602,7 @@ hideElementsById(["forgot-password","user-email-error"]);const reenterPwdDisplay
 reenterPwd.setAttribute('style',`display: ${reenterPwdDisplay};`);}}
 function authOptions(toggle){hideElementsById(['user-email-error']);const moreOptions={true:{visible:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"],hidden:["switch-to-email","social-auth-google"]},false:{visible:["switch-to-email","social-auth-google"],hidden:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"]}};const isMoreOptions=toggle==="moreOptions";showElementsById(moreOptions[String(isMoreOptions)].visible);hideElementsById(moreOptions[String(isMoreOptions)].hidden);const userEmailInput=document.getElementById('user-email');if(userEmailInput)
 userEmailInput.focus();const loginButton=document.getElementById('login-via-email-id');if(toggle==="moreOptions"&&loginButton&&loginButton.innerHTML==="Login"){hideElementsById(["reenter-password-container-id"]);}}
-function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/pricing')){return;}
+function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/deepai-eu/pricing')){return;}
 const userProfile=getUserProfile();if(userProfile){if(!(userProfile.user_has_deepai_pro||userProfile.user_is_pay_as_you_go)){openSubscription();}}}
 function openSubscribeFromGenius(tag){const modalId=tag==="image"?"genius-images-modal":"genius-chat-modal";const geniusModal=document.getElementById(modalId);if(geniusModal&&typeof geniusModal.close==='function'){geniusModal.close();openSubscription();}
 else{console.warn(`Modal with ID '${modalId}' not found or is not a closeable element.`);openSubscription();}}
@@ -1624,7 +1624,7 @@ else if(pagePathCookie.length>100000){}
 else{const newPagePathCookie=[pagePathCookie,thisLocation];localStorage.setItem('pagePath',newPagePathCookie.toString());}
 const localLatestPagePathCookie=localStorage.getItem('pagePath');cookieUserReeferrer=localCookieUserReeferrer||undefined;latestPagePathCookie=localLatestPagePathCookie||undefined;}
 catch(e){console.log("error in reeferrer madness: "+e);}
-if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="/static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
+if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="../static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
 else{console.log('not loading dialog polyfill');}
 try{if(!window.localStorage||!window.sessionStorage)
 (function(){const Storage=function(type){function createCookie(name,value,days){let date,expires;if(days){date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));expires="; expires="+date.toUTCString();}
@@ -1671,8 +1671,8 @@ dropdownUser.style.display="flex";if(profileSecNav)
 profileSecNav.style.display="flex";if(profileButtonNav)
 profileButtonNav.style.display="flex";if(navUsername&&user_object.username)
 navUsername.textContent=user_object.username;if(navUseremail&&user_object.email)
-navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/dashboard/profile')");button.innerHTML="My Profile";}
-const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/dashboard/profile')");signupDropdownLi.innerHTML="My Profile";}
+navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");button.innerHTML="My Profile";}
+const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");signupDropdownLi.innerHTML="My Profile";}
 for(const loginButton of Array.from(document.getElementsByClassName('login-button'))){const button=loginButton;button.setAttribute('onclick',"logout()");button.innerHTML="Log Out";}
 const loginDropdown=document.getElementById('login-button-dropdown');if(loginDropdown){loginDropdown.setAttribute('onclick',"logout()");loginDropdown.innerHTML="Logout";}
 applyCachedHeartsToHeartsOnPage();await refreshHeartsFromServer();}
@@ -1795,7 +1795,7 @@ return;login_user_email.classList.add('loading');const response=await fetch(app_
 login_modal.close();if(nudgeLoginModal)
 nudgeLoginModal.classList.remove("active");await auth();subscriptionPopupAfterAuth();}
 else{login_user_email.classList.remove('loading');const login_fail="Hmm, something went wrong. Let's try that again.";const p=document.getElementById('user-email-error');if(p){p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}}
-async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/';}
+async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/deepai-eu/index.html';}
 async function resetPassword(e){const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
 const login_user_email=document.getElementById('user-email');if(!login_user_email)
 return;const login_user_email_value=login_user_email.value;const formData=new FormData();formData.append('email',login_user_email_value);const response=await fetch(app_base_url+"/password_reset_trigger",{method:'POST',credentials:'include',body:formData,});console.log(response);if(response.ok==true&&p){const submission_success="Check your email inbox to reset password.";console.log(p);p.innerHTML=submission_success;p.className='good-auth-error';p.setAttribute('style','display: flex;');}
@@ -1876,7 +1876,7 @@ catch(error){console.error('Error reading geo IP cache:',error);return await fet
 
         <script>const model_id="surreal-graphics-generator";const model_expected_runtime=60.0;;</script>
 
-        <script>const splitterJsUrl="/static/js/splitter.js";;;var contextualAdProvider='nobody';const forceAdProvider=new URLSearchParams(window.location.search).get('forceAdProvider');var koahReadyCallbacks=[];var koahLoaded=false;function onKoahReady(callback){if(koahLoaded){callback();}
+        <script>const splitterJsUrl="../static/js/splitter.js";;;var contextualAdProvider='nobody';const forceAdProvider=new URLSearchParams(window.location.search).get('forceAdProvider');var koahReadyCallbacks=[];var koahLoaded=false;function onKoahReady(callback){if(koahLoaded){callback();}
 else{koahReadyCallbacks.push(callback);}}
 var adProviderReadyCallbacks=[];var adProviderDecided=false;function onAdProviderReady(callback){if(adProviderDecided){try{callback();}
 catch(e){console.error('Error in adProviderReady callback:',e);}}
@@ -1899,7 +1899,7 @@ gtag('event','exp_contextual_ads_variant_B');}
 catch(e){}}
 notifyAdProviderReady();};document.head.appendChild(script);})();}
 else{console.log('user has paid for no ads, not loading contextual ads');notifyAdProviderReady();}}}}).catch((error)=>{console.error('Failed to load geo IP data:',error);geoData=null;});function loadProrataAds(){console.log('Prorata ads enabled - API-based integration ready');}
-function loadKoahAds(){const script=document.createElement('script');script.async=true;script.type='module';script.src='https://app.koah.ai/js?token=8a686266-fd49-462b-8480-f7326a2566f7';script.onload=function(){koahLoaded=true;koahReadyCallbacks.forEach(cb=>cb());};document.head.appendChild(script);}
+function loadKoahAds(){if(!window._eu_marketing_consent)return;const script=document.createElement('script');script.async=true;script.type='module';script.src='https://app.koah.ai/js?token=8a686266-fd49-462b-8480-f7326a2566f7';script.onload=function(){koahLoaded=true;koahReadyCallbacks.forEach(cb=>cb());};document.head.appendChild(script);}
 function loadThradAds(){console.log('Thrad ads enabled - API-based integration ready');};;let _usageTrackerData=null;let _usageTrackerLastFetch=0;let _usageTrackerConfig=null;const USAGE_TRACKER_CACHE_MS=30000;const USAGE_TRACKER_POST_GEN_DELAY_MS=500;function isUserPro(){const userObj=window.user_object;return userObj?.userprofile2?.locked_out_due_to_no_payment_info===false;}
 function renderUsageTrackerSkeleton(){const container=document.getElementById('usage-tracker-container');if(!container||!_usageTrackerConfig)
 return;container.style.display='block';const categoryNames=Object.values(_usageTrackerConfig.categoryDisplayNames);let html='';for(let i=0;i<categoryNames.length;i++){const isFirst=i===0;html+=`
@@ -1971,7 +1971,7 @@ otherLinks.classList.remove('disabled');}
 function disableUI(){disableAllButtons();const otherLinks=document.getElementById('other-model-links');if(otherLinks)
 otherLinks.classList.add('disabled');}
 function addModalCloseListeners(modal,clickableSelector=null){const closeModal=()=>modal.close('cancelled');modal.addEventListener('cancel',closeModal);modal.addEventListener('click',event=>{if(event.target===modal||(clickableSelector&&event.target.closest(clickableSelector))){closeModal();}});}
-function loadMasonryWithCallback(selector,config,callback){const script=document.createElement("script");script.src="/static/js/libs/masonry.pkgd.min.js";script.type="text/javascript";script.async=true;script.onload=()=>{const elem=document.querySelector(selector);if(elem){const instance=new Masonry(elem,config);if(callback)
+function loadMasonryWithCallback(selector,config,callback){const script=document.createElement("script");script.src="../static/js/libs/masonry.pkgd.min.js";script.type="text/javascript";script.async=true;script.onload=()=>{const elem=document.querySelector(selector);if(elem){const instance=new Masonry(elem,config);if(callback)
 callback(instance);}};document.head.appendChild(script);}
 function addListeners(element,events,handler){events.forEach(event=>element.addEventListener(event,handler));}
 window.addEventListener('load',()=>{const textInputs=document.getElementsByClassName('model-input-text-input');if(textInputs.length>0){textInputs[0].focus();}
@@ -2134,7 +2134,7 @@ return;const inputs_dict={'image':url};doSubmit(inputs_dict,{enhanceEnable:true}
 async function remove_bg_image(){const url=getCurrentImageUrl();if(!url)
 return;const inputs_dict={'image':url};doSubmit(inputs_dict,{removeBgEnable:true});}
 async function animate_image(){const url=getCurrentImageUrl();if(!url)
-return;const inputs_dict={"url":url};sessionStorage.setItem('imageModelSubmitInputsDict',JSON.stringify(inputs_dict));sessionStorage.setItem('imageModelSubmitOnload','true');window.location.href="/video";}
+return;const inputs_dict={"url":url};sessionStorage.setItem('imageModelSubmitInputsDict',JSON.stringify(inputs_dict));sessionStorage.setItem('imageModelSubmitOnload','true');window.location.href="/deepai-eu/video.html";}
 async function zoom_out(){const url=getCurrentImageUrl();if(!url)
 return;const inputs_dict={'image':url};doSubmit(inputs_dict,{zoomOutEnable:true});}
 async function doSubmit(inputs_dict,options){await progressBarFunctionWrapper(async()=>{const targetElement=document.getElementsByClassName('try-it-result-area')[0];const targetErrorElement=document.getElementById('tryItResultError');let result;try{disableUI();let formData=new FormData();for(const key of Object.keys(inputs_dict)){const input=inputs_dict[key];if(!input)
@@ -2414,8 +2414,8 @@ editControls.style.display='none';highlightAndSelectEditGenerator('editModelHdBu
         <strong style="font-size:16px;">Cookie Preferences</strong>
         <p style="margin:8px 0 0; color:rgba(255,255,255,0.75); line-height:1.5;">
           We use cookies to operate this site and improve your experience. Non-essential cookies are only set with your explicit consent.
-          <a href="cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
-          <a href="privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
+          <a href="../cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
+          <a href="../privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
         </p>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
@@ -2474,6 +2474,7 @@ editControls.style.display='none';highlightAndSelectEditGenerator('editModelHdBu
     // Marketing: Twitter pixel, ad networks
     if (consent.marketing) {
       window._eu_marketing_consent = true;
+      if(typeof contextualAdProvider!=="undefined"&&contextualAdProvider==="koah"&&typeof loadKoahAds==="function")loadKoahAds();
     }
   }
 
@@ -2514,7 +2515,7 @@ editControls.style.display='none';highlightAndSelectEditGenerator('editModelHdBu
     </svg>
     <span>
       <strong>AI-Generated Content</strong> — Outputs from this tool are produced by artificial intelligence.
-      <a href="ai-transparency.html" style="color:#c764ec; text-decoration:underline;">Learn more</a>
+      <a href="../ai-transparency.html" style="color:#c764ec; text-decoration:underline;">Learn more</a>
     </span>
   </div>
   <button onclick="this.parentElement.parentElement.style.display='none'" style="position:absolute; top:4px; right:8px; background:none; border:none; color:rgba(255,255,255,0.5); cursor:pointer; font-size:14px; line-height:1;">&times;</button>

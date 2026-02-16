@@ -449,7 +449,7 @@ a.button.menu {
       <P style="display: none;">DeepAI</P>
     </a>
     <div class="nav-buttons">
-        <a class="button headerbutton aichat" href="../chat/${apiResultHtml[i].url_handle}.html">Chat</a>
+        <a class="button headerbutton aichat" href="../chat/gpt-chat.html">Chat</a>
         <a class="button headerbutton imagegenerator" href="../machine-learning-model/text2img.html">Image Generator</a>
         <a class="button headerbutton videogenerator" href="../video.html">Video</a>
         <a class="button headerbutton audiogenerator" href="../music.html">Music</a>
@@ -461,8 +461,8 @@ a.button.menu {
             <ul>
                 <li class="dropdown">
                     <button class="drop-menu-button" id="dropMenuButton">
-                        <img src="static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
-                        <img src="static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
+                        <img src="../static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
+                        <img src="../static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
                     </button>
                     <ul id="mainNavDropdown">
                         <div class="exit">
@@ -480,24 +480,24 @@ a.button.menu {
                           </svg>
                         </div>
                         <div id="navProfileSection" class="nav-profile-section">
-                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/dashboard/profile')" src="static/images/dolphin-icon.jpeg" />
+                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')" src="../static/images/dolphin-icon.jpeg" />
                           <div class="nav-usernames">
                             <p class="nav-profilename" id="navUserName"></p>
                             <p class="nav-username" id="navUserEmail"></p>
                           </div>
                         </div>
-                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/dashboard/profile')">Account Settings</button>
+                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')">Account Settings</button>
                         <div class="menu-options">
                           <div class="pages">
                             <a href="../machine-learning-model/text2img.html" class="ai-generators">Image Generator</a>
                             <a href="../video.html" class="ai-generators">Video Generator</a>
                             <a href="../music.html" class="ai-generators">Music Generator</a>
-                            <a href="../chat/${apiResultHtml[i].url_handle}.html" class="ai-generators">Chat</a>
+                            <a href="../chat/gpt-chat.html" class="ai-generators">Chat</a>
                             <a href="../machine-learning-model/image-editor.html" class="ai-generators">Photo Editor</a>
                             <a href="../pricing.html" class="pricing">Pricing</a>
                             <a href="definitions" class="glossary">Glossary</a>
                             <a href="../docs.html" class="apidocs">Docs</a>
-                            <a href="Literature.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
+                            <a href="Literature.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="../static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
                             <a href="../privacy-policy.html" class="privacy-policy" target="_blank">Privacy Policy</a>
                           </div>
                           <div class="menu-settings">
@@ -594,7 +594,7 @@ a.button.menu {
       </div>
     </div>
     <button class="search-button" onclick="search()" id="search-button">
-      <img src="static/images/search-icon.svg" alt="Search Icon">
+      <img src="../static/images/search-icon.svg" alt="Search Icon">
     </button>
   </div>
 
@@ -905,7 +905,7 @@ a.button.menu {
 
   <div id="characters"></div>
   <div class="placeholder">
-    <img class="placeholder-img" alt="placeholder icon" src="static/icons/nothingfound.png">
+    <img class="placeholder-img" alt="placeholder icon" src="../static/icons/nothingfound.png">
     <div>
       <div>No Characters</div>
       <div class="title">Try creating a character!</div>
@@ -1000,7 +1000,7 @@ a.button.menu {
   <span class="message" data-default-message="Success!">Success!</span>
 </div>
 <div id="errorpopup" style="display: none;">
-  <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+  <img class="errorIcon" src="../static/images/error-icon.svg" alt="Error Icon" />
   <span class="message" data-default-message="An error has occurred">An error has occurred</span>
 </div>
 </main>
@@ -1254,7 +1254,7 @@ a.button.menu {
             <span class="message">Success!</span>
         </div>
         <div id="errorpopup">
-            <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+            <img class="errorIcon" src="../static/images/error-icon.svg" alt="Error Icon" />
             <span class="message">An error occurred</span>
         </div>
 
@@ -1266,26 +1266,26 @@ a.button.menu {
                     <div class="social-icon">
                         <div class="icon-container x">
                             <a id="x-link" target="_blank">
-                            <img src="static/images/social-x-icon.svg">
+                            <img src="../static/images/social-x-icon.svg">
 
                             </a>
                             <p class="social-name">X</p>
                         </div>
                     <div class="icon-container facebook">
                         <a id="facebook-link" target="_blank">
-                        <img src="static/images/social-facebook-icon.svg">
+                        <img src="../static/images/social-facebook-icon.svg">
                         </a>
                         <p class="social-name">Facebook</p>
                     </div>
                     <div class="icon-container linkedin">
                         <a id="linkedin-link" target="_blank">
-                        <img src="static/images/social-linkedin-icon.svg">
+                        <img src="../static/images/social-linkedin-icon.svg">
                         </a>
                         <p class="social-name">Linkedin</p>
                     </div>
                     <div class="icon-container reddit">
                         <a id="reddit-link" target="_blank">
-                        <img src="static/images/social-reddit-icon.svg">
+                        <img src="../static/images/social-reddit-icon.svg">
                         </a>
                         <p class="social-name">Reddit</p>
                     </div>
@@ -1293,7 +1293,7 @@ a.button.menu {
                     <div class="social-link-copy">
                         <input type="text" id="social-link-input" readonly>
                         <button class="copy-button" onclick="navigator.clipboard.writeText(document.getElementById('social-link-input').value)">
-                            <img src="static/images/social-copy-icon.svg" alt="Copy">
+                            <img src="../static/images/social-copy-icon.svg" alt="Copy">
                         </button>
                     </div>
                 </div>
@@ -1359,7 +1359,7 @@ a.button.menu {
             </div>
             <div class="nudge-popup-body" style="padding: 0px 25px 20px 25px;">
                 <div class="nudge-pro-body-title">
-                    <img class="profile-pro-icon nudge-pro-icon" src="static/images/pro-badge.svg" />
+                    <img class="profile-pro-icon nudge-pro-icon" src="../static/images/pro-badge.svg" />
                     <h2>Consider DeepAI Pro</h2>
                 </div>
                 <ul class="pro-features-list" style="list-style: none; padding: 0; margin: 0 0 20px 0;">
@@ -1449,7 +1449,7 @@ a.button.menu {
             <div class="footer-row">
                 <div class="leftfooter">
                     <a href="../dashboard/videos.html">
-                        <img src="static/images/SmallFlops.svg" alt="flops" />
+                        <img src="../static/images/SmallFlops.svg" alt="flops" />
                         <p>Deep AI, Inc. ©</p>
                     </a>
                 </div>
@@ -1458,15 +1458,15 @@ a.button.menu {
                     <a href="mailto:team@deepai.org" class="contact">Contact</a>
                     <a href="../press.html" class="press">Press</a>
                     <a href="../terms-of-service/terms-of-service.html" class="legal">Legal</a>
-                    <a class=" " href="https://twitter.com/DeepAI" target="_blank"><img src="static/images/xLogo.svg" alt="xlogo" class="xlogo" /></a>
+                    <a class=" " href="https://twitter.com/DeepAI" target="_blank"><img src="../static/images/xLogo.svg" alt="xlogo" class="xlogo" /></a>
                     <a class=" " href="https://www.linkedin.com/company/deepai" target="_blank"><img
-                      src="static/images/linkedinLogo.svg"
+                      src="../static/images/linkedinLogo.svg"
                       alt="linkedinlogo"
                       class="linkedinlogo"
                     /></a>
-                    <a class=" " href="https://www.instagram.com/deepai_org/" target="_blank"><img src="static/images/instagramLogo.svg" alt="instagramlogo" class="instagramlogo" /></a>
-                    <a class=" " href="https://www.tiktok.com/@_ai_creations" target="_blank"><img src="static/images/tiktokLogo.svg" alt="tiktoklogo" class="tiktoklogo" /></a>
-                    <a class=" " href="https://www.reddit.com/r/DeepAI/" target="_blank"><img src="static/images/redditLogo.svg" alt="redditlogo" class="redditlogo" /></a>
+                    <a class=" " href="https://www.instagram.com/deepai_org/" target="_blank"><img src="../static/images/instagramLogo.svg" alt="instagramlogo" class="instagramlogo" /></a>
+                    <a class=" " href="https://www.tiktok.com/@_ai_creations" target="_blank"><img src="../static/images/tiktokLogo.svg" alt="tiktoklogo" class="tiktoklogo" /></a>
+                    <a class=" " href="https://www.reddit.com/r/DeepAI/" target="_blank"><img src="../static/images/redditLogo.svg" alt="redditlogo" class="redditlogo" /></a>
                 </div>
             </div>
 
@@ -1481,15 +1481,15 @@ a.button.menu {
   <span>|</span>
   <span>DPO: <a href="mailto:dpo@deepai.org" style="color:rgba(255,255,255,0.65);">dpo@deepai.org</a></span>
   <span>|</span>
-  <a href="privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
+  <a href="../privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
   <span>|</span>
-  <a href="cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
+  <a href="../cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
   <span>|</span>
   <a href="terms-of-service/terms-of-service.html" style="color:rgba(255,255,255,0.65);">Terms of Service</a>
   <span>|</span>
-  <a href="dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
+  <a href="../dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
   <span>|</span>
-  <a href="data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
+  <a href="../data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
 </div>
 
 </footer>
@@ -1534,7 +1534,7 @@ hideElementsById(["forgot-password","user-email-error"]);const reenterPwdDisplay
 reenterPwd.setAttribute('style',`display: ${reenterPwdDisplay};`);}}
 function authOptions(toggle){hideElementsById(['user-email-error']);const moreOptions={true:{visible:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"],hidden:["switch-to-email","social-auth-google"]},false:{visible:["switch-to-email","social-auth-google"],hidden:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"]}};const isMoreOptions=toggle==="moreOptions";showElementsById(moreOptions[String(isMoreOptions)].visible);hideElementsById(moreOptions[String(isMoreOptions)].hidden);const userEmailInput=document.getElementById('user-email');if(userEmailInput)
 userEmailInput.focus();const loginButton=document.getElementById('login-via-email-id');if(toggle==="moreOptions"&&loginButton&&loginButton.innerHTML==="Login"){hideElementsById(["reenter-password-container-id"]);}}
-function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/pricing')){return;}
+function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/deepai-eu/pricing')){return;}
 const userProfile=getUserProfile();if(userProfile){if(!(userProfile.user_has_deepai_pro||userProfile.user_is_pay_as_you_go)){openSubscription();}}}
 function openSubscribeFromGenius(tag){const modalId=tag==="image"?"genius-images-modal":"genius-chat-modal";const geniusModal=document.getElementById(modalId);if(geniusModal&&typeof geniusModal.close==='function'){geniusModal.close();openSubscription();}
 else{console.warn(`Modal with ID '${modalId}' not found or is not a closeable element.`);openSubscription();}}
@@ -1556,7 +1556,7 @@ else if(pagePathCookie.length>100000){}
 else{const newPagePathCookie=[pagePathCookie,thisLocation];localStorage.setItem('pagePath',newPagePathCookie.toString());}
 const localLatestPagePathCookie=localStorage.getItem('pagePath');cookieUserReeferrer=localCookieUserReeferrer||undefined;latestPagePathCookie=localLatestPagePathCookie||undefined;}
 catch(e){console.log("error in reeferrer madness: "+e);}
-if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="/static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
+if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="../static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
 else{console.log('not loading dialog polyfill');}
 try{if(!window.localStorage||!window.sessionStorage)
 (function(){const Storage=function(type){function createCookie(name,value,days){let date,expires;if(days){date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));expires="; expires="+date.toUTCString();}
@@ -1603,8 +1603,8 @@ dropdownUser.style.display="flex";if(profileSecNav)
 profileSecNav.style.display="flex";if(profileButtonNav)
 profileButtonNav.style.display="flex";if(navUsername&&user_object.username)
 navUsername.textContent=user_object.username;if(navUseremail&&user_object.email)
-navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/dashboard/profile')");button.innerHTML="My Profile";}
-const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/dashboard/profile')");signupDropdownLi.innerHTML="My Profile";}
+navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");button.innerHTML="My Profile";}
+const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");signupDropdownLi.innerHTML="My Profile";}
 for(const loginButton of Array.from(document.getElementsByClassName('login-button'))){const button=loginButton;button.setAttribute('onclick',"logout()");button.innerHTML="Log Out";}
 const loginDropdown=document.getElementById('login-button-dropdown');if(loginDropdown){loginDropdown.setAttribute('onclick',"logout()");loginDropdown.innerHTML="Logout";}
 applyCachedHeartsToHeartsOnPage();await refreshHeartsFromServer();}
@@ -1727,7 +1727,7 @@ return;login_user_email.classList.add('loading');const response=await fetch(app_
 login_modal.close();if(nudgeLoginModal)
 nudgeLoginModal.classList.remove("active");await auth();subscriptionPopupAfterAuth();}
 else{login_user_email.classList.remove('loading');const login_fail="Hmm, something went wrong. Let's try that again.";const p=document.getElementById('user-email-error');if(p){p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}}
-async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/';}
+async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/deepai-eu/index.html';}
 async function resetPassword(e){const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
 const login_user_email=document.getElementById('user-email');if(!login_user_email)
 return;const login_user_email_value=login_user_email.value;const formData=new FormData();formData.append('email',login_user_email_value);const response=await fetch(app_base_url+"/password_reset_trigger",{method:'POST',credentials:'include',body:formData,});console.log(response);if(response.ok==true&&p){const submission_success="Check your email inbox to reset password.";console.log(p);p.innerHTML=submission_success;p.className='good-auth-error';p.setAttribute('style','display: flex;');}
@@ -1825,18 +1825,18 @@ async function infiniteScrollLoadMore(searchValue){const mainListElement=$("char
 return;const actualSearchValue=searchValue!==undefined?searchValue:searchQuery;const numElems=mainListElement.childElementCount;const url=app_base_url+'/get_character_row/'+(numElems||0)+`/${actualSearchValue}/${current_genre}`;console.log('triggered infinite scroll load...');state.infiniteScrollLoading=true;showHideScrollLoading(true);try{const apiResult=await fetch(url,{credentials:'include'});if(!apiResult.ok)
 throw apiResult;const apiResultHtml=await apiResult.json();if(apiResultHtml.length<10){console.log('hit the end of infinite scrolling...');state.infiniteScrollHitEnd=true;}
 if(current_genre==="My Characters"){for(let i=0;i<apiResultHtml.length;i++){mainListElement.innerHTML+=`
-                    <a id="${apiResultHtml[i].name}" href="chat/${apiResultHtml[i].url_handle}" class="captioned-figure">
-                        <img class="figure" src="https://images.deepai.org/${apiResultHtml[i].image}" alt=${apiResultHtml[i].url_handle} lazyload>
+                    <a id="${apiResultHtml[i].name}" href="chat/gpt-chat" class="captioned-figure">
+                        <img class="figure" src="https://images.deepai.org/${apiResultHtml[i].image}" alt=gpt-chat lazyload>
                             <div class="action-buttons">
-                                <img class="delete-button" onclick="openDeleteModal(event)" src="static/images/trash.svg" style="width:19px;height:19px;margin:0;color: white;"/>
+                                <img class="delete-button" onclick="openDeleteModal(event)" src="../static/images/trash.svg" style="width:19px;height:19px;margin:0;color: white;"/>
                             </div>
                             <h2 id="hello"><div id="figure-name" class="figure-name">${apiResultHtml[i].name}</div></h2>
                         </img>
                     </a>
                 `;}}
 else{for(let i=0;i<apiResultHtml.length;i++){mainListElement.innerHTML+=`
-                    <a id="${apiResultHtml[i].name}" href="chat/${apiResultHtml[i].url_handle}" class="captioned-figure">
-                        <img class="figure" src="https://images.deepai.org/${apiResultHtml[i].image}" alt=${apiResultHtml[i].url_handle} lazyload>
+                    <a id="${apiResultHtml[i].name}" href="chat/gpt-chat" class="captioned-figure">
+                        <img class="figure" src="https://images.deepai.org/${apiResultHtml[i].image}" alt=gpt-chat lazyload>
                             <h2 id="hello"><div id="figure-name" class="figure-name">${apiResultHtml[i].name}</div></h2>
                         </img>
                     </a>
@@ -1851,7 +1851,7 @@ const lastElementOfList=mainListElement.lastElementChild;if(!lastElementOfList){
 else{const lastElementBounds=lastElementOfList.getBoundingClientRect();if(lastElementBounds.top<(window.innerHeight||document.documentElement.clientHeight)*2){infiniteScrollLoadMore();}}}
 async function createCharacterSubmit(){const submitButton=$("send-button");if(submitButton)
 submitButton.disabled=true;const nameInput=$("name");const descInput=$("char-desc");const publicCheckbox=$("public");const name=nameInput?.value.trim()||"";const description=descInput?.value.trim()||"";const isPublic=publicCheckbox?.checked||false;const formData=new FormData();formData.append("char_info",JSON.stringify({name,description,isPublic}));try{const response=await fetch(app_base_url+"/create_character",{credentials:'include',method:'POST',body:formData});const jsonResp=await response.json();if(response.status<300){if(submitButton)
-submitButton.disabled=false;window.location.href="/chat/"+jsonResp.href;}
+submitButton.disabled=false;window.location.href="/deepai-eu/chat.html"+jsonResp.href;}
 else{toast("errorpopup",jsonResp.status||"An error has occurred");if(submitButton)
 submitButton.disabled=false;}}
 catch(err){console.error("Character creation failed:",err);toast("errorpopup","An error has occurred");if(submitButton)
@@ -1903,9 +1903,9 @@ modalWindow.addEventListener('click',modalClick);if(deleteModalWindow)
 deleteModalWindow.addEventListener('click',modalClick);scrollResizeHandler();window.addEventListener('resize',scrollResizeHandler,{capture:true,passive:true});window.addEventListener('scroll',scrollResizeHandler,{capture:true,passive:true});try{removeHeaderBackground();}
 catch(e){if(e instanceof Error){console.log("error removing header background: "+e.message);}
 else{console.log("error removing header background: "+e);}}
-try{const currGenre=window.location.pathname;if(currGenre==="/dashboard/characters"){const userStr=localStorage.getItem('user');if(userStr){const parsedUser=JSON.parse(userStr);if(parsedUser&&typeof parsedUser==='object'){user_object=parsedUser;if(!user_object?.pk){window.location.href='/characters';}}
-else{window.location.href='/characters';}}
-else{window.location.href='/characters';}}}
+try{const currGenre=window.location.pathname;if(currGenre==="/deepai-eu/dashboard/characters.html"){const userStr=localStorage.getItem('user');if(userStr){const parsedUser=JSON.parse(userStr);if(parsedUser&&typeof parsedUser==='object'){user_object=parsedUser;if(!user_object?.pk){window.location.href='/deepai-eu/characters.html';}}
+else{window.location.href='/deepai-eu/characters.html';}}
+else{window.location.href='/deepai-eu/characters.html';}}}
 catch(e){console.log("error redirecting unknown user from My Characters: "+e);}
 fit_font_size();user_object=undefined;const storedUser=localStorage.getItem('user');if(storedUser){user_object=JSON.parse(storedUser);}});onAfterAuthStatusCheck(()=>{const myCharacters=document.getElementById("MyCharacters");if(myCharacters){if(userIsLoggedIn()){myCharacters.style.display="inline-block";}
 else{myCharacters.style.display="none";}}});;</script>
@@ -1921,8 +1921,8 @@ else{myCharacters.style.display="none";}}});;</script>
         <strong style="font-size:16px;">Cookie Preferences</strong>
         <p style="margin:8px 0 0; color:rgba(255,255,255,0.75); line-height:1.5;">
           We use cookies to operate this site and improve your experience. Non-essential cookies are only set with your explicit consent.
-          <a href="cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
-          <a href="privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
+          <a href="../cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
+          <a href="../privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
         </p>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
@@ -1981,6 +1981,7 @@ else{myCharacters.style.display="none";}}});;</script>
     // Marketing: Twitter pixel, ad networks
     if (consent.marketing) {
       window._eu_marketing_consent = true;
+      if(typeof contextualAdProvider!=="undefined"&&contextualAdProvider==="koah"&&typeof loadKoahAds==="function")loadKoahAds();
     }
   }
 
