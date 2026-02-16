@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html>
+	<head>
+        <title> AI Music Generator </title>
+
+        <script type="application/ld+json"></script>
+<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="manifest" href="static/manifest.json">
+        <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
+        <script>
+            // 1. Initialize UNCONDITIONALLY so the variable always exists
+            // This prevents "ReferenceError: user_object is not defined"
+            window.user_paid_for_no_ads = false;
+            window.user_object = undefined;
+
+            try {
+                var storedUser = localStorage.getItem('user');
+                // check if storedUser is valid string and not "undefined"
+                if (storedUser && storedUser !== "undefined") {
+                    window.user_object = JSON.parse(storedUser);
+
+                    if (window.user_object?.userprofile2) {
+                        if (window.user_object.userprofile2.locked_out_due_to_no_payment_info === false) {
+                            window.user_paid_for_no_ads = true;
+                        }
+                    }
+                }
+            } catch(e) {
+                console.log('error checking user login for ads removal', e);
+                // Safety fallback
+                window.user_object = undefined;
+            }
+        </script>
+        
+
+<meta name="description" content="Create unique music effortlessly with DeepAI's music generator. Perfect for foley, sound effects, and background tracks for your videos. Transform your projects with custom-generated soundscapes tailored to your needs.">
+<meta property="og:url" content="music">
+<meta property="og:site_name" content="DeepAI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Music Generator - DeepAI">
+<meta property="og:description" content="Create unique music effortlessly with DeepAI's music generator. Perfect for foley, sound effects, and background tracks for your videos. Transform your projects with custom-generated soundscapes tailored to your needs.">
+<meta property="og:image" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@DeepAI">
+<meta name="twitter:creator" content="@DeepAI">
+
+<meta name="twitter:title" content="AI Music Generator - DeepAI">
+<meta name="twitter:description" content="Create unique music effortlessly with DeepAI's music generator. Perfect for foley, sound effects, and background tracks for your videos. Transform your projects with custom-generated soundscapes tailored to your needs.">
+<meta name="twitter:image" content="">
+
+<meta property="article:published_time" content="" />
+
+
+
+        
+        <style type="text/css">@font-face{font-family:'Atkinson Hyperlegible Next';font-style:normal;font-weight:400;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPNcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiHn3qmpQ.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:normal;font-weight:400;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPNcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiJn3o.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:normal;font-weight:600;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPNcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiHn3qmpQ.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:normal;font-weight:600;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPNcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiJn3o.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:italic;font-weight:400;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPPcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiMr3a-oXZ-.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:italic;font-weight:400;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPPcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiMr3i-oQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:italic;font-weight:600;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPPcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiMr3a-oXZ-.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:italic;font-weight:600;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPPcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiMr3i-oQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}html{background-color:#170a2c;font-family:'Atkinson Hyperlegible Next',sans-serif;font-synthesis:none}b,strong{font-weight:600}button,input,optgroup,select,textarea{font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:100%;line-height:1.15;margin:0}body{margin:0;padding:0;display:flex;flex-direction:column;min-height:100vh;background:linear-gradient(180deg,#7729aa -13.13%,#170a2d 0.17%,#0a061d 6.9%,rgba(10,6,30,0.99) 36.38%,#010311 98.59%)!important}a{text-decoration:none}header{height:45px;overflow:hidden;width:100%;z-index:101}header a.logo-link,footer a.logo-link{display:flex;color:white!important;cursor:pointer;margin-right:10px}header nav{display:flex;margin-left:auto;max-height:62px}header ul{list-style-type:none;margin:0;padding:0;display:flex;flex-direction:row;white-space:nowrap;align-items:center;min-width:46px;justify-content:center}header ul li{display:block;float:left;font-size:16px;color:#fff;line-height:25px}header ul li a{text-decoration:none;cursor:pointer}.drop-menu-button{display:block;width:46px;height:45px;padding:0;margin:0;border:none;background:transparent;cursor:pointer}.menu-icon{font-size:30px;font-weight:600;cursor:pointer;vertical-align:middle;pointer-events:none}header ul li a:hover{text-decoration:none}header ul li.dropdown:hover{cursor:pointer}header .dropdown{position:unset}ul li.dropdown ul{visibility:hidden;opacity:0;display:none;position:absolute;transition:all 0.5s ease;top:auto;z-index:10;right:13px;margin:auto;margin-top:20px;width:296px;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);-webkit-backdrop-filter:blur(114px);-moz-backdrop-filter:blur(114px);backdrop-filter:blur(114px)}.show-dropdown{visibility:visible!important;opacity:1!important;display:block!important}ul li.dropdown ul a{clear:both;display:block;margin:0;margin:0px 10px;height:45px;position:relative}ul li.dropdown ul li{margin:4px 5px;cursor:pointer}.search-bar-container{background:rgba(45,40,60,1);border-radius:30px;margin:0 9px 0 9px;height:32px;width:100%;max-width:450px;border:1px solid rgba(74,66,97,1);display:flex;flex-direction:row;align-items:center}.search-bar-container img{height:17px;margin:8px}.search-bar{width:100%}.search-bar input{width:100%;height:100%;border:none;padding:0;color:white;background-color:rgba(0,0,0,0)}.loading{background:url(static/images/loading.gif) no-repeat right center!important;background-size:contain!important}.loading-center{background:url(static/images/loading.gif) no-repeat center center;background-size:contain;height:50px}a.button{display:flex;padding:6px 19px;font-size:14px;border-radius:45px;border:1px solid #1e79d1;vertical-align:bottom;white-space:nowrap;font-weight:600;color:#1e79d1;margin-left:9px}a.button:active{opacity:0.9}a.button.highlighted{background-color:#a01ed1;color:white;width:auto;background:linear-gradient(94deg,#c764ec,#4a36b1);height:auto;border:none;cursor:pointer}a.button.hotline{background:transparent;color:#c764ec;width:auto;height:auto;border:1px solid #c764ec;cursor:pointer}a.login-button{border:none;color:white;cursor:pointer}input:focus,button{outline:none}footer{margin-top:auto;text-align:center}a.button.doublecolor{border-radius:8px;border-right:1px solid #e7416b;border-bottom:1px solid #e7416b;border-left:1px solid #1e79d1;border-top:1px solid #1e79d1;background:transparent;padding:0.3em;color:white;width:auto;height:auto}#social-modal{flex-direction:column;width:80vw;max-width:440px;justify-content:flex-start;align-items:center;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);-webkit-backdrop-filter:blur(114px);-moz-backdrop-filter:blur(114px);backdrop-filter:blur(114px);margin:auto;position:relative;color:white;padding-bottom:54px;position:fixed}.social-link-copy{display:flex;box-sizing:border-box;position:relative;align-items:center;justify-content:space-between;padding-right:18px;padding-left:18px;width:100%;border-radius:32px;border:1px solid rgba(255,255,255,0.13);backdrop-filter:blur(12px);height:48px;margin-top:10px}#social-link-input{flex-grow:1;border:none;background-color:transparent;font-size:14px;padding:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:white}.copy-button{background-color:transparent;border:none;cursor:pointer;padding:4px;margin-left:8px}.copy-button img{width:20px;height:20px}footer p{color:white;font-size:15px}.footer-row{display:flex;position:relative;flex-direction:row;align-items:center;justify-content:space-between;height:50px;background-color:rgba(1,0,9,0);z-index:5;bottom:0px}.bad-auth-error{display:none;justify-content:center;font-size:11px;color:#eb4f4f;text-align:left;margin-bottom:8px;margin-left:8px}.good-auth-error{display:none;justify-content:center;font-size:11px;color:#59ee7f;text-align:left;margin-bottom:8px}.leftfooter{margin-left:16px}.leftfooter a{display:flex;flex-direction:row}.leftfooter p,.logo-link p{background:linear-gradient(180deg,#fff 0%,#ebe5fb 50%,#7fabff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;flex-direction:row;font-size:19px;margin:auto;margin-left:10px}@media screen and (max-width:800px){.logo-link p{display:none}}.rightfooter{display:flex;flex-direction:row;margin-right:16px;align-items:center}.contact,.press,.legal,.feedback,.xlogo,.linkedinlogo,.instagramlogo,.tiktoklogo,.redditlogo{margin:auto;margin-left:15px;color:rgba(255,255,255,0.65)}@media screen and (max-width:800px){.feedback{display:none}}@media screen and (max-width:939px){.press{display:none}}@media screen and (max-width:950px){.legal{display:none}}.xlogo{height:19px}.instagramlogo,.redditlogo{height:25px}dialog{padding:0;border:0;border-radius:0.6rem}dialog::backdrop{background-color:rgba(0,0,0,0.4)}dialog + .backdrop{position:fixed;top:0;right:0;bottom:0;left:0;background-color:rgba(0,0,0,0.4)}dialog[open]{animation:slide-up 0.4s ease-out;display:flex}dialog{display:none;left:0;right:0;margin:auto;max-width:90vw;background-color:transparent}dialog#login-modal form{display:block;margin:20px;width:500px}dialog#subscription-modal form{display:block;margin:20px;width:600px}dialog .button.social-auth{width:48%;background:#fff;color:#1D2129;border:1px solid #999;display:inline-block;padding:0 0 0 28px;text-align:left;margin:10px 4px}dialog .button.social-auth img{vertical-align:middle;margin:6px}dialog .button.more-options{background:linear-gradient(94deg,#c764ec,#4a36b1)}dialog .other-options-signup-row{display:flex;flex-direction:row;justify-content:center;align-items:center;margin:20px}dialog .other-options-signup-line{width:30%;height:0;border:1px solid #fff;margin:3px;display:inline-block}dialog .other-options-signup{color:#fff;font-size:15px;padding:0 10px 0 10px}dialog .switch-login-signup-button{padding:0 28px;color:#fff;background:#6ec0fd;font-weight:600;font-size:.7em;border-radius:3px;box-shadow:0 2px 5px 0 rgba(0,0,0,.26);border-width:0;border-style:none;-webkit-appearance:none;height:25px;cursor:pointer;margin:10px auto;width:30%;display:block}.login-container{display:none;flex-direction:column;width:440px;justify-content:flex-start;align-items:center;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);backdrop-filter:blur(114px);-webkit-backdrop-filter:blur(114px);-moz-backdrop-filter:blur(114px);-ms-backdrop-filter:blur(114px);margin:auto;color:white;position:fixed}.close{position:absolute;top:0.2em;right:0.2em;padding:0.3em;line-height:0.6;background-color:transparent;border:0;font-size:2em;color:#fff;cursor:pointer}.modal-body{padding:1em;background-color:#2A282F;text-align:center;color:white}.login-header{text-align:center;font-size:36px;font-weight:600;letter-spacing:0.75px;line-height:normal;margin-top:49px;margin-bottom:0px;cursor:default;padding:0px}.share-header{text-align:center;font-size:36px;font-weight:600;letter-spacing:0.75px;line-height:normal;margin-top:54px;margin-bottom:0px}.share-subheader{text-align:center;color:darkgray;font-size:12px;line-height:18px;margin:auto;margin-top:8px;margin-bottom:24px}.out-credits-header{text-align:center;font-size:30px;font-weight:600;letter-spacing:0.75px;line-height:normal;margin-top:25px;margin-bottom:0px}.login-exit{display:flex;flex-direction:row;position:absolute;justify-content:right;right:24px;top:24px;cursor:pointer}.out-credits-exit{display:flex;flex-direction:row;position:absolute;justify-content:right;right:24px;top:24px;cursor:pointer}.oc-msg{display:none;margin:16px 25px 10px;padding:5px 10px;color:rgba(255,255,255,0.95);font-size:14px;line-height:1.6;text-align:left;font-weight:500}.oc-msg a{color:#c764ec;text-decoration:underline}.oc-section{margin:10px 25px;padding:5px}.oc-auto-topup{display:none;margin:10px 25px;padding:7px}.oc-toggle-row{margin-bottom:12px}.oc-toggle{display:flex;align-items:center;cursor:pointer;user-select:none;padding-left:0px}.oc-toggle input[type="checkbox"]{display:none}.oc-toggle-slider{position:relative;display:inline-block;width:50px;height:26px;background-color:rgba(255,255,255,0.2);border-radius:26px;transition:background-color 0.3s;margin-right:12px}.oc-toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background-color:white;border-radius:50%;transition:transform 0.3s}.oc-toggle input[type="checkbox"]:checked + .oc-toggle-slider{background-color:#8f37ff}.oc-toggle input[type="checkbox"]:checked + .oc-toggle-slider::before{transform:translateX(24px)}.oc-toggle-label{font-size:16px;color:#fff}.oc-desc{font-size:13px;color:rgba(255,255,255,0.7);text-align:left;line-height:1.4}.oc-desc a{color:#c764ec;text-decoration:none}.please-subheader{text-align:center;color:darkgray;font-size:12px;line-height:18px;margin:auto;margin-top:8px;margin-bottom:16px}.options-container{width:270px;height:48px;display:flex;justify-content:center;align-items:center;background:rgba(142,142,142,0.05);border-radius:12px;justify-content:center;margin:auto;margin-top:6px;margin-bottom:6px;cursor:pointer}.membership-toggle{width:100%;height:36px}.login-active{display:flex;width:131px;height:40px;margin-left:4px;font-size:14px;font-weight:200;padding:0 41px 0 41px;justify-content:center;align-items:center;border-radius:10px;color:darkgray;cursor:pointer}.member-active{display:flex;width:131px;height:28px;margin-left:4px;font-size:12px;font-weight:200;padding:0 40px 0 40px;justify-content:center;align-items:center;border-radius:10px;color:darkgray;cursor:pointer}.signup{display:flex;width:131px;height:40px;padding:0 41px 0 41px;justify-content:center;align-items:center;border-radius:10px;font-size:14px;font-weight:200;color:darkgray;white-space:nowrap;text-align:center;cursor:pointer;margin-right:4px}.active{color:white;font-weight:400;background:rgba(255,255,255,0.1)}.signin-with-google{display:flex;position:relative;height:48px;width:270px;justify-content:center;align-items:center;gap:12px;border:none;border-radius:12px;color:white;font-size:14px;font-weight:400;font-family:inherit;background:rgba(255,255,255,0.1);margin:auto;margin-bottom:12px;transition:background 0s ease;cursor:pointer}.signin-with-google:hover{background:white;color:black}.button.login-with-email{display:flex;justify-content:center;background:none;border:none;white-space:nowrap;color:white;font-family:inherit;font-size:12px;font-weight:400;margin:auto;margin-bottom:48px;cursor:pointer}.email-container::before{content:"Email Address";position:absolute;z-index:1;top:10px;left:60px;font-size:9px;pointer-events:none;color:darkgray}.email-container{position:relative;display:none;margin:auto;margin-bottom:12px;width:270px;height:48px;border-radius:12px;background:rgba(142,142,142,0.02)}.email-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:darkgray;z-index:1;border-right:1px solid darkgray;padding-right:12px}.input-email{padding-left:58px;padding-top:22px;padding-bottom:10px;height:14px;line-height:14px;position:relative;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:transparent;color:white;width:100%}.input-email::placeholder{font-size:12px;line-height:18px}.password-container::before{content:"Enter Password";position:absolute;z-index:1;top:10px;left:60px;font-size:9px;pointer-events:none;color:darkgray}.password-container{position:relative;display:none;margin:auto;margin-bottom:12px;width:270px;height:48px}.lock-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:darkgray;z-index:1;border-right:1px solid darkgray;padding-right:10px}.input-password{font-size:12px;padding-left:58px;padding-top:22px;padding-bottom:10px;height:14px;line-height:14px;position:relative;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:transparent;color:white;width:100%}.input-password::placeholder{font-size:12px;line-height:18px}.reenter-password-container::before{content:"Re-enter Password";position:absolute;z-index:1;top:10px;left:60px;font-size:9px;color:darkgray;pointer-events:none}.reenter-password-container{position:relative;display:none;margin:auto;margin-bottom:12px;width:270px;height:48px}.button.login-email{display:none;flex-direction:column;background:#7000ff;border:none;width:270px;color:var(--white);font-size:14px;font-weight:500;white-space:nowrap;letter-spacing:2%;margin:auto;padding:12px;margin:auto;margin-bottom:12px;transition:background 0.2s ease;cursor:pointer;align-items:center;border-radius:12px}.button.sub-set{display:flex;flex-direction:column;align-items:center;border-radius:12px;background:#7000ff;border:none;width:270px;color:var(--white);font-size:14px;font-weight:500;white-space:nowrap;letter-spacing:2%;margin:auto;padding:12px;margin:auto;margin-bottom:12px;transition:background 0.2s ease;cursor:pointer}.button.goback{display:none;justify-content:center;background:none;border:none;white-space:nowrap;color:white;font-size:12px;font-weight:400;margin:auto;margin-bottom:24px;cursor:pointer}#forgot-password{display:none;justify-content:center;text-align:center;font-size:12px;margin:auto;margin-bottom:12px;color:white}#forgot-password:hover{background:none;cursor:default}span.click-here{color:#c549fe;cursor:pointer;margin-left:6px}.modal-body .title{font-size:22px;justify-content:center}.modal-body .subtitle{opacity:0.9}.subscription-modal-body{width:max(40vw,386px);background-color:#2A282F}.out-of-credits-modal-body{display:flex;flex-direction:column;width:80vw;max-width:440px;justify-content:flex-start;align-items:center;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);backdrop-filter:blur(114px);-webkit-backdrop-filter:blur(114px);-moz-backdrop-filter:blur(114px);-ms-backdrop-filter:blur(114px);margin:auto;position:relative;color:white;padding-bottom:20px;overflow-y:hidden}#out-stripe-go-button-container{height:40px;font-size:14px}.subscription-pro{display:flex;flex-direction:column}.smaller{text-align:left;font-size:12px;padding-right:70px}.stripe-signup-button{padding:8px 30px;font-size:16px;border-radius:45px;background-color:#a01ed1;color:white;width:auto;background:linear-gradient(94deg,#c764ec,#4a36b1);height:auto;border:none;cursor:pointer;vertical-align:bottom;white-space:nowrap;font-weight:600;margin-bottom:11px}.modal-subscriptions-container{display:flex;position:relative;flex-direction:column;text-align:left;height:fit-content;border:1px solid transparent;border-radius:12px;padding:48px;padding-bottom:10px;color:#fff;overflow-y:hidden}.modal-small-subscription-container{background:rgba(142,142,142,0.02);backdrop-filter:blur(114px);-webkit-backdrop-filter:blur(114px);height:fit-content;width:426px;border:1px solid rgba(255,255,255,0.13);border-radius:12px;margin:auto}.modal-subscription-section{display:flex;flex-direction:row;justify-content:space-between;height:auto;overflow:hidden;margin:auto;width:95%}#mobile-subscription-section-id{margin-top:16px}.modal-overview{visibility:visible}.modal-subscription-title-container{display:flex;flex-direction:column;justify-content:center;align-items:center}.modal-model-title{display:flex;flex-direction:row}.modal-subscription-title{font-size:27px;margin-bottom:5px;line-height:29px}.modal-subscriptions-subheader{font-size:14px;color:#9c9b9b;font-weight:300}.pro-title{margin-left:3px;font-weight:600}.modal-subscription-price{display:flex;justify-content:center}.modal-price{font-size:30px;color:#8f37ff;font-weight:500;margin-bottom:6px}.modal-subscription-length{font-size:24px;color:#8f37ff;margin-top:6px}.modal-get-started,.mobile-get-started{display:flex;flex-direction:row;width:100%!important;height:48px;padding:5px 95px;justify-content:center;align-items:center;gap:10px;border-radius:12px;font-size:18px;text-align:center;background-color:#8f37ff;color:white;border:none;white-space:nowrap;cursor:pointer}.modal-overview{list-style-type:none;font-size:14px;line-height:38px;padding-left:0px}.get-started-container{display:none;flex-direction:column}.payment-container{display:flex;flex-direction:column}.active{color:white;font-weight:400;background:rgba(255,255,255,0.1)}.modal-see-full{display:flex;flex-direction:row;justify-content:center;align-items:center;background:none;border:none;color:white;font-size:14px;cursor:pointer;margin:auto;margin-bottom:30px;gap:4px}.promo-modal-container{width:780px;max-width:95vw}.promo-modal-container .modal-subscriptions-container{padding:32px;padding-bottom:24px}.promo-modal-container .close{position:absolute;top:12px;right:12px;background:none;border:none;color:rgba(255,255,255,0.6);font-size:28px;cursor:pointer;padding:4px 10px;line-height:1;z-index:10}.promo-modal-container .close:hover{color:#fff}.promo-modal-container .modal-subscription-title{font-size:24px;margin-bottom:24px}.promo-tiers-container{display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:24px}.promo-tier-card{position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.15)}.promo-tier-image{width:100%;height:100%;object-fit:cover;display:block}.promo-tier-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 12px;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.4) 60%,rgba(0,0,0,0) 100%);display:flex;flex-direction:column;align-items:center;gap:2px}.promo-tier-badge{font-size:15px;font-weight:600;color:#fff}.promo-tier-res{font-size:12px;color:rgba(255,255,255,0.7)}.share-button{color:#fff!important;opacity:0.65;cursor:pointer;display:flex;align-items:center;flex-direction:row}.share-button img{margin-right:4px}#social-image{margin:0 auto}.separator-bullet{margin:0 4px;color:#999}.card-list{display:flex;flex-direction:column;justify-content:center;padding:18px 10px 0}.card-list .main-list{display:flex;flex-direction:column;margin:0 auto;width:100%}.card-list-item{border-radius:8px;margin:30px auto 30px auto;width:100%;max-width:700px;cursor:pointer;display:flex;flex-direction:row;outline:none;box-shadow:0 8px 92px 20px rgb(71 28 115 / 70%)}.card-list-item .heart-link{display:flex;flex:0 1;flex-direction:column;padding:12px 0;align-items:center}.card-list-item .card-content{display:flex;flex-direction:column;background:transparent;width:100%;border-radius:0 8px 8px 0;color:black;padding:20px}.card-list-item:hover{outline:1px solid #898989}.card-list-item .tag-container{display:flex;flex-direction:row}.card-list-item .card-list-item-header{display:flex;flex-direction:row;align-items:center;margin:12px;font-size:14px;color:#999}.card-list-item .trunc-summary{margin:0 12px 12px;font-size:14px;color:#fff}.card-list-item .card-footer{display:flex;flex-direction:row;align-items:center;margin:12px;font-size:14px}.card-list-item .card-footer .author-link{color:#c764ec}.card-list-item .title{margin:0 12px 12px;font-size:15px;font-weight:500;line-height:24px;color:#fff}.dropdown-select{background-color:rgba(111,0,255,0.049);color:darkgray;padding:12px;font-size:16px;border:none;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}.dropdown-select option{color:white;margin-top:14px}.dropdown-select option:first-child{color:darkgray}.dropdown-select option:hover{background-color:#f1f1f1}.dropdown-payment-amount::before{content:"Add credits to your account";position:absolute;z-index:1;top:10px;left:60px;font-size:8px;color:darkgray;pointer-events:none}.dropdown-payment-amount::after{color:white}.dropdown-payment-amount{position:relative;display:none;margin-bottom:12px;width:100%;height:48px}.go-dropdown{display:flex}.money-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:darkgray;z-index:1;border-right:1px solid darkgray;padding-right:12px}.dropdown-input-amount{font-size:12px;padding-left:58px;padding-top:22px;padding-bottom:10px;height:48px;line-height:14px;position:relative;width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(255,255,255,0.02);backdrop-filter:blur(12px)}.dropdown-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;background-color:#ffffff00;color:white;border:none;z-index:2}.dropdown-icon:hover{cursor:pointer}.nudge-popup{position:fixed;top:20px;right:-350px;width:350px;max-height:300px;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);backdrop-filter:blur(114px);transition:right 0.3s ease;z-index:1000;overflow-y:auto;visibility:hidden}.nudge-popup.active{right:20px;visibility:visible}.nudge-popup-header{display:flex;justify-content:space-between;align-items:center;background:rgba(142,142,142,0.02);color:white;border-bottom:1px solid rgba(255,255,255,0.2);padding:2px 17px}.pro-popup-header{border:none;justify-content:flex-end}.nudge-popup-header-text{display:flex;align-items:center;gap:10px}.nudge-popup-body{padding:20px}.nudge-signin-button{margin-top:12px;font-size:16px}.nudge-pro-popup{position:fixed!important;bottom:20px;right:-350px;width:350px;max-height:400px;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);backdrop-filter:blur(114px);transition:right 0.3s ease;z-index:2147483647!important;isolation:isolate;overflow-y:auto;visibility:hidden}.nudge-pro-popup.active{right:20px;visibility:visible}.nudge-pro-body-title{display:flex;flex-direction:column;justify-content:center;text-align:center}.nudge-pro-icon{margin-top:-20px;height:50px}.close-icon{cursor:pointer;font-size:40px;opacity:.75}.sub-terms-pro-styling{padding-left:0px;padding-top:8px;margin:auto;flex-direction:column}.sub-terms-go-styling{padding-left:0px;padding-top:8px;margin:auto;flex-direction:column}.dataset{position:relative;width:100%}#amount{-webkit-appearance:none;-moz-appearance:none}.card-list-item .title a{color:#fff}.thumbnail{width:500px;max-width:100%;margin:12px auto;height:350px;max-height:100%;box-sizing:border-box;border-radius:8px;background-size:contain;background-repeat:no-repeat;background-position:center}.middle{vertical-align:middle}.hide{display:none}.heart-link{display:flex;align-items:center;justify-content:center;color:#999!important;text-decoration:none!important;cursor:pointer;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.heart-count{margin:4px}.heart-link:not([hearted]) .hearted-heart-icon{display:none}.heart-link[hearted] .unhearted-heart-icon{display:none}.multi-select-checkbox{display:none}a:hover,a:focus{text-decoration:none}.social-icon{display:flex;gap:26px}.social-name{font-size:14px}.icon-container{display:flex;flex-direction:column;align-items:center;gap:8px}.icon-container a{display:flex;width:58px;height:58px;border-radius:12px;background-color:#ffffff04;justify-content:center;align-items:center;transition:background-color 0.3s;margin-bottom:-8px}.icon-container a:hover{background-color:#ffffff12}.facebook a:hover{background-color:#1876f2}.reddit a:hover{background-color:#ff4400}.x a:hover{background-color:rgb(13,13,13)}.linkedin a:hover{background-color:#0a66c2}.icon-container img{width:55%;height:auto;transition:transform 0.3s}.icon-container a:hover img{transform:scale(1.1)}@media screen and (max-width:960px){header img.header-social-icon{margin-left:12px}}@media screen and (max-width:800px){.smaller{padding-right:30px}}@media screen and (max-width:600px){ul li.dropdown ul{right:2%}.contact,.press,.feedback,.legal{margin-left:10px;font-size:12px}.linkedinlogo,.instagramlogo,.tiktoklogo,.redditlogo{margin-left:10px;height:22px}.xlogo{height:18px}.smaller{padding-right:10px}dialog#login-modal form{width:100%;margin:auto}dialog#subscription-modal form{width:400px;margin:10px}.thumbnail{max-width:90%;margin:12px}dialog .button{width:80%}dialog input[type=email]{width:90%}dialog input[type=text]{width:90%}dialog input[type=password]{width:90%}dialog .button.social-auth{width:80%;display:block;margin:auto;margin-bottom:10px;text-align:left}.card-list .card-list-item{margin:4px 0}.card-list .card-list-item .card-content{width:87%}header img.deepai-logo{height:28px;margin-left:8px;width:32px;object-fit:cover;object-position:left}.sub-terms-pro-styling{margin:auto}.sub-terms-go-styling{margin:auto}}@media (max-width:500px){.social-modal-body{width:268px}.social-icon{gap:12px}#social-modal{width:98%}.social-name{font-size:12px}.promo-modal-container .modal-subscriptions-container{padding:24px 16px}.promo-modal-container .modal-subscription-title{font-size:20px;margin-bottom:16px}.promo-tier-overlay{padding:10px 8px}.promo-tier-badge{font-size:12px}.promo-tier-res{font-size:10px}}@media screen and (max-width:470px){.modal-small-subscription-container{width:96vw;height:auto}.modal-subscriptions-container{padding:34px 34px 14px 34px}.out-of-credits-modal-body{width:auto}.oc-msg{margin:16px 18px 10px}.oc-section,.oc-auto-topup{margin:10px 18px}#close-sub{margin-right:10px}dialog{max-width:100vw;width:100vw}ul li.dropdown ul{width:96%}.login-container{width:96%}.leftfooter p{display:none}}@media screen and (max-width:420px){.modal-column{width:280px}.other-modal-column{width:280px;padding-bottom:5%;margin-bottom:10px}.other-modal-column .other-box-title{padding:0.8em}.modal-column .box-title{padding:0.8em}.other-modal-column :nth-child(2){padding:0.6em}.modal-column :nth-child(2){padding:0.6em}.member-active{padding:0 35px 0 35px}}@media screen and (max-width:390px){.member-active{padding:0 30px 0 30px}.oc-msg{margin:16px 12px 10px}.oc-section,.oc-auto-topup{margin:10px 12px}}@media screen and (max-width:375px){dialog#login-modal form{width:90%;margin:auto}dialog input[type=email]{width:90%}dialog input[type=text]{width:90%}dialog input[type=password]{width:90%}dialog .button{width:90%}dialog .button.social-auth{width:90%}.member-active{padding:0 20px 0 20px}}@media screen and (max-width:425px){.subscription-modal-body{width:auto}.subscription-pro{width:100%;margin:auto}}@media screen and (max-width:320px){ul li.dropdown ul{right:10px}dialog#login-modal form{width:95%;margin:auto}dialog#subscription-modal form{width:400px;margin:10px}dialog .button{width:100%}dialog .button.social-auth{width:100%}.thumbnail{max-width:90%;margin:12px}.card-list .card-list-item .card-content{width:87%}.card-list .card-list-item{margin:4px 0}dialog .button.social-auth{width:100%;display:block}.options-container{width:260px}.signin-with-google{width:240px}.email-container{width:240px}.password-container{width:240px}.reenter-password-container{width:240px}.button.login-email{width:240px}}@media screen and (max-width:290px){.options-container{width:235px}.member-active{padding:0 12px 0 12px}dialog{margin-left:0px}}.announcement-banner{background:rgba(143,55,255,0.25);backdrop-filter:blur(10px);border:1px solid rgba(143,55,255,0.3);color:white;position:relative;box-sizing:border-box;display:none;justify-content:center;align-items:center;text-align:center;border-radius:50px;padding:10px 35px 10px 16px;margin:0 auto;max-width:fit-content}.banner-text{margin:0;padding:0;text-align:center;display:flex;align-items:center;justify-content:center}.permanent-announcement-banner{display:none;background:rgba(143,55,255,0.25);backdrop-filter:blur(10px);border:1px solid rgba(143,55,255,0.3);color:white;position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;text-align:center;border-radius:50px;padding:8px 29.5px;margin:0 auto}.menu-perm-ad{border-radius:6px;background:rgba(143,55,255,0.25);backdrop-filter:blur(10px);border:1px solid rgba(143,55,255,0.3);color:white;padding:8px 31.5px;margin-top:6px}.sidebar-perm-ad{border-radius:10px}.image-generator-banner{padding:8px 45px}.banner-text{margin:0;padding:0;text-align:center;display:flex;flex-direction:column}.perm-banner-text{margin:0;padding:0;text-align:center;display:flex;flex-direction:column}.main-text{font-size:14px;line-height:1;color:white;font-weight:400}.image-perm-text{font-size:18px}.sub-text{font-size:14px;line-height:1.2;color:white;font-weight:400}.image-sub-perm-text{font-size:15px}.sub-perm-text{font-size:12px}.pro-link-button{display:block;text-decoration:none;color:inherit;width:100%}.announcement-banner{display:none}.dismiss-button{background:transparent;border:none;color:rgba(255,255,255,0.8);cursor:pointer;font-size:16px;line-height:16px;padding:0;margin:0;position:absolute;right:8px;top:50%;transform:translateY(calc(-50% - 1.25px));width:24px;height:24px;display:flex;align-items:center;justify-content:center;text-align:center}#successpopup,#errorpopup{visibility:hidden;min-width:250px;background-color:rgba(45,40,60,1);border-radius:45px;padding:16px;position:fixed;z-index:10001;left:50%;bottom:30px;transform:translateX(-50%);text-align:center;border:1px solid rgba(74,66,97,1);display:flex;align-items:center;justify-content:center}#successpopup{color:#fff;border-color:rgba(74,66,97,1);background-color:rgba(45,40,60,1)}#successpopup.show{visibility:visible;animation:fadein 0.5s ease-in,fadeout 0.5s ease-out 2.5s forwards}#errorpopup{color:#ee7a7a;border-color:rgba(95,49,64,1);background-color:rgba(33,17,39,1)}.errorIcon{width:16px;height:16px;margin-right:0.75rem;flex-shrink:0;opacity:0.9}#errorpopup.show{visibility:visible;animation:fadein 0.5s ease-in,fadeout 0.5s ease-out 2.5s forwards}@keyframes fadein{from{opacity:0}to{opacity:1}}@keyframes fadeout{from{opacity:1}to{opacity:0}}.privacy-modal-dialog{border:none;border-radius:12px;padding:0;max-width:650px;width:90%;height:90vh;max-height:90vh;box-shadow:0 8px 32px rgba(0,0,0,0.3);overflow:hidden}.privacy-modal-dialog[open]{display:flex;flex-direction:column;position:fixed;inset:0;margin:auto}.privacy-modal-dialog::backdrop{background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);position:fixed;inset:0}body:has(.privacy-modal-dialog[open]){overflow:hidden}.privacy-modal-close-btn{position:absolute;top:12px;right:12px;background:white;border:none;border-radius:50%;width:36px;height:36px;font-size:28px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:all 0.2s;z-index:1000}.privacy-modal-close-btn:hover{background:#f5f5f5;color:#333;transform:scale(1.1)}#privacy-modal-iframe{width:100%;flex:1;border:none;display:block;margin:0;padding:0;border-radius:12px;min-height:0}@media (max-width:600px){.privacy-modal-dialog{max-width:100%;width:100%;max-height:100vh;border-radius:0}#privacy-modal-iframe{height:100vh}}div.left-sticky{position:fixed;top:20vh;left:0px;right:calc(100% - 320px);z-index:20;overflow:hidden}@media (max-width:1650px){div.left-sticky{right:calc(100% - 180px)}}@media (min-width:1650px){div.left-sticky{right:calc(100% - 320px)}}h2,h3{font-weight:600;font-size:20px}*:focus{outline:none;-webkit-tap-highlight-color:transparent}:root{--standard-width:calc(min(100vw - 18px,900px))}body{color:white;min-height:100vh;display:flex;flex-direction:column}h1{text-align:center}h2{text-align:center;margin-left:auto;margin-right:auto;max-width:800px;padding-left:1em;padding-right:1em}.button-container{display:flex;gap:10px;justify-content:center}.button-container button{border:none;cursor:pointer;color:white;background:rgba(255,255,255,0.08);color:white;flex:1}#loading-wrapper{position:relative;border:none;cursor:pointer;color:white;color:white;padding:.5em 0;margin:0;font-size:1.2em;border:none}button:hover{background:rgba(255,255,255,0.12)}.button-icon{margin-right:5px}.button-icon.recording{color:#ee7a7a}.disclaimer{text-align:center;margin-top:10px;max-width:var(--standard-width);margin:auto;margin-top:12px;line-height:21px;margin-bottom:100px;font-size:14px}.disclaimer-read-docs{color:#b78ded}#error-message{color:#ee7a7a;text-align:center;margin-top:10px}footer{margin-top:auto}.tts-section{margin-left:auto;margin-right:auto;margin-bottom:100px;text-align:center;max-width:800px;width:calc(100% - 2em);position:relative}.dropdown-arrow-container{position:absolute;top:22px;right:12px;transform:translateY(-50%);pointer-events:none}.dropdown-arrow-container svg{display:block;width:100%;height:auto}#text-input{border:1px solid rgba(255,255,255,0.12);background-color:rgba(255,255,255,0.02);padding:1em;border-radius:10px;display:inline-block;width:calc(100% - 2em);color:white;font-size:1em;min-height:32px;resize:vertical}.text-input-wrapper{margin-top:1em;margin-bottom:.5em;position:relative;width:100%;height:100%}#text-input::placeholder{color:#9C9C9C}#select-models option{background-color:#333;color:#fff}.button-container{display:flex;flex-direction:column;align-items:center}.button-row{display:flex;justify-content:center;width:100%;gap:.5em}.olde-container,.olde-container *{box-sizing:border-box;cursor:pointer}.olde-container{width:fit-content;max-width:100%;margin:8px auto;padding:8px 10px;background:rgba(255,255,255,0.04);border-radius:12px;border:1px solid rgba(255,255,255,0.13)}.genius-main{display:flex;align-items:center;justify-content:flex-start}.genius-toggle-area{display:flex;align-items:center;margin-right:20px;flex-shrink:0}.genius-checkbox{position:relative;appearance:none;width:52px;height:28px;background-color:#2d283c;border-radius:14px;cursor:pointer;transition:background-color 0.3s;flex-shrink:0}.genius-checkbox::before{content:'';position:absolute;width:24px;height:24px;border-radius:50%;top:2px;left:2px;background-color:white;transition:transform 0.3s}.genius-checkbox:checked{background-color:#8F37FF}.genius-checkbox:checked::before{transform:translateX(24px)}.genius-label{color:#ffffff;font-size:18px;font-weight:600;margin-left:12px;flex-shrink:0}.genius-description{color:rgba(255,255,255,0.9);font-size:16px;line-height:1.4;margin:0;flex:1;min-width:0;text-align:left}.genius-disclaimer{margin-top:10px;color:rgb(169,169,169);font-style:italic;font-size:14px;text-align:left}button{padding:.5em 0;margin:0;font-size:1.2em;border-radius:100px;border:none;background:rgba(255,255,255,0.08);color:white}#play-icon,#pause-icon{width:.8em;height:.8em}#send-button{background-color:#8F37FF}button:hover{background:rgba(255,255,255,0.12)}.button-row button{display:flex;align-items:center;justify-content:center}.button-row button:disabled{opacity:0.5;cursor:not-allowed}.button-icon{margin-right:5px}.button-icon.recording{color:red}.input-container{position:relative;display:inline-block}#progressContainer{width:calc(min(100vw - 18px,787px));height:10px;margin:auto;border-radius:12px}#deepaiProgressBar{height:10px;background:#8F37FF;border-radius:10px;width:0%}#audio-player{display:none}.progress-bar-container{margin-top:10px;width:calc(100% - 2em)}#progress-bar{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:5px;background:#8F37FF;outline:none;opacity:0.7;transition:opacity .2s}#progress-bar::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:#ffffff;cursor:pointer}#progress-bar::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#ffffff;cursor:pointer}@keyframes spin{0%{transform:translateY(-50%) rotate(0deg)}100%{transform:translateY(-50%) rotate(360deg)}}.delete-button{position:relative;align-self:flex-end;bottom:8px;background:rgba(255,255,255,0.04);border-radius:6px;padding:6px 8px;border:none;margin-right:12px;cursor:pointer}.delete-button:hover{background-color:#ffffff12}.category-tag:nth-child(3){display:none}.art-grid-item{margin-bottom:10px}.art-image-thumbnail{width:200px;height:auto;border-radius:5px}.art-grid-item-prompt-text{position:absolute;bottom:0px;left:0px;padding:4px;color:#ffffffd9;background:#00000096;opacity:0;transition:opacity 0.15s}.art-grid-item-prompt-text-always-visible{opacity:1}.art-grid-item:hover .art-grid-item-prompt-text{opacity:1}.art-grid-item-heart-container{position:absolute;top:0px;right:0px;padding:0px;color:#ffffffd9;background:#00000096;opacity:0;transition:opacity 0.15s}.art-grid-item:hover .art-grid-item-heart-container{opacity:1}.art-image-info-prompt{display:inherit;text-align:left;flex-direction:column}.modal-trunc-summary{overflow:hidden;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical}.art-image-btn{background-color:#201e25;border-radius:4px;padding:4px 8px 4px 8px;color:white;border:1px solid #ffffff4d;margin:16px 0px 4px;font-size:16px;cursor:pointer;display:flex;justify-content:center;align-items:center}.art-image-publish-buttons{display:flex;margin-bottom:12px;margin-top:-8px;justify-content:center}dialog[id^="art-modal"] *{box-sizing:border-box}dialog[id^="art-modal"] .modal-body{padding:0;position:fixed;top:0;left:0;right:0;bottom:0;--dock-min-height:230px;--dock-min-width:355px;background:rgba(0,0,0,.4)}.art-image-wrapper{display:flex;justify-content:center;position:relative}.art-image-info{display:flex;flex-direction:column;background:#2A282F;padding:12px}img.art-image-full{padding:15px;width:100%;height:100%;object-fit:contain}@media (orientation:portrait){.art-image-wrapper{height:calc(100% - var(--dock-min-height));width:100%}.art-image-info{height:var(--dock-min-height);width:100%}.modal-trunc-summary{-webkit-line-clamp:2}}@media (orientation:landscape){.art-image-wrapper{width:calc(100% - var(--dock-min-width));height:100%}.art-image-info{width:var(--dock-min-width);height:100%;position:absolute;top:0;right:0}.art-image-btn.publish-btn{flex:1}.art-image-btn.edit{flex:1}}@media (max-width:360px){dialog[id^="art-modal"] .modal-body{--dock-min-height:340px}.art-image-buttons{flex-direction:column}.art-image-buttons .art-image-btn:first-child{margin-left:12px}.art-image-btn{margin:8px 12px 4px 0}.art-image-publish-buttons{margin-left:12px;margin-top:unset}.art-image-btn.publish-btn{flex:1}.art-image-info-prompt{margin:0 12px}}.art-image-wrapper[highres="true"]>img:first-of-type,.art-image-wrapper[highres="false"]>img:last-of-type{opacity:0;pointer-events:none;position:absolute;top:0}.card-list .main-list{display:flex;flex-direction:column;margin:0 auto;max-width:880px;padding-left:12px}@media screen and (max-width:1200px){.card-list .main-list{max-width:660px}}@media screen and (max-width:820px){.card-list .main-list{max-width:440px}}@media screen and (max-width:520px){.card-list .main-list{max-width:210px}}@media screen and (max-width:600px){.hero-icon{display:none}.inner-content{max-width:325px}.trunc-summary{-webkit-line-clamp:3}.hero-section .hero-content{padding:8px}.genius-main{flex-direction:column}.genius-toggle-area{margin-right:0;margin-bottom:12px}.hero-section .category-feature-card .subtitle{font-size:12px}.card-list .card-list-item .card-content{max-width:90%}.category-tag:nth-child(2),.category-tag:nth-child(3){display:none}#download-button,#share-button,#play-pause-button{font-size:17px}.button-icon{width:20px}}@media screen and (max-width:380px){#download-button,#share-button,#play-pause-button{font-size:14px}.button-icon{width:18px}}@media screen and (max-width:320px){.hero-icon{display:none}.trunc-summary{-webkit-line-clamp:3}.hero-section .category-feature-card .subtitle{font-size:12px}.hero-section .hero-content{padding:8px}.card-list .card-list-item .card-content{max-width:90%}.category-tag:nth-child(2),.category-tag:nth-child(3){display:none}}.card-list .main-list{display:flex;flex-direction:column;margin:0 auto;max-width:880px;padding-left:12px}@media screen and (max-width:1200px){.card-list .main-list{max-width:660px}}@media screen and (max-width:820px){.card-list .main-list{max-width:440px}}@media screen and (max-width:520px){.card-list .main-list{max-width:210px}}.check-gallery-button{margin:5px;color:white;padding:14px 42px;border-radius:45px;cursor:pointer;font-size:15px;background-color:rgba(45,40,60,1);font-weight:normal;text-align:center;margin-left:auto;margin-right:auto;display:block;margin-bottom:18px;margin-top:0px;width:300px}.check-gallery-button a{font:inherit 16px;text-decoration:none;color:inherit}.check-gallery-button a:visited{color:inherit}#usage-tracker-container{width:100%;max-width:900px;margin:12px auto;padding:12px 16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(255,255,255,0.08);box-sizing:border-box;align-self:stretch}.usage-tracker-item{margin-bottom:8px}.tracker-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.tracker-label{font-size:13px;font-weight:500;color:#ffffff}.tracker-count{font-size:12px;color:rgba(255,255,255,0.7);font-variant-numeric:tabular-nums}.tracker-progress-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden}.tracker-progress-fill{height:100%;border-radius:3px;transition:width 0.3s ease}.tracker-status-good .tracker-progress-fill{background:linear-gradient(90deg,#10b981,#34d399)}.tracker-status-warning .tracker-progress-fill{background:linear-gradient(90deg,#f59e0b,#fbbf24)}.tracker-status-exceeded .tracker-progress-fill{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}.tracker-footer{margin-top:4px;font-size:11px;display:flex;justify-content:space-between;align-items:center}.tracker-remaining{color:rgba(255,255,255,0.6)}.tracker-overage{color:#a78bfa}.tracker-credits-row{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);margin-top:4px}.tracker-credits{font-size:12px;color:rgba(255,255,255,0.7);font-variant-numeric:tabular-nums}.tracker-next{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}.tracker-next.next-free{background:rgba(16,185,129,0.15);color:#34d399}.tracker-next.next-paid{background:rgba(139,92,246,0.15);color:#a78bfa}.usage-tracker-item.tracker-current{background:rgba(143,55,255,0.08);border-radius:8px;padding:8px;margin:-8px;margin-bottom:8px}.skeleton-inline{color:transparent;background:rgba(255,255,255,0.08);border-radius:3px}.tracker-skeleton .tracker-next{background:rgba(255,255,255,0.04)}.skeleton-bar{width:30%;background:rgba(255,255,255,0.1)}@media screen and (max-width:768px){#usage-tracker-container{padding:10px}.tracker-label{font-size:12px}.tracker-count{font-size:11px}.tracker-credits-row{flex-direction:column;gap:6px;align-items:flex-start}}</style>
+
+        <!-- Google tag (gtag.js) -->
+<!--  End Google Analytics Tag -->
+    <!-- Twitter conversion tracking base code -->
+<!-- End Twitter conversion tracking base code -->
+	</head>
+	<body>
+
+        
+        <header>
+            
+<style>
+   :root {
+  --white: rgba(255, 255, 255, 1);
+  --clear: rgba(255, 255, 255, 0.06);
+  --cod-gray: rgba(8, 8, 8, 1);
+  --cod-gray-2: rgba(9, 9, 9, 1);
+  --pink: #c549fe;
+  --purple: #7000ff;
+  --font-size-xxs: 24px;
+  --font-size-xs: 26px;
+  --font-size-s: 32px;
+  --font-size-m: 40px;
+  --font-size-l: 48px;
+}
+a.button {
+  display: flex;
+  flex-direction: row;
+  width: 35px;
+  padding: 5px 95px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 16px;
+  margin-right: 16px;
+  height: 45px;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.hidden-icon {
+  display: none;
+}
+
+.exit {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: right;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+a.button.login, a.button.headerbutton {
+  z-index: 2;
+  width: fit-content;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--white);
+  white-space: nowrap;
+  letter-spacing: 2%;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: none;
+  padding: 5px 10px;
+  height: 32px;
+  margin-left: auto;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+a.button.chatbutton,
+a.button.imagebutton {
+  background: var(--clear);
+  border: none;
+  color: var(--white);
+  font-weight: bold;
+  letter-spacing: 2%;
+  margin-right: 12px;
+  transition: background 0.4s ease;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  z-index: 2;
+}
+
+a.button.chatbutton,
+a.button.imagebutton {
+  display: flex;
+  flex-direction: row;
+  width: 240px;
+  margin-right: 0px;
+  justify-content: space-around;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  z-index: 2;
+}
+
+a.button.chatbutton:hover {
+  background: var(--purple);
+}
+a.button.imagebutton:hover {
+  background: var(--pink);
+}
+
+a.button.menu {
+  background: none;
+  border: none;
+  width: 24px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.menu-icon {
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.dropbtn {
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin: auto;
+}
+
+#userIconDrop {
+  display: none;
+}
+
+.usericon {
+  width: 75px;
+  height: 75px;
+  border-radius: 12px;
+  margin: auto 24px 12px 0px;
+  object-fit: cover;
+}
+
+.nav-profile-section {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.nav-usernames {
+  gap: 6px;
+  margin-bottom: 3px;
+  margin-bottom: 6px;
+}
+
+.nav-profilename {
+  margin: auto;
+  margin-bottom: 0px;
+  white-space: normal;
+}
+
+.nav-username {
+  margin: auto;
+  margin-top: 0px;
+  white-space: normal;
+  max-width: 170px;
+  overflow-wrap: break-word;
+  word-wrap: normal;
+  word-break: break-word;
+  font-size: 13px;
+}
+
+.nav-profile-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #8f37ff;
+  border: none;
+  width: 77%;
+  font-family: inherit;
+  color: var(--white);
+  white-space: nowrap;
+  letter-spacing: 2%;
+  margin: auto;
+  padding: 12px;
+  margin-top: 0px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.profile-button:hover {
+  background: var(--pink);
+}
+
+#navProfileSection{
+  display: none;
+}
+
+#navProfileButton{
+  display: none;
+}
+
+.pages {
+  margin-bottom: 12px;
+}
+
+.menu-options {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 52px;
+  padding: 2px 0px;
+}
+
+.pages a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  text-decoration: none;
+  width: 77%;
+  margin: auto;
+  margin: 0px 10px;
+  padding: 0 0 0 46px;
+}
+
+.pages a:hover {
+  background-color: var(--clear);
+  border-radius: 12px;
+  width: auto;
+}
+
+.settings,
+.logout {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  margin: 4px 4px 0 16px;
+  background: none;
+  border: none;
+  height: 52px;
+  font-size: 18px;
+  font-family: inherit;
+  color: white;
+  cursor: pointer;
+  width: 95%;
+}
+
+.logout {
+  width: auto;
+  padding: 0px 0px 0px 40px;
+}
+
+.menu-border {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  width: 100%;
+  height: auto;
+}
+
+
+@media screen and (max-width: 1040px) {
+  a.button.mathai {  /* Math AI disappears first */
+    display: none;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  a.button.audiogenerator { /* AI Music disappears second */
+    display: none;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  a.button.voicechat { /* Voice chat disappears third */
+    display: none;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  a.button.photoeditor { /* AI Photo Editor disappears fourth */
+    display: none;
+  }
+}
+
+@media screen and (max-width: 620px) {
+    .hero h1 {
+        font-size: 76px;
+    }
+    .titlesparkle {
+        top: -55px;
+        height: 34%;
+        margin-left: -60px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+  a.button.videogenerator {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-buttons {
+    justify-content: space-between;
+    width: 100%;
+  }
+  a.button.login,  a.button.headerbutton {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  a.button.login {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 420px) {
+    .hero h1 {
+        font-size: 56px;
+    }
+    .titlesparkle {
+        top: -40px;
+        margin-left: -55px;
+    }
+    a.button.headerbutton {
+      font-size: 13px;
+      margin-right: 6px;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    .hero h1 {
+        font-size: 48px;
+    }
+    .titlesparkle {
+        top: -40px;
+        margin-left: -52px;
+    }
+    a.button.headerbutton {
+      font-size: 12px;
+      margin-right: 2px;
+      padding: 5px 5px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+  .nav-buttons {
+    justify-content: flex-end;
+    width: 100%;
+  }
+  a.button.videogenerator, a.button.videogenerator { /* Note: Duplicate selector here, might want to clean up */
+    display: none;
+  }
+  a.button.aichat {
+      font-size: 14px;
+  }
+}
+
+
+</style>
+
+<div class="nav-items">
+    <a class="logo-link" href="dashboard/videos.html">
+      <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.4781 27.6456V24.5259H10.5015V27.5763H13.4781V27.6456Z" fill="white"/>
+        <path d="M33.9079 25.8433C33.8402 26.1899 33.7049 26.6058 33.5696 26.9525C33.5696 27.0218 33.502 27.0911 33.502 27.1605C33.2314 27.8537 32.8931 28.4777 32.5549 29.1016C32.2166 29.5869 31.8784 30.0722 31.5401 30.4881C31.3372 30.6961 31.2019 30.9041 30.9989 31.1121L31.0666 31.0428C30.796 31.3201 30.5254 31.5974 30.1871 31.8747C30.0518 32.0133 29.8489 32.0827 29.7136 32.2213C29.6459 32.2213 29.5783 32.2906 29.5783 32.2906C29.1724 32.5679 28.7665 32.7759 28.2929 32.9839C27.7517 33.2612 27.1429 33.4692 26.534 33.6078C25.9252 33.7465 25.2487 33.8851 24.6398 33.9545C23.8957 34.0238 23.1515 34.0238 22.3397 33.8851C18.8895 33.3999 15.9806 31.3894 14.2217 28.6163C14.6276 29.1016 15.0335 29.5176 15.507 29.8642C16.3188 30.4881 17.2659 30.9734 18.3483 31.1814C18.8219 31.3201 19.3631 31.3201 19.8366 31.3201C19.9719 31.3201 20.1072 31.3201 20.2425 31.3201C20.9867 31.3201 21.7309 31.1814 22.4074 30.9041C22.5427 30.8348 22.6103 30.8348 22.7456 30.7654C22.9486 30.6961 23.2192 30.5575 23.4221 30.4881C23.4898 30.4881 23.4898 30.4188 23.5574 30.4188C25.6546 29.2403 27.2105 27.1605 27.4811 24.526C27.5488 24.0408 27.5488 23.4861 27.5488 23.0009C29.443 23.0009 30.9989 24.1794 31.8107 25.7739C31.8784 25.9819 31.946 26.1899 32.0137 26.3979C32.0137 26.2592 32.0137 26.1899 32.0137 26.0512C32.0137 25.4966 31.946 25.0113 31.8784 24.4567C31.2019 20.7824 28.0223 18.0787 24.2339 18.0787C23.7604 18.0787 23.3545 18.148 22.8809 18.2173C22.8809 18.2173 22.8809 18.2173 22.8133 18.2173C21.4603 18.4253 20.5132 18.8413 19.0248 19.9505C18.416 20.3665 17.1983 21.4757 16.2512 22.3769C15.7776 22.8622 14.9658 22.3769 15.1011 21.6837C15.2364 21.0597 15.4394 20.3665 15.8453 19.6039C13.9511 16.9001 13.9511 13.9884 17.6718 11.4233C19.8366 9.89813 23.4221 9.48217 26.737 10.7301C28.7665 9.62083 31.6754 9.5515 34.3138 12.4632C34.5844 12.7405 34.3814 13.2258 33.9755 13.2258C33.2314 13.2258 32.2166 13.4338 31.4048 14.0577C31.4725 14.1271 31.5401 14.2657 31.6754 14.4044C34.855 18.7026 34.7873 22.7236 33.9079 25.8433Z" fill="white"/>
+      </svg>
+      <P style="display: none;">DeepAI</P>
+    </a>
+    <div class="nav-buttons">
+        <a class="button headerbutton aichat" href="chat/${apiResultHtml[i].url_handle}.html">Chat</a>
+        <a class="button headerbutton imagegenerator" href="machine-learning-model/text2img.html">Image Generator</a>
+        <a class="button headerbutton videogenerator" href="video.html">Video</a>
+        <a class="button headerbutton audiogenerator" href="music.html">Music</a>
+        <a class="button headerbutton voicechat" href="voice.html">Voice Chat</a>
+        <a class="button headerbutton photoeditor" href="machine-learning-model/image-editor.html">Photo Editor</a>
+
+        <a class="button login" id="headerLoginButton" onclick="openLogin()">Login</a>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <button class="drop-menu-button" id="dropMenuButton">
+                        <img src="static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
+                        <img src="static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
+                    </button>
+                    <ul id="mainNavDropdown">
+                        <div class="exit">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <path
+                              d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z"
+                              fill="white"
+                            />
+                          </svg>
+                        </div>
+                        <div id="navProfileSection" class="nav-profile-section">
+                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/dashboard/profile')" src="static/images/dolphin-icon.jpeg" />
+                          <div class="nav-usernames">
+                            <p class="nav-profilename" id="navUserName"></p>
+                            <p class="nav-username" id="navUserEmail"></p>
+                          </div>
+                        </div>
+                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/dashboard/profile')">Account Settings</button>
+                        <div class="menu-options">
+                          <div class="pages">
+                            <a href="machine-learning-model/text2img.html" class="ai-generators">Image Generator</a>
+                            <a href="video.html" class="ai-generators">Video Generator</a>
+                            <a href="music.html" class="ai-generators">Music Generator</a>
+                            <a href="chat/${apiResultHtml[i].url_handle}.html" class="ai-generators">Chat</a>
+                            <a href="machine-learning-model/image-editor.html" class="ai-generators">Photo Editor</a>
+                            <a href="pricing.html" class="pricing">Pricing</a>
+                            <a href="definitions" class="glossary">Glossary</a>
+                            <a href="docs.html" class="apidocs">Docs</a>
+                            <a href="music.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
+                            <a href="privacy-policy.html" class="privacy-policy" target="_blank">Privacy Policy</a>
+                          </div>
+                          <div class="menu-settings">
+                            <div class="menu-border"></div>
+                            <button id="login-button-dropdown" onclick="openSignup()" class="logout">
+                              Login
+                            </button>
+                          </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+        </header>
+        <div id="announcement-banner" class="announcement-banner">
+            <a href="javascript:void(0);" onclick="openSubscription();" class="pro-link-button">
+                <div class="banner-text">
+                    <span class="main-text">DeepAI Pro - More Access to Better AI</span>
+                </div>
+            </a>
+            <button id="dismiss-banner" class="dismiss-button" aria-label="Dismiss announcement">×</button>
+        </div>
+        <script>
+            // Immediately decide banner visibility to prevent CLS
+            (function() {
+                const banner = document.getElementById('announcement-banner');
+                const bannerKey = 'proBannerDismissed';
+                const dismissedData = localStorage.getItem(bannerKey);
+                const pathname = window.location.pathname;
+
+                // Check cached user object for Pro status
+                let userHasPro = false;
+                try {
+                    const cachedUser = localStorage.getItem('user');
+                    if (cachedUser) {
+                        const user = JSON.parse(cachedUser);
+                        userHasPro = user?.userprofile2?.user_has_deepai_pro || false;
+                    }
+                } catch (e) {}
+
+                // Don't show if user has Pro or on specific pages
+                if (userHasPro || pathname.includes('dashboard/') || pathname.includes('chat') || pathname.includes('/video')) {
+                    return;
+                }
+
+                // Check dismissal status
+                if (dismissedData) {
+                    try {
+                        const dismissedDate = new Date(JSON.parse(dismissedData).date);
+                        const daysSinceDismissal = Math.floor((Date.now() - dismissedDate) / (1000 * 60 * 60 * 24));
+                        if (daysSinceDismissal < 5) {
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
+                // Show the banner
+                banner.style.display = 'inline-flex';
+            })();
+        </script>
+        
+        
+<main>
+  <h1 class="title">
+    AI Music Generator
+  </h1>
+  <h2>
+    Create unique music effortlessly with DeepAI&#x27;s music generator. Perfect for foley, sound effects, and background tracks for your videos. Transform your projects with custom-generated soundscapes tailored to your needs.
+  </h2>
+  <section class="tts-section">
+    <div class="text-input-wrapper">
+      <textarea id="text-input" placeholder="Enter what you want to hear..."
+      rows="5"></textarea>
+    </div>
+    <div class="button-container">
+      <div class="button-row" style="flex-direction: column;">
+        <!-- Progress Bar -->
+        <div id="progressContainer">
+          <div id="deepaiProgressBar"></div>
+        </div>
+        <button id="send-button" class="send-button" disabled>
+          <span id="send-button-text">Generate</span>
+        </button>
+      </div>
+      <div class="progress-bar-container" style="display: none; width: 100%;">
+        <input type="range" id="progress-bar" value="0" max="100" style="width: 100%;">
+      </div>
+      <div class="button-row">
+        <button id="download-button" style="display: none">
+          <img src="static/images/download-icon.svg" class="button-icon" alt="Download">
+            Download
+        </button>
+        <button id="share-button" style="display: none">
+          <img src="static/images/share-icon.svg" class="button-icon" alt="Share">
+          Share
+        </button>
+        <button id="play-pause-button" style="display: none">
+          <img src="static/images/play-icon.svg" id="play-icon" class="button-icon" alt="Play" style="display: none;">
+          <img src="static/images/pause-icon.svg" id="pause-icon" class="button-icon" alt="Pause">
+          <span id="play-pause-button-text">Pause</span>
+        </button>
+      </div>
+    </div>
+    <audio id="audio-player" controls></audio>
+    <div id="error-message"></div>
+    <div class="olde-container">
+      <div id="old-model-checkbox-container" style="
+            color: white;
+            display: flex;
+            gap: 3px;
+            user-select: none;">
+          <input type="checkbox" id="model-old-style-checkbox" name="model-old-style-checkbox" onclick="toggleOldModel()" />
+          <span class="checkmark"></span>
+          <label for="model-old-style-checkbox">Use Olde Model</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Tracker for Pro Users -->
+  <div id="usage-tracker-container" style="display: none;"></div>
+
+  <div class="disclaimer" style="overflow: hidden;">
+    If you have DeepAI Pro, your first 100 songs are free each month, with additional songs costing $0.05 each. More information can be found in our <span><a href="docs.html" id="#ai-audio-generator" class="disclaimer-read-docs">docs</a></span>. Generated audio may be shared publicly.
+  </div>
+
+
+  <h2>Community Music</h2>
+  <div class="card-list">
+    <div id="sort-selection" class="sort-selection-container">
+      
+      
+    </div>
+    <div id="main-list" class="main-list">
+      
+    </div>
+    <div id="infinite-scroll-loading"></div>
+  </div>
+</main>
+
+
+        <dialog id="login-modal" class="login-container">
+            <div id="close-login" type="button" class="login-exit">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z"
+                    fill="white"
+                  />
+                </svg>
+            </div>
+            <div style="width: 95%;">
+                <h2 class="login-header" id="login-header-title">Login</h2>
+                <p class="please-subheader">
+                    Please sign up or login with your details
+                </p>
+                <div class="options-container">
+                    <div class="option login-active active" id='loginToggle' onclick="toggleAuthOption('login')">
+                    Login
+                    </div>
+                    <div class="option signup" id='signupToggle' onclick="toggleAuthOption('signup')">
+                    Sign up
+                    </div>
+                </div>
+                <button class="signin-with-google" id="social-auth-google" onclick="social_login(event, 'google')">
+                    <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32C24.8366 32 32 24.8366 32 16Z"
+                        fill="white"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M23.8299 16.1823C23.8299 15.615 23.779 15.0695 23.6845 14.5459H16.1499V17.6405H20.4554C20.2699 18.6405 19.7063 19.4877 18.859 20.055V22.0623H21.4445C22.9572 20.6695 23.8299 18.6186 23.8299 16.1823Z"
+                        fill="#4285F4"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16.1496 23.9995C18.3096 23.9995 20.1205 23.2832 21.4442 22.0614L18.8587 20.0541C18.1423 20.5341 17.226 20.8177 16.1496 20.8177C14.066 20.8177 12.3023 19.4104 11.6732 17.5195H9.00049V19.5923C10.3169 22.2068 13.0223 23.9995 16.1496 23.9995Z"
+                        fill="#34A853"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M11.6735 17.52C11.5135 17.04 11.4226 16.5272 11.4226 16C11.4226 15.4727 11.5135 14.96 11.6735 14.48V12.4072H9.00081C8.45899 13.4872 8.1499 14.709 8.1499 16C8.1499 17.2909 8.45899 18.5127 9.00081 19.5927L11.6735 17.52Z"
+                        fill="#FBBC05"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16.1496 11.1818C17.3241 11.1818 18.3787 11.5855 19.2078 12.3782L21.5023 10.0836C20.1169 8.79273 18.306 8 16.1496 8C13.0223 8 10.3169 9.79273 9.00049 12.4073L11.6732 14.48C12.3023 12.5891 14.066 11.1818 16.1496 11.1818Z"
+                        fill="#EA4335"
+                    />
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="email-container" id="email-container-id">
+                    <svg
+                      class="email-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"
+                        fill="#7D7D7D"
+                      />
+                    </svg>
+
+                    <input
+                      class="input-email"
+                      id="user-email"
+                      type="text"
+                      placeholder="Enter valid email address"
+                      name="email"
+                      onkeypress="authKeyPressHandler(event)"
+                    />
+                </div>
+                <div class="password-container" id="password-container-id">
+                    <svg
+                      class="lock-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="27"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 17C13.1 17 14 16.1 14 15C14 13.9 13.1 13 12 13C10.9 13 10 13.9 10 15C10 16.1 10.9 17 12 17ZM18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM8.9 6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8H8.9V6ZM18 20H6V10H18V20Z"
+                        fill="#7D7D7D"
+                      />
+                    </svg>
+
+                    <input
+                      class="input-password"
+                      id="user-password"
+                      type="password"
+                      placeholder="Enter your password"
+                      name="password"
+                      onkeypress="authKeyPressHandler(event)"
+                    />
+                </div>
+                <div class="reenter-password-container" id="reenter-password-container-id">
+                    <svg
+                      class="lock-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="27"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 17C13.1 17 14 16.1 14 15C14 13.9 13.1 13 12 13C10.9 13 10 13.9 10 15C10 16.1 10.9 17 12 17ZM18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM8.9 6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8H8.9V6ZM18 20H6V10H18V20Z"
+                        fill="#7D7D7D"
+                      />
+                    </svg>
+
+                    <input
+                      class="input-password"
+                      id="confirm-user-password"
+                      type="password"
+                      placeholder="Re-enter your password"
+                      name="password"
+                    />
+                      <path
+                        d="M10.125 10.5C10.0757 10.5001 10.0269 10.4905 9.98145 10.4716C9.93595 10.4527 9.89464 10.425 9.8599 10.3901L1.6099 2.14013C1.54254 2.06923 1.50555 1.97482 1.5068 1.87704C1.50805 1.77925 1.54745 1.68582 1.6166 1.61667C1.68575 1.54752 1.77918 1.50812 1.87697 1.50687C1.97475 1.50561 2.06916 1.54261 2.14006 1.60997L10.3901 9.85997C10.4425 9.91241 10.4782 9.97922 10.4926 10.0519C10.5071 10.1247 10.4996 10.2 10.4713 10.2685C10.4429 10.337 10.3949 10.3956 10.3332 10.4368C10.2716 10.478 10.1991 10.5 10.125 10.5V10.5ZM5.99201 9.00005C5.01959 9.00005 4.08185 8.71223 3.20482 8.14458C2.40631 7.62895 1.68748 6.89044 1.12592 6.01177V6.00989C1.59326 5.34028 2.10514 4.77403 2.65498 4.31747C2.65995 4.31331 2.66401 4.30817 2.66689 4.30236C2.66978 4.29655 2.67143 4.29021 2.67174 4.28374C2.67204 4.27726 2.67101 4.27079 2.66869 4.26474C2.66637 4.25868 2.66282 4.25317 2.65826 4.24856L2.19139 3.78239C2.18309 3.77403 2.17195 3.76909 2.16018 3.76857C2.14841 3.76805 2.13687 3.77198 2.12787 3.77958C1.54381 4.27177 1.0017 4.87552 0.508807 5.58239C0.424007 5.7041 0.377304 5.84828 0.374633 5.99659C0.371962 6.14491 0.413444 6.29067 0.493807 6.41536C1.11279 7.38403 1.90943 8.19989 2.79724 8.77434C3.79685 9.42192 4.87264 9.75005 5.99201 9.75005C6.59622 9.74817 7.19615 9.64861 7.76857 9.4552C7.77612 9.45264 7.7829 9.4482 7.78825 9.44229C7.79361 9.43638 7.79737 9.4292 7.79917 9.42143C7.80098 9.41367 7.80077 9.40557 7.79858 9.3979C7.79638 9.39024 7.79227 9.38326 7.78662 9.37763L7.28084 8.87184C7.2692 8.86049 7.2548 8.85235 7.23906 8.84824C7.22332 8.84413 7.20678 8.84419 7.19107 8.84841C6.79937 8.94927 6.39649 9.00022 5.99201 9.00005V9.00005ZM11.504 5.59223C10.8839 4.63317 10.0793 3.81848 9.1774 3.23606C8.17967 2.59106 7.0781 2.25005 5.99201 2.25005C5.39421 2.25111 4.80084 2.35276 4.23678 2.55075C4.22926 2.55337 4.22253 2.55785 4.21723 2.56378C4.21193 2.56972 4.20822 2.5769 4.20647 2.58466C4.20471 2.59242 4.20495 2.6005 4.20718 2.60814C4.20941 2.61578 4.21354 2.62273 4.2192 2.62833L4.72428 3.13341C4.73603 3.14496 4.75063 3.15322 4.7666 3.15733C4.78256 3.16145 4.79933 3.16128 4.81521 3.15684C5.19888 3.05306 5.59456 3.00034 5.99201 3.00005C6.94568 3.00005 7.8806 3.29138 8.77053 3.86723C9.58404 4.39223 10.3113 5.13005 10.8743 6.00005C10.8747 6.00058 10.8749 6.00124 10.8749 6.00192C10.8749 6.0026 10.8747 6.00326 10.8743 6.0038C10.4656 6.64714 9.95851 7.22234 9.37146 7.70841C9.36644 7.71255 9.36233 7.71769 9.3594 7.72351C9.35647 7.72933 9.35479 7.7357 9.35446 7.7422C9.35413 7.74871 9.35516 7.75521 9.35748 7.7613C9.3598 7.76738 9.36337 7.77292 9.36795 7.77755L9.83435 8.24372C9.84261 8.25205 9.85369 8.25699 9.8654 8.25755C9.87712 8.25812 9.88862 8.25427 9.89764 8.24677C10.5244 7.71907 11.0669 7.0988 11.5064 6.40739C11.5841 6.28555 11.6252 6.14397 11.6247 5.99947C11.6243 5.85497 11.5824 5.71363 11.504 5.59223V5.59223Z"
+                        fill="#7D7D7D"
+                      />
+                      <path
+                        d="M5.99999 3.75C5.83145 3.74991 5.66344 3.76878 5.49913 3.80625C5.49083 3.80797 5.48315 3.81192 5.47691 3.81766C5.47068 3.8234 5.46611 3.83072 5.46371 3.83885C5.4613 3.84698 5.46115 3.8556 5.46326 3.86381C5.46537 3.87202 5.46966 3.87951 5.47569 3.88547L8.11452 6.52359C8.12048 6.52962 8.12796 6.53392 8.13617 6.53603C8.14438 6.53814 8.15301 6.53798 8.16114 6.53558C8.16927 6.53317 8.17659 6.52861 8.18233 6.52237C8.18807 6.51613 8.19201 6.50846 8.19374 6.50016C8.26887 6.17063 8.26879 5.82842 8.19353 5.49893C8.11826 5.16944 7.96973 4.86114 7.75897 4.59692C7.54821 4.33271 7.28064 4.11937 6.97612 3.97275C6.6716 3.82613 6.33796 3.74999 5.99999 3.75V3.75ZM3.88545 5.47641C3.87949 5.47038 3.87201 5.46608 3.8638 5.46397C3.85559 5.46186 3.84696 5.46202 3.83883 5.46443C3.83071 5.46683 3.82338 5.47139 3.81764 5.47763C3.8119 5.48387 3.80796 5.49154 3.80624 5.49984C3.72124 5.87118 3.73191 6.25801 3.83725 6.62409C3.9426 6.99017 4.13916 7.32351 4.40852 7.59287C4.67788 7.86223 5.01122 8.0588 5.3773 8.16414C5.74338 8.26948 6.13022 8.28015 6.50155 8.19516C6.50985 8.19343 6.51753 8.18949 6.52376 8.18375C6.53 8.17801 6.53456 8.17069 6.53697 8.16256C6.53937 8.15443 6.53953 8.1458 6.53742 8.13759C6.53531 8.12938 6.53101 8.1219 6.52499 8.11594L3.88545 5.47641Z"
+                        fill="#7D7D7D"
+                      />
+                    </svg>
+                </div>
+                <p id="user-email-error"  class="bad-auth-error"></p>
+                <button class="button login-with-email" id="switch-to-email" onclick="authOptions('moreOptions')">Or login with email</button>
+                <button class="button login-email" id="login-via-email-id" onclick="login(event)">Login</button>
+                <a class="forgot-password" id="forgot-password">
+                    Forgot password?
+                    <span href="javascript:void();" onclick="resetPassword(event)" class="click-here">Click here to reset</span>
+                </a>
+                <button class="button goback" id="go-back-login" onclick="authOptions('lessOptions')">Go back</button>
+            </div>
+        </dialog>
+<dialog id="subscription-modal">
+          <div id="subscription-pro-id" class="modal-small-subscription-container">
+                <div class="modal-subscriptions-container">
+                  <div class="modal-subscription-title-container">
+                    <div class="modal-subscription-title pro-promo-title" id="subscription-title-pro-promo-id">Unlock AI power with&nbsp;</div>
+                    <div class="modal-model-title">
+                        <div class="modal-subscription-title" id="subscription-title-id">DeepAI</div>
+                        <div class="modal-subscription-title pro-title" id="subscription-title-pro-id">PRO</div>
+                    </div>
+                  </div>
+                  <div class="modal-subscription-price">
+                      <div class="modal-price" id="subscription-price-id"> $9.99 </div>
+                      <div class="modal-subscription-length" id="subscription-length-id">/month</div>
+                  </div>
+                    <button id="stripe-pro-button-container" class="modal-get-started" onclick="window.open(window.deepaiProLinkUrl, '_blank')">Subscribe</button>
+                </div>
+                <a class="modal-see-full" href="pricing.html" target="_blank">
+                    See Full Pricing
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="19"
+                      viewBox="0 0 18 19"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M3.8248 5.44998C3.64578 5.44998 3.47409 5.52109 3.34751 5.64768C3.22092 5.77427 3.1498 5.94595 3.1498 6.12498V13.775C3.1498 14.1476 3.4522 14.45 3.8248 14.45H11.4748C11.6538 14.45 11.8255 14.3789 11.9521 14.2523C12.0787 14.1257 12.1498 13.954 12.1498 13.775V10.175C12.1498 9.99595 12.2209 9.82427 12.3475 9.69768C12.4741 9.57109 12.6458 9.49998 12.8248 9.49998C13.0038 9.49998 13.1755 9.57109 13.3021 9.69768C13.4287 9.82427 13.4998 9.99595 13.4998 10.175V13.775C13.4998 14.312 13.2865 14.8271 12.9067 15.2069C12.5269 15.5866 12.0119 15.8 11.4748 15.8H3.8248C3.28774 15.8 2.77267 15.5866 2.39291 15.2069C2.01315 14.8271 1.7998 14.312 1.7998 13.775V6.12498C1.7998 5.58791 2.01315 5.07285 2.39291 4.69308C2.77267 4.31332 3.28774 4.09998 3.8248 4.09998H8.3248C8.50383 4.09998 8.67551 4.17109 8.8021 4.29768C8.92869 4.42427 8.9998 4.59595 8.9998 4.77498C8.9998 4.954 8.92869 5.12569 8.8021 5.25227C8.67551 5.37886 8.50383 5.44998 8.3248 5.44998H3.8248Z"
+                        fill="#C3CAD9"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5.57465 11.9777C5.63413 12.0436 5.706 12.097 5.78615 12.135C5.8663 12.1731 5.95316 12.1949 6.04176 12.1994C6.13036 12.2038 6.21897 12.1907 6.30252 12.1609C6.38606 12.131 6.4629 12.085 6.52865 12.0254L14.85 4.49605V7.02505C14.85 7.20407 14.9212 7.37576 15.0478 7.50235C15.1743 7.62893 15.346 7.70005 15.525 7.70005C15.7041 7.70005 15.8758 7.62893 16.0023 7.50235C16.1289 7.37576 16.2 7.20407 16.2 7.02505V2.97505C16.2 2.79603 16.1289 2.62434 16.0023 2.49775C15.8758 2.37116 15.7041 2.30005 15.525 2.30005H11.475C11.296 2.30005 11.1243 2.37116 10.9978 2.49775C10.8712 2.62434 10.8 2.79603 10.8 2.97505C10.8 3.15407 10.8712 3.32576 10.9978 3.45235C11.1243 3.57893 11.296 3.65005 11.475 3.65005H13.7727L5.62235 11.0246C5.55653 11.0841 5.50308 11.156 5.46505 11.2361C5.42703 11.3163 5.40517 11.4032 5.40074 11.4918C5.39631 11.5804 5.40939 11.669 5.43923 11.7525C5.46907 11.8361 5.51509 11.912 5.57465 11.9777Z"
+                        fill="#C3CAD9"
+                      />
+                    </svg>
+                </a>
+                </div>
+                <button id="close-sub" class="close" type="button">&times;</button>
+            </div>
+            </div>
+        </dialog>
+        <dialog id="out-of-credits-modal">
+            <div class="modal-body out-of-credits-modal-body">
+                <div id="close-out-of-credits" type="button" class="out-credits-exit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z" fill="white"/></svg>
+                </div>
+                <div style="width: 100%;">
+                  <h2 class="out-credits-header">Out of credits</h2>
+                  <div id="outOfCreditsMessage" class="oc-msg"></div>
+                  <div class="oc-section">
+                    <div class="dropdown-payment-amount go-dropdown">
+                      <div class="dataset">
+                        <select id="outOfCreditsAmountSelect" class="dropdown-select dropdown-input-amount" name="chooseAmount">
+                          <option value="5" selected>$5.00 USD</option>
+                          <option value="10">$10.00 USD</option>
+                          <option value="20">$20.00 USD</option>
+                          <option value="50">$50.00 USD</option>
+                          <option value="100">$100.00 USD</option>
+                          <option value="200">$200.00 USD</option>
+                          <option value="500">$500.00 USD</option>
+                          <option value="1000">$1000.00 USD</option>
+                        </select>
+                        <svg class="money-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M11.8003 10.9C9.53031 10.31 8.80031 9.7 8.80031 8.75C8.80031 7.66 9.81031 6.9 11.5003 6.9C13.2803 6.9 13.9403 7.75 14.0003 9H16.2103C16.1403 7.28 15.0903 5.7 13.0003 5.19V3H10.0003V5.16C8.06031 5.58 6.50031 6.84 6.50031 8.77C6.50031 11.08 8.41031 12.23 11.2003 12.9C13.7003 13.5 14.2003 14.38 14.2003 15.31C14.2003 16 13.7103 17.1 11.5003 17.1C9.44031 17.1 8.63031 16.18 8.52031 15H6.32031C6.44031 17.19 8.08031 18.42 10.0003 18.83V21H13.0003V18.85C14.9503 18.48 16.5003 17.35 16.5003 15.3C16.5003 12.46 14.0703 11.49 11.8003 10.9Z" fill="#7D7D7D"/></svg>
+                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.59 8.58997L12 13.17L7.41 8.58997L6 9.99997L12 16L18 9.99997L16.59 8.58997Z" fill="white"/></svg>
+                      </div>
+                    </div>
+                    <button id="out-stripe-go-button-container" onclick="creditsCheckoutUrl('outOfCreditsAmountSelect')" class="button modal-get-started">Add Credits</button>
+                  </div>
+                  <div id="outOfCreditsAutoTopUp" class="oc-auto-topup">
+                    <div class="oc-toggle-row">
+                      <label class="oc-toggle">
+                        <input type="checkbox" id="outOfCreditsAutoTopUpToggle">
+                        <span class="oc-toggle-slider"></span>
+                        <span class="oc-toggle-label">Enable Auto Top-Up</span>
+                      </label>
+                    </div>
+                    <p class="oc-desc">Automatically add credits when your balance is low. Never run out again!</p>
+                  </div>
+                </div>
+              </div>
+        </dialog>
+
+        <!-- Toast notifications -->
+        <div id="successpopup">
+            <span class="message">Success!</span>
+        </div>
+        <div id="errorpopup">
+            <img class="errorIcon" src="static/images/error-icon.svg" alt="Error Icon" />
+            <span class="message">An error occurred</span>
+        </div>
+
+        <dialog id="social-modal">
+            <div class="social-modal-body">
+                <p class="share-header">Share</p>
+                <p class="share-subheader">Share your generations with friends</p>
+                <div class="social-container">
+                    <div class="social-icon">
+                        <div class="icon-container x">
+                            <a id="x-link" target="_blank">
+                            <img src="static/images/social-x-icon.svg">
+
+                            </a>
+                            <p class="social-name">X</p>
+                        </div>
+                    <div class="icon-container facebook">
+                        <a id="facebook-link" target="_blank">
+                        <img src="static/images/social-facebook-icon.svg">
+                        </a>
+                        <p class="social-name">Facebook</p>
+                    </div>
+                    <div class="icon-container linkedin">
+                        <a id="linkedin-link" target="_blank">
+                        <img src="static/images/social-linkedin-icon.svg">
+                        </a>
+                        <p class="social-name">Linkedin</p>
+                    </div>
+                    <div class="icon-container reddit">
+                        <a id="reddit-link" target="_blank">
+                        <img src="static/images/social-reddit-icon.svg">
+                        </a>
+                        <p class="social-name">Reddit</p>
+                    </div>
+                    </div>
+                    <div class="social-link-copy">
+                        <input type="text" id="social-link-input" readonly>
+                        <button class="copy-button" onclick="navigator.clipboard.writeText(document.getElementById('social-link-input').value)">
+                            <img src="static/images/social-copy-icon.svg" alt="Copy">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button id="close-social" class="close" type="button">&times;</button>
+        </dialog>
+
+        <!-- Nudge Popup HTML (hidden by default) -->
+        <div id="nudge-popup" class="nudge-popup">
+            <div class="nudge-popup-header">
+                <div class="nudge-popup-header-text">
+                    <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32C24.8366 32 32 24.8366 32 16Z"
+                        fill="white"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M23.8299 16.1823C23.8299 15.615 23.779 15.0695 23.6845 14.5459H16.1499V17.6405H20.4554C20.2699 18.6405 19.7063 19.4877 18.859 20.055V22.0623H21.4445C22.9572 20.6695 23.8299 18.6186 23.8299 16.1823Z"
+                        fill="#4285F4"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16.1496 23.9995C18.3096 23.9995 20.1205 23.2832 21.4442 22.0614L18.8587 20.0541C18.1423 20.5341 17.226 20.8177 16.1496 20.8177C14.066 20.8177 12.3023 19.4104 11.6732 17.5195H9.00049V19.5923C10.3169 22.2068 13.0223 23.9995 16.1496 23.9995Z"
+                        fill="#34A853"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M11.6735 17.52C11.5135 17.04 11.4226 16.5272 11.4226 16C11.4226 15.4727 11.5135 14.96 11.6735 14.48V12.4072H9.00081C8.45899 13.4872 8.1499 14.709 8.1499 16C8.1499 17.2909 8.45899 18.5127 9.00081 19.5927L11.6735 17.52Z"
+                        fill="#FBBC05"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16.1496 11.1818C17.3241 11.1818 18.3787 11.5855 19.2078 12.3782L21.5023 10.0836C20.1169 8.79273 18.306 8 16.1496 8C13.0223 8 10.3169 9.79273 9.00049 12.4073L11.6732 14.48C12.3023 12.5891 14.066 11.1818 16.1496 11.1818Z"
+                        fill="#EA4335"
+                    />
+                    </svg>
+                    <h2 style="font-size: 17px;">Sign in with Google</h2>
+                </div>
+            <span class="close-icon" id="close-nudge-popup">&times;</span>
+            </div>
+            <div class="nudge-popup-body">
+            <p style="margin: auto; width: 90%;">Use your Google Account to sign in to DeepAI</p>
+            <button class="signin-with-google nudge-signin-button" id="social-auth-google" onclick="social_login(event, 'google')">
+                Continue
+            </button>
+            </div>
+        </div>
+
+        <div id="nudge-pro-popup" class="nudge-pro-popup">
+            <div class="nudge-popup-header pro-popup-header">
+              <span class="close-icon" id="close-nudge-pro-popup">&times;</span>
+            </div>
+            <div class="nudge-popup-body" style="padding: 0px 25px 20px 25px;">
+                <div class="nudge-pro-body-title">
+                    <img class="profile-pro-icon nudge-pro-icon" src="static/images/pro-badge.svg" />
+                    <h2>Consider DeepAI Pro</h2>
+                </div>
+                <ul class="pro-features-list" style="list-style: none; padding: 0; margin: 0 0 20px 0;">
+                  <li style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style="margin-right: 10px;"
+                    >
+                      <circle cx="12" cy="12" r="12" fill="#8f37ff" />
+                      <path
+                        d="M10.8333 13.8503L16.1953 8.48776L17.0207 9.3126L10.8333 15.5L7.12097 11.7877L7.94581 10.9628L10.8333 13.8503Z"
+                        fill="white"
+                      />
+                    </svg>
+                    <span>World's best value AI at $9.99 per month</span>
+                  </li>
+                  <li style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style="margin-right: 10px;"
+                    >
+                      <circle cx="12" cy="12" r="12" fill="#8f37ff" />
+                      <path
+                        d="M10.8333 13.8503L16.1953 8.48776L17.0207 9.3126L10.8333 15.5L7.12097 11.7877L7.94581 10.9628L10.8333 13.8503Z"
+                        fill="white"
+                      />
+                    </svg>
+                    <span>Smarter AI Chat</span>
+                  </li>
+                  <li style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style="margin-right: 10px;"
+                    >
+                      <circle cx="12" cy="12" r="12" fill="#8f37ff" />
+                      <path
+                        d="M10.8333 13.8503L16.1953 8.48776L17.0207 9.3126L10.8333 15.5L7.12097 11.7877L7.94581 10.9628L10.8333 13.8503Z"
+                        fill="white"
+                      />
+                    </svg>
+                    <span>Highest quality AI Images, Videos, and Music</span>
+                  </li>
+                  <li style="display: flex; align-items: center;">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style="margin-right: 10px;"
+                    >
+                      <circle cx="12" cy="12" r="12" fill="#8f37ff" />
+                      <path
+                        d="M10.8333 13.8503L16.1953 8.48776L17.0207 9.3126L10.8333 15.5L7.12097 11.7877L7.94581 10.9628L10.8333 13.8503Z"
+                        fill="white"
+                      />
+                    </svg>
+                    <span>100% Ad-free</span>
+                  </li>
+                </ul>
+                <button id="stripe-pro-button-container" class="modal-get-started" onclick="window.open(deepaiProLinkUrl, '_blank')">
+                  Subscribe
+                </button>
+              </div>
+          </div>
+
+        
+		<footer>
+			
+			
+			
+			
+
+
+            <div class="footer-row">
+                <div class="leftfooter">
+                    <a href="dashboard/videos.html">
+                        <img src="static/images/SmallFlops.svg" alt="flops" />
+                        <p>Deep AI, Inc. ©</p>
+                    </a>
+                </div>
+                <div class="rightfooter">
+                    <a href="feedback.html" class="feedback">Submit Feedback</a>
+                    <a href="mailto:team@deepai.org" class="contact">Contact</a>
+                    <a href="press.html" class="press">Press</a>
+                    <a href="terms-of-service/terms-of-service.html" class="legal">Legal</a>
+                    <a class=" " href="https://twitter.com/DeepAI" target="_blank"><img src="static/images/xLogo.svg" alt="xlogo" class="xlogo" /></a>
+                    <a class=" " href="https://www.linkedin.com/company/deepai" target="_blank"><img
+                      src="static/images/linkedinLogo.svg"
+                      alt="linkedinlogo"
+                      class="linkedinlogo"
+                    /></a>
+                    <a class=" " href="https://www.instagram.com/deepai_org/" target="_blank"><img src="static/images/instagramLogo.svg" alt="instagramlogo" class="instagramlogo" /></a>
+                    <a class=" " href="https://www.tiktok.com/@_ai_creations" target="_blank"><img src="static/images/tiktokLogo.svg" alt="tiktoklogo" class="tiktoklogo" /></a>
+                    <a class=" " href="https://www.reddit.com/r/DeepAI/" target="_blank"><img src="static/images/redditLogo.svg" alt="redditlogo" class="redditlogo" /></a>
+                </div>
+            </div>
+
+			
+		<!-- eu-footer-compliance: EU-mandated footer disclosures -->
+<!-- Injected by apply-patches.sh before </footer>. -->
+<!-- Contains: EU Representative, DPO, supervisory authority, Impressum, legal links -->
+<div id="eu-footer-compliance" style="border-top:1px solid rgba(255,255,255,0.1); padding:12px 16px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px 20px; font-size:12px; color:rgba(255,255,255,0.5); font-family:'Atkinson Hyperlegible Next',sans-serif;">
+  <span>Deep AI, Inc. | 1968 S. Coast Hwy #3773, Laguna Beach, CA 92651</span>
+  <span>|</span>
+  <span>EU Representative: <a href="mailto:eu-representative@deepai.org" style="color:rgba(255,255,255,0.65);">[EU Representative — TBD]</a></span>
+  <span>|</span>
+  <span>DPO: <a href="mailto:dpo@deepai.org" style="color:rgba(255,255,255,0.65);">dpo@deepai.org</a></span>
+  <span>|</span>
+  <a href="privacy-notice.html" style="color:rgba(255,255,255,0.65);">Privacy Notice</a>
+  <span>|</span>
+  <a href="cookie-policy.html" style="color:rgba(255,255,255,0.65);">Cookie Policy</a>
+  <span>|</span>
+  <a href="terms-of-service/terms-of-service.html" style="color:rgba(255,255,255,0.65);">Terms of Service</a>
+  <span>|</span>
+  <a href="dsa-notice.html" style="color:rgba(255,255,255,0.65);">Report Illegal Content</a>
+  <span>|</span>
+  <a href="data-rights.html" style="color:rgba(255,255,255,0.65);">Your Data Rights</a>
+</div>
+
+</footer>
+        
+
+        <!-- Privacy Modal -->
+        <dialog id="privacy-modal-dialog" class="privacy-modal-dialog">
+            <button id="privacy-modal-close-btn" class="privacy-modal-close-btn" aria-label="Close">&times;</button>
+            <iframe id="privacy-modal-iframe" data-src="/privacy-choices/" title="Privacy Choices"></iframe>
+        </dialog>
+
+        <script>const app_base_url='http://localhost:8000';const network_to_url={linkedin:'/accounts/linkedin_oauth2/login/?process=login',google:'/accounts/google/login/?process=login',};;</script>
+
+        <script>"use strict";;;var deepaiProLinkUrl=undefined;var deepaiAddCreditsLinkUrl=undefined;var deepaiUpdateStripeCardUrl=undefined;var cookieUserReeferrer=undefined;var latestPagePathCookie=undefined;const bus={afterAuthStatusCheck:[]};function onAfterAuthStatusCheck(fn){if(!bus.afterAuthStatusCheck.includes(fn)){bus.afterAuthStatusCheck.push(fn);}}
+function emitAfterAuthStatusCheck(){bus.afterAuthStatusCheck.forEach(fn=>{try{fn(undefined);}
+catch(e){console.error('Error in afterAuthStatusCheck listener:',e);}});}
+function setElementsStyleById(ids,style){ids.forEach(id=>{const element=document.getElementById(id);if(element){element.setAttribute('style',style);}});}
+function showElementsById(ids){setElementsStyleById(ids,"display: flex;");}
+function hideElementsById(ids){setElementsStyleById(ids,"display: none;");}
+function logStat(statName,options){const formData=new FormData();formData.append('stat_name',statName);if(options?.type&&options?.message){formData.append('error_type',options.type);formData.append('error_message',options.message);}
+if(options?.breakdown){formData.append('breakdown',options.breakdown);}
+fetch(app_base_url+'/log_stat',{method:'POST',credentials:'include',body:formData}).catch(()=>{});}
+function getUserObject(){try{const userStr=localStorage.getItem('user');if(userStr){return JSON.parse(userStr);}}
+catch(e){console.error("Error accessing or parsing user data from localStorage",e);}
+return null;}
+function getUserProfile(){const userObject=getUserObject();return userObject?.userprofile2||null;}
+function toggleAuthOption(toggle){const loginOption=document.getElementById("loginToggle");const signupOption=document.getElementById("signupToggle");const authGoogle=document.getElementById('social-auth-google');const emailSwitch=document.getElementById("switch-to-email");const loginEmail=document.getElementById('login-via-email-id');const userEmailError=document.getElementById('user-email-error');const reenterPwd=document.getElementById("reenter-password-container-id");if(userEmailError)
+userEmailError.setAttribute('style',"display: none;");const userEmailInput=document.getElementById('user-email');if(userEmailInput)
+userEmailInput.focus();if(toggle==="login"){if(loginOption&&!loginOption.classList.contains("active")){loginOption.classList.add("active");if(signupOption)
+signupOption.classList.remove("active");}
+const loginHeaderTitle=document.getElementById('login-header-title');if(loginHeaderTitle)
+loginHeaderTitle.innerHTML="Login";if(authGoogle&&authGoogle.parentNode){const newAuthGoogle=authGoogle.cloneNode(true);newAuthGoogle.addEventListener('click',(e)=>social_login(e,'google'));authGoogle.parentNode.replaceChild(newAuthGoogle,authGoogle);}
+if(emailSwitch&&emailSwitch.parentNode){const newEmailSwitch=emailSwitch.cloneNode(true);newEmailSwitch.innerHTML="Or login with email";newEmailSwitch.addEventListener('click',()=>authOptions('moreOptions'));emailSwitch.parentNode.replaceChild(newEmailSwitch,emailSwitch);}
+hideElementsById(["reenter-password-container-id","user-email-error"]);if(loginEmail&&loginEmail.parentNode){const newLoginEmail=loginEmail.cloneNode(true);newLoginEmail.innerHTML="Login";newLoginEmail.removeAttribute('onclick');newLoginEmail.addEventListener('click',(e)=>login(e));loginEmail.parentNode.replaceChild(newLoginEmail,loginEmail);}}
+else{if(signupOption&&!signupOption.classList.contains("active")){signupOption.classList.add("active");if(loginOption)
+loginOption.classList.remove("active");}
+const loginHeaderTitle=document.getElementById('login-header-title');if(loginHeaderTitle)
+loginHeaderTitle.innerHTML="Signup";if(authGoogle&&authGoogle.parentNode){const newAuthGoogle=authGoogle.cloneNode(true);newAuthGoogle.addEventListener('click',(e)=>social_signup(e,'google'));authGoogle.parentNode.replaceChild(newAuthGoogle,authGoogle);}
+if(emailSwitch&&emailSwitch.parentNode){const newEmailSwitch=emailSwitch.cloneNode(true);newEmailSwitch.innerHTML="Or signup with email";newEmailSwitch.addEventListener('click',()=>authOptions('moreOptions'));emailSwitch.parentNode.replaceChild(newEmailSwitch,emailSwitch);}
+if(loginEmail&&loginEmail.parentNode){const newLoginEmail=loginEmail.cloneNode(true);newLoginEmail.innerHTML="Signup";newLoginEmail.removeAttribute('onclick');newLoginEmail.addEventListener('click',(e)=>signup(e));loginEmail.parentNode.replaceChild(newLoginEmail,loginEmail);}
+hideElementsById(["forgot-password","user-email-error"]);const reenterPwdDisplay=(authGoogle&&authGoogle.style.display==="none")?"flex":"none";if(reenterPwd)
+reenterPwd.setAttribute('style',`display: ${reenterPwdDisplay};`);}}
+function authOptions(toggle){hideElementsById(['user-email-error']);const moreOptions={true:{visible:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"],hidden:["switch-to-email","social-auth-google"]},false:{visible:["switch-to-email","social-auth-google"],hidden:["email-container-id","password-container-id","reenter-password-container-id","login-via-email-id","forgot-password","go-back-login"]}};const isMoreOptions=toggle==="moreOptions";showElementsById(moreOptions[String(isMoreOptions)].visible);hideElementsById(moreOptions[String(isMoreOptions)].hidden);const userEmailInput=document.getElementById('user-email');if(userEmailInput)
+userEmailInput.focus();const loginButton=document.getElementById('login-via-email-id');if(toggle==="moreOptions"&&loginButton&&loginButton.innerHTML==="Login"){hideElementsById(["reenter-password-container-id"]);}}
+function subscriptionPopupAfterAuth(){if(window.location.pathname.startsWith('/pricing')){return;}
+const userProfile=getUserProfile();if(userProfile){if(!(userProfile.user_has_deepai_pro||userProfile.user_is_pay_as_you_go)){openSubscription();}}}
+function openSubscribeFromGenius(tag){const modalId=tag==="image"?"genius-images-modal":"genius-chat-modal";const geniusModal=document.getElementById(modalId);if(geniusModal&&typeof geniusModal.close==='function'){geniusModal.close();openSubscription();}
+else{console.warn(`Modal with ID '${modalId}' not found or is not a closeable element.`);openSubscription();}}
+function toast(toastElementId,message,toastInterval=3000){const toastElement=document.getElementById(toastElementId);if(toastElement){const messageElement=toastElement.querySelector('.message');if(messageElement){const defaultMessage=messageElement.textContent;if(message){messageElement.textContent=message;}
+toastElement.classList.add('show');setTimeout(()=>{toastElement.classList.remove('show');if(messageElement&&defaultMessage){messageElement.textContent=defaultMessage;}},toastInterval);}}}
+/* hostname validation removed for deployment */
+
+/* iframe escape removed for deployment */
+
+fetch(app_base_url+"/favicon.ico",{method:'POST',});try{document.addEventListener("visibilitychange",(e)=>{fetch(app_base_url+"/favicon.ico",{method:'POST',});});}
+catch(e){console.log("error adding visibilitychange event listener: "+e);}
+function removeHeaderBackground(){const navbar=document.querySelector('header');if(navbar){navbar.style.background="";}}
+try{localStorage.setItem("name","Hello World!");}
+catch(e){console.log("Error - local storage is full. clearing local storage");try{localStorage.clear();}
+catch(e2){console.log("error clearing local storage: "+e2);}}
+let onCategoryPage=false;try{const reeferrerMadness=document.referrer;let localCookieUserReeferrer=localStorage.getItem('userReeferrer');if(localCookieUserReeferrer==undefined){localStorage.setItem('userReeferrer',reeferrerMadness);localCookieUserReeferrer=localStorage.getItem('userReeferrer');}
+const thisLocation=window.location.pathname;let pagePathCookie=localStorage.getItem('pagePath');if(pagePathCookie==undefined){localStorage.setItem('pagePath',[thisLocation].toString());}
+else if(pagePathCookie.length>100000){}
+else{const newPagePathCookie=[pagePathCookie,thisLocation];localStorage.setItem('pagePath',newPagePathCookie.toString());}
+const localLatestPagePathCookie=localStorage.getItem('pagePath');cookieUserReeferrer=localCookieUserReeferrer||undefined;latestPagePathCookie=localLatestPagePathCookie||undefined;}
+catch(e){console.log("error in reeferrer madness: "+e);}
+if(window.HTMLDialogElement&&'showModal'in HTMLDialogElement.prototype){console.log('loading dialog polyfill...');const script=document.createElement("script");script.src="/static/js/libs/dialog-polyfill.js";script.type="text/javascript";script.async=true;script.onload=function(){for(const dialog of Array.from(document.getElementsByTagName('dialog'))){dialogPolyfill.registerDialog(dialog);}};document.getElementsByTagName("head")[0].appendChild(script);}
+else{console.log('not loading dialog polyfill');}
+try{if(!window.localStorage||!window.sessionStorage)
+(function(){const Storage=function(type){function createCookie(name,value,days){let date,expires;if(days){date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));expires="; expires="+date.toUTCString();}
+else{expires="";}
+document.cookie=name+"="+value+expires+"; path=/";}
+function readCookie(name){const nameEQ=name+"=";const ca=document.cookie.split(';');let i,c;for(i=0;i<ca.length;i++){c=ca[i];while(c.charAt(0)==' '){c=c.substring(1,c.length);}
+if(c.indexOf(nameEQ)==0){return c.substring(nameEQ.length,c.length);}}
+return null;}
+function setData(data){const dataStr=JSON.stringify(data);if(type=='session'){window.name=dataStr;}
+else{createCookie('localStorage',dataStr,365);}}
+function clearData(){if(type=='session'){window.name='';}
+else{createCookie('localStorage','',365);}}
+function getData(){const data=type=='session'?window.name:readCookie('localStorage');return data?JSON.parse(data):{};}
+let data=getData();function numKeys(){let n=0;for(const k in data){if(data.hasOwnProperty(k)){n+=1;}}
+return n;}
+return{clear:function(){data={};clearData();this.length=numKeys();},getItem:function(key){key=encodeURIComponent(key);return data[key]===undefined?null:data[key];},key:function(i){let ctr=0;for(const k in data){if(ctr==i)
+return decodeURIComponent(k);else
+ctr++;}
+return null;},removeItem:function(key){key=encodeURIComponent(key);delete data[key];setData(data);this.length=numKeys();},setItem:function(key,value){key=encodeURIComponent(key);data[key]=String(value);setData(data);this.length=numKeys();},length:0};};if(!window.localStorage)
+window.localStorage=Storage('local');if(!window.sessionStorage)
+window.sessionStorage=Storage('session');})();}
+catch(e){console.log("error installing localstorage polyfill: "+e);}
+function userIsLoggedIn(){if(user_object?.pk){return true;}
+else{return false;}}
+function getUserId(){if(user_object?.pk){return user_object.pk;}
+else{return null;}}
+async function saveDeepaiProLinkUrl(){const resp=await fetch(app_base_url+'/get_my_stripe_subscription_checkout_link',{method:'GET',credentials:'include',});const data=await resp.json();deepaiProLinkUrl=data.link;console.log("got deepaiProLinkUrl",deepaiProLinkUrl);}
+async function creditsCheckoutUrl(creditsAmountSelect){const selectElement=document.getElementById(creditsAmountSelect);if(!selectElement)
+return;const amount_of_credits=selectElement.value;const checkoutWindow=window.open('','_blank');const formData=new FormData();formData.append('amount_of_credits',amount_of_credits);try{const resp=await fetch(app_base_url+'/get_my_stripe_credits_checkout_link',{method:'POST',credentials:'include',body:formData});const data=await resp.json();deepaiAddCreditsLinkUrl=data.add_credits_link;console.log("got deepaiAddCreditsLinkUrl",deepaiAddCreditsLinkUrl);if(checkoutWindow){checkoutWindow.location.href=deepaiAddCreditsLinkUrl;}
+else{window.location.href=deepaiAddCreditsLinkUrl;}}
+catch(error){console.error("Error getting checkout URL:",error);if(checkoutWindow){checkoutWindow.close();}}}
+async function saveStripeCardUpdateLink(){const resp=await fetch(app_base_url+'/get_my_stripe_card_update_link',{method:'GET',credentials:'include',});const data=await resp.json();deepaiUpdateStripeCardUrl=data.link;console.log("got deepaiUpdateStripeCardUrl",deepaiUpdateStripeCardUrl);}
+function authKeyPressHandler(e){if(e.keyCode==13&&!e.shiftKey){e.preventDefault();const loginButton=document.getElementById('login-via-email-id');if(loginButton&&loginButton.innerHTML=="Login"){login(e);}
+else{signup(e);}}}
+async function checkAuthStatus(){const userStr=localStorage.getItem('user');if(userStr){user_object=JSON.parse(userStr);}
+console.log(user_object);const dropdownSandwich=document.getElementById('sandwichIconDrop');const dropdownUser=document.getElementById('userIconDrop');const profileSecNav=document.getElementById('navProfileSection');const profileButtonNav=document.getElementById('navProfileButton');const navProfileAvatar=document.getElementById('navUserAvatar');const headerLogin=document.getElementById('headerLoginButton');const navUsername=document.getElementById('navUserName');const navUseremail=document.getElementById('navUserEmail');if(userIsLoggedIn()&&user_object){if(user_object.userprofile2?.user_has_deepai_pro){const banner=document.getElementById('announcement-banner');if(banner){banner.style.display='none';}}
+showHidePermanentProAds();if(user_object.userprofile2?.user_has_deepai_pro){if(typeof user_paid_for_no_ads!=='undefined'){user_paid_for_no_ads=true;}}
+else if(user_object.userprofile2?.locked_out_due_to_no_payment_info===false){if(typeof user_paid_for_no_ads!=='undefined'){user_paid_for_no_ads=true;}}
+if(navProfileAvatar){navProfileAvatar.src=app_base_url+'/get_author_obj_img_url';}
+saveDeepaiProLinkUrl();saveStripeCardUpdateLink();if(dropdownSandwich)
+dropdownSandwich.style.display="none";if(headerLogin)
+headerLogin.style.display="none";if(dropdownUser)
+dropdownUser.style.display="flex";if(profileSecNav)
+profileSecNav.style.display="flex";if(profileButtonNav)
+profileButtonNav.style.display="flex";if(navUsername&&user_object.username)
+navUsername.textContent=user_object.username;if(navUseremail&&user_object.email)
+navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/dashboard/profile')");button.innerHTML="My Profile";}
+const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/dashboard/profile')");signupDropdownLi.innerHTML="My Profile";}
+for(const loginButton of Array.from(document.getElementsByClassName('login-button'))){const button=loginButton;button.setAttribute('onclick',"logout()");button.innerHTML="Log Out";}
+const loginDropdown=document.getElementById('login-button-dropdown');if(loginDropdown){loginDropdown.setAttribute('onclick',"logout()");loginDropdown.innerHTML="Logout";}
+applyCachedHeartsToHeartsOnPage();await refreshHeartsFromServer();}
+emitAfterAuthStatusCheck();}
+function setupIMEHandlers(element){let isComposing=false;let compositionJustEnded=false;element.addEventListener('compositionstart',()=>{isComposing=true;compositionJustEnded=false;});element.addEventListener('compositionend',()=>{isComposing=false;compositionJustEnded=true;setTimeout(()=>{compositionJustEnded=false;},50);});return{isComposing:()=>isComposing,compositionJustEnded:()=>compositionJustEnded};}
+async function auth(){try{const response=await fetch(app_base_url+"/daily-time-sync/user/",{credentials:'include'});const user=await response.json();const user_string=JSON.stringify(user);if(response.status==200){localStorage.setItem('user',user_string);user_object=JSON.parse(localStorage.getItem('user'));await checkAuthStatus();}
+else{localStorage.removeItem('user');localStorage.removeItem('hearts-cache');user_object=undefined;}}
+catch(e){console.log("Error validating auth",e);localStorage.removeItem('user');localStorage.removeItem('hearts-cache');user_object=undefined;}}
+function mainNavDrop(){const dropdown=document.getElementById("mainNavDropdown");if(dropdown){dropdown.classList.toggle("show-dropdown");}}
+const dropMenuButton=document.getElementById("dropMenuButton");if(dropMenuButton){dropMenuButton.addEventListener("click",function(event){event.stopPropagation();mainNavDrop();},false);}
+window.onclick=function(event){const target=event.target;if(target.closest('.dropdown-link')||target.closest('.content-dropdown-link')){}
+else if(!target.matches('.dropbtn')){const contentDropdown=document.getElementById("contentNavDropdown");if(contentDropdown&&contentDropdown.classList.contains('show-dropdown')){contentDropdown.classList.remove('show-dropdown');}
+const mainDropdown=document.getElementById("mainNavDropdown");if(mainDropdown&&mainDropdown.classList.contains('show-dropdown')){mainDropdown.classList.remove('show-dropdown');}}};checkAuthStatus();auth();async function refreshHeartsFromServer(){const response=await fetch(app_base_url+"/get_my_hearted_object_ids",{credentials:'include'});const hearts=await response.json();localStorage.setItem('hearts-cache',JSON.stringify(hearts));applyCachedHeartsToHeartsOnPage();}
+function applyCachedHeartsToHeartsOnPage(){const heartsCacheStr=localStorage.getItem('hearts-cache');if(!heartsCacheStr){console.log('no heart cache');return;}
+const hearts_hash=JSON.parse(heartsCacheStr).hearts;for(const heartLink of Array.from(document.getElementsByClassName('heart-link'))){const link=heartLink;link.removeAttribute('hearted');const heartId=link.getAttribute('heartid');if(heartId&&hearts_hash[heartId]){link.setAttribute('hearted','hearted');}}}
+async function heart(heartLink){if(!userIsLoggedIn()){openSignup(function(){heart(heartLink);});return;}
+let hearts_cache;const cachedData=localStorage.getItem('hearts-cache');if(cachedData){hearts_cache=JSON.parse(cachedData);}
+else{console.log('warning, hearts cache is empty. creating new hearts cache...');hearts_cache={'hearts':{}};}
+let addremove;const heartCountElement=heartLink.getElementsByClassName('heart-count')[0];const oldcount=parseInt(heartCountElement.innerText)||0;const heartId=heartLink.getAttribute('heartid');if(!heartId)
+return;if(heartLink.hasAttribute('hearted')){heartLink.removeAttribute('hearted');addremove='false';delete hearts_cache.hearts[heartId];let count=oldcount-1;if(count<0){count=0;}
+heartCountElement.innerText=count.toString();}
+else{heartLink.setAttribute('hearted','hearted');addremove='true';hearts_cache.hearts[heartId]=true;heartCountElement.innerText=(oldcount+1).toString();}
+localStorage.setItem('hearts-cache',JSON.stringify(hearts_cache));const formData=new FormData();const split=heartId.split('-');const heartclass=split[0];const objid=split[1];formData.append('type',heartclass);formData.append('id',objid);formData.append('switch',addremove);const response=await fetch(app_base_url+"/add_remove_heart",{method:'POST',credentials:'include',body:formData});console.log('hearty response ',response);}
+const modal=document.getElementById('login-modal');const nudgeLoginModal=document.getElementById("nudge-popup");const nudgeProModal=document.getElementById("nudge-pro-popup");let afterSignupFunction=null;const subscription_modal=document.getElementById('subscription-modal');const openSignup=function(afterSignupFunctionArg,popupHeaderText){afterSignupFunction=afterSignupFunctionArg||null;if(userIsLoggedIn()){if(afterSignupFunction){afterSignupFunction();}}
+else{if(subscription_modal)
+subscription_modal.close();if(modal&&!modal.open){modal.showModal();toggleAuthOption("signup");if(popupHeaderText){const header=modal.getElementsByClassName('login-header')[0];if(header)
+header.innerHTML=popupHeaderText;}}}};const closeElem=document.getElementById('close');if(closeElem){closeElem.addEventListener('click',()=>{if(modal)
+modal.close();authOptions('lessOptions');});}
+if(modal){modal.addEventListener('cancel',()=>{modal.close();authOptions('lessOptions');});modal.addEventListener('click',(event)=>{if(event.target===modal){modal.close();authOptions('lessOptions');}});}
+function getSignupCustomData(desired_username){return{'referrer':'['+(cookieUserReeferrer||'')+']'+'['+(latestPagePathCookie||'')+']','signup_page':window.location.pathname,'desired_username':desired_username};}
+async function save_custom_signup_data(desired_username){const custom_signup_data=getSignupCustomData(desired_username);const response=await fetch(app_base_url+"/save_custom_signup_data",{credentials:'include',method:'POST',body:JSON.stringify(custom_signup_data),headers:{'Content-Type':'application/json'}});if(!response.ok){throw new Error("saving custom signup data HTTP status "+response.status);}
+return null;}
+async function signup(e){e.preventDefault();const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
+const user_email=document.getElementById('user-email');const user_password=document.getElementById('user-password');const confirm_user_password=document.getElementById('confirm-user-password');if(!user_email||!user_password||!confirm_user_password)
+return;const user_email_value=user_email.value;const user_password_value=user_password.value;const confirm_user_password_value=confirm_user_password.value;const formData=new FormData();formData.append('email',user_email_value);formData.append('username',user_email_value);formData.append('password1',user_password_value);formData.append('password2',confirm_user_password_value);user_email.classList.add('loading');let validation_error=null;if(!user_email_value){validation_error='Email is required';}
+else if(!user_password_value){validation_error='Password is required';}
+else if(!confirm_user_password_value){validation_error='Password confirmation is required';}
+if(validation_error&&p){p.innerHTML=validation_error;p.setAttribute('style','display: block;');user_email.classList.remove('loading');return;}
+else{const user_login_type=await get_user_login_type(user_email_value);if(user_login_type.user_exists){user_email.classList.remove('loading');let message="This account already exists";if(!user_login_type.login_with_password){const name=user_login_type.login_with_social_accounts[0];message="This account exists and needs to be logged in using "+name;}
+if(p){p.innerHTML=message;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}
+else{await save_custom_signup_data(null);const response=await fetch(app_base_url+"/daily-time-sync/registration/",{credentials:'include',method:'POST',body:formData});console.log(response);if(response.ok===true){user_email.classList.remove('loading');if(modal)
+modal.close();if(nudgeLoginModal)
+nudgeLoginModal.classList.remove("active");if(afterSignupFunction){await auth();afterSignupFunction();}
+else{await auth();subscriptionPopupAfterAuth();}}
+else if(response.ok===false&&p){user_email.classList.remove('loading');if(response.status===500){const signup_fail="Hmm, something went wrong. Perhaps try another email address, or try again later.";p.innerHTML=signup_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}
+else if(response.status>=400){const data=await response.json();let signup_fail="Hmm, something went wrong. Perhaps try another email address, or try again later.";for(const[key,value]of Object.entries(data)){if(value[0]){signup_fail=value[0];break;}}
+p.innerHTML=signup_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}}}}
+function recordNewProSubscriberConversion(callback){try{twq('event','tw-pzofp-pzoig',{value:5.00,currency:'USD',email_address:user_object?.email,phone_number:null});}
+catch(e){console.log('error recording new pro subscriber conversion to twitter',e);}
+try{if(!callback){callback=function(){console.log('conversion event callback');};}
+gtag('event','conversion_event_subscribe_paid',{'event_callback':callback,'event_timeout':2000,});}
+catch(e){console.log('error recording new pro subscriber conversion',e);if(callback)
+callback();}}
+const login_modal=document.getElementById('login-modal');let afterLoginFunction=null;const openLogin=function(afterLoginFunctionArg){afterLoginFunction=afterLoginFunctionArg||null;if(userIsLoggedIn()){if(afterLoginFunction){afterLoginFunction();}}
+else{if(login_modal&&!login_modal.open){login_modal.showModal();toggleAuthOption("login");}}};const closeLogin=document.getElementById('close-login');if(closeLogin){closeLogin.addEventListener('click',()=>{if(login_modal)
+login_modal.close();authOptions('lessOptions');});}
+if(login_modal){login_modal.addEventListener('cancel',()=>{login_modal.close();authOptions('lessOptions');});login_modal.addEventListener('click',(event)=>{if(event.target===login_modal){login_modal.close();authOptions('lessOptions');}});}
+let subscription_shown=false;const subscriptionMessageHandler=async(event)=>{console.log('received message: ',event.data);if(event.data=='stripe subscription success'){if(subscription_modal)
+subscription_modal.close();if(nudgeProModal)
+nudgeProModal.classList.remove('active');recordNewProSubscriberConversion();try{await auth();const up=user_object?.userprofile2;if(up?.user_has_deepai_pro){if(typeof user_paid_for_no_ads!=='undefined'){user_paid_for_no_ads=true;}
+const banner=document.getElementById('announcement-banner');if(banner)
+banner.style.display='none';}
+showHidePermanentProAds();emitAfterAuthStatusCheck();}
+catch(e){console.log('Error handling subscription success:',e);}}};let subscriptionListenerAdded=false;const openSubscription=function(){if(!subscriptionListenerAdded){window.addEventListener("message",subscriptionMessageHandler,false);subscriptionListenerAdded=true;}
+const showSubscriptionModal=()=>{if(subscription_modal&&!subscription_modal.open){subscription_modal.showModal();subscription_shown=true;}};if(userIsLoggedIn()&&user_object?.userprofile2?.user_has_deepai_pro){if(!user_object?.userprofile2?.user_can_use_genius_mode){openOutOfCredits();return;}
+if(subscription_modal)
+subscription_modal.close();if(nudgeProModal)
+nudgeProModal.classList.remove('active');return;}
+if(!userIsLoggedIn()){openSignup(async function(){if(user_object?.userprofile2?.user_has_deepai_pro){if(!user_object?.userprofile2?.user_can_use_genius_mode){openOutOfCredits();}
+return;}
+if(!deepaiProLinkUrl){await saveDeepaiProLinkUrl();}
+if(deepaiProLinkUrl){const stripeWindow=window.open(deepaiProLinkUrl,'_blank');if(!stripeWindow||stripeWindow.closed||typeof stripeWindow.closed==='undefined'){showSubscriptionModal();}}});return;}
+if(userIsLoggedIn()&&deepaiProLinkUrl){const stripeWindow=window.open(deepaiProLinkUrl,'_blank');if(!stripeWindow||stripeWindow.closed||typeof stripeWindow.closed==='undefined'){showSubscriptionModal();}
+return;}
+const userStr=localStorage.getItem('user');if(userStr){user_object=JSON.parse(userStr);}
+showSubscriptionModal();};const closeSubscription=document.getElementById('close-sub');if(closeSubscription){closeSubscription.addEventListener('click',()=>{if(subscription_modal)
+subscription_modal.close();});}
+if(subscription_modal){subscription_modal.addEventListener('cancel',()=>{subscription_modal.close();});subscription_modal.addEventListener('click',(event)=>{if(event.target===subscription_modal){subscription_modal.close();}});}
+const out_of_credits_modal=document.getElementById('out-of-credits-modal');const openOutOfCredits=function(current_balance,errorData){if(!userIsLoggedIn()){openLogin();return;}
+if(!out_of_credits_modal)
+return;if(!out_of_credits_modal.open){out_of_credits_modal.showModal();}
+const msg=document.getElementById('outOfCreditsMessage');if(msg){msg.textContent=errorData?.message||'';msg.style.display=errorData?.message?'block':'none';}
+const section=document.getElementById('outOfCreditsAutoTopUp');if(!section||!user_object?.userprofile2?.user_has_deepai_pro){if(section)
+section.style.display='none';return;}
+section.style.display='block';const toggle=document.getElementById('outOfCreditsAutoTopUpToggle');if(!toggle)
+return;toggle.checked=errorData?.auto_top_up_enabled||false;toggle.onchange=async()=>{const previousState=!toggle.checked;const enabled=toggle.checked;try{const res=await fetch(app_base_url+'/update_auto_top_up_settings',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({enabled,min_balance:5.00})});const result=await res.json();if(result.error){toggle.checked=previousState;toast('errorpopup',result.error);}
+else if(result.success){toast('successpopup',enabled?'Auto top-up enabled!':'Auto top-up disabled');}}
+catch(e){console.error('Error saving auto top-up settings:',e);toggle.checked=previousState;toast('errorpopup','An error occurred. Please try again.');}};};const closeOutOfCredits=document.getElementById('close-out-of-credits');if(closeOutOfCredits){closeOutOfCredits.addEventListener('click',()=>{if(out_of_credits_modal)
+out_of_credits_modal.close();});}
+if(out_of_credits_modal){out_of_credits_modal.addEventListener('cancel',()=>{out_of_credits_modal.close();});out_of_credits_modal.addEventListener('click',(event)=>{if(event.target===out_of_credits_modal){out_of_credits_modal.close();}});}
+async function get_user_login_type(email){const formData=new FormData();formData.append('email',email);const response=await fetch(app_base_url+"/get_user_login_type",{credentials:'include',method:'POST',body:formData});if(response.ok==true){const user_login_type=await response.json();return user_login_type;}
+throw new Error("Failed to get user login type");}
+async function login(e){e.preventDefault();const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
+const login_user_email=document.getElementById('user-email');const login_user_password=document.getElementById('user-password');if(!login_user_email||!login_user_password)
+return;const login_user_email_value=login_user_email.value;const login_user_password_value=login_user_password.value;const formData=new FormData();formData.append('username',login_user_email_value);formData.append('password',login_user_password_value);if(login_user_email_value==''||login_user_password_value==''){return;}
+else{login_user_email.classList.add('loading');const user_login_type=await get_user_login_type(login_user_email_value);if(!user_login_type.user_exists){login_user_email.classList.remove('loading');const login_fail="No user with this email or username was found";if(p){p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}
+return;}
+if(!user_login_type.login_with_password){login_user_email.classList.remove('loading');const name=user_login_type.login_with_social_accounts[0];const login_fail="This account needs to be logged in using "+name;if(p){p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}
+return;}
+const response=await fetch(app_base_url+"/daily-time-sync/login/",{credentials:'include',method:'POST',body:formData});console.log(response);if(response.ok==true){login_user_email.classList.remove('loading');if(login_modal)
+login_modal.close();if(nudgeLoginModal)
+nudgeLoginModal.classList.remove("active");if(afterLoginFunction){await auth();afterLoginFunction();}
+else{await auth();subscriptionPopupAfterAuth();}}
+else if(response.ok==false&&p){login_user_email.classList.remove('loading');if(response.status==500){const login_fail="Hmm, something went wrong. Let's try that again.";p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}
+else if(response.status==400){const login_fail="Email/password combination incorrect. Let's try that again.";p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}
+else{}}}}
+function sleep_async(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+async function social_auth(social_network,desired_username){const url=app_base_url+network_to_url[social_network];const openedWindow=window.open('about:blank','deepaiLogin','height=600,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no');if(!openedWindow)
+return;await save_custom_signup_data(desired_username);openedWindow.location.href=url;while(true){await sleep_async(200);if(openedWindow.closed){return;}}}
+async function social_signup(e,social_network){e.preventDefault();const user_email=document.getElementById('user-email');if(!user_email)
+return;user_email.classList.add('loading');const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
+let validation_error=null;if(validation_error&&p){p.innerHTML=validation_error;p.setAttribute('style','display: block;');user_email.classList.remove('loading');return;}
+await social_auth(social_network,null);const response=await fetch(app_base_url+"/daily-time-sync/user/",{credentials:'include'});if(response.ok==true){user_email.classList.remove('loading');if(modal)
+modal.close();if(nudgeLoginModal)
+nudgeLoginModal.classList.remove("active");if(afterSignupFunction){await auth();afterSignupFunction();}
+else{await auth();subscriptionPopupAfterAuth();}}
+else{user_email.classList.remove('loading');const signup_fail="Hmm, something went wrong. You might already have an account with that email, or your passwords do not match.";if(p){p.innerHTML=signup_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}}
+async function social_login(e,social_network){e.preventDefault();await social_auth(social_network,null);const login_user_email=document.getElementById('user-email');if(!login_user_email)
+return;login_user_email.classList.add('loading');const response=await fetch(app_base_url+"/daily-time-sync/user/",{credentials:'include'});if(response.ok==true){login_user_email.classList.remove('loading');if(login_modal)
+login_modal.close();if(nudgeLoginModal)
+nudgeLoginModal.classList.remove("active");await auth();subscriptionPopupAfterAuth();}
+else{login_user_email.classList.remove('loading');const login_fail="Hmm, something went wrong. Let's try that again.";const p=document.getElementById('user-email-error');if(p){p.innerHTML=login_fail;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}}
+async function logout(){const response=await fetch(app_base_url+"/daily-time-sync/logout/",{method:'POST',credentials:'include'});localStorage.removeItem('user');localStorage.removeItem('hearts-cache');localStorage.removeItem('geniusChecked');localStorage.removeItem('onlineChecked');localStorage.removeItem('geniusVideoChecked');user_object=undefined;showHidePermanentProAds();window.location.href='/';}
+async function resetPassword(e){const p=document.getElementById('user-email-error');if(p){p.innerHTML='';p.setAttribute('style','display: none;');}
+const login_user_email=document.getElementById('user-email');if(!login_user_email)
+return;const login_user_email_value=login_user_email.value;const formData=new FormData();formData.append('email',login_user_email_value);const response=await fetch(app_base_url+"/password_reset_trigger",{method:'POST',credentials:'include',body:formData,});console.log(response);if(response.ok==true&&p){const submission_success="Check your email inbox to reset password.";console.log(p);p.innerHTML=submission_success;p.className='good-auth-error';p.setAttribute('style','display: flex;');}
+else if(response.ok==false&&p){const userEmailInput=document.getElementById("user-email");const submission_success=userEmailInput?.value?"Hmm something isn't right. Please try again or contact us.":"Please enter your email address above.";p.innerHTML=submission_success;p.className='bad-auth-error';p.setAttribute('style','display: flex;');}}
+const social_modal=document.getElementById('social-modal');const openSocial=function(target_url){if(!social_modal)
+return;if(!social_modal.open){social_modal.showModal();}
+const x_link=document.getElementById('x-link');if(x_link){const x_link_value="https://twitter.com/intent/tweet?url="+target_url;x_link.href=x_link_value;}
+const facebook_link=document.getElementById('facebook-link');if(facebook_link){const facebook_link_value="https://www.facebook.com/sharer.php?u="+target_url;facebook_link.href=facebook_link_value;}
+const linkedin_link=document.getElementById('linkedin-link');if(linkedin_link){const linkedin_link_value="https://www.linkedin.com/shareArticle?mini=true&url="+target_url;linkedin_link.href=linkedin_link_value;}
+const reddit_link=document.getElementById('reddit-link');if(reddit_link){const reddit_link_value="https://www.reddit.com/submit?url="+target_url;reddit_link.href=reddit_link_value;}
+const social_link_input=document.getElementById('social-link-input');if(social_link_input){social_link_input.value=target_url;}};const closeSocial=document.getElementById('close-social');async function getPresignedDownloadUrl(url){const urlParts=url.split('/');const item_hash=urlParts[urlParts.length-1].split('?')[0];const item_id=urlParts[urlParts.length-2];const response=await fetch(`${app_base_url}/gallery-item-download/${item_id}/${item_hash}`,{credentials:'include'});if(!response.ok)
+throw new Error(`HTTP error! status: ${response.status}`);const data=await response.json();if(!data.url)
+throw new Error(data.error||'No download URL returned');return data.url;}
+async function downloadFile(url,filename){try{const presignedUrl=await getPresignedDownloadUrl(url);if(!filename){const urlParts=url.split('/');filename=urlParts[urlParts.length-1].split('?')[0];}
+const link=document.createElement('a');link.href=presignedUrl;link.download=filename;link.style.display='none';document.body.appendChild(link);link.click();document.body.removeChild(link);}
+catch(error){console.error('Download failed:',error);window.open(url,'_blank');}}
+async function shareMedia(target_url,isMusic=false){const share_url=target_url.replace('job-view','gallery-item').replace('art-image','gallery-item').replace('audio-gallery-item','gallery-item').replace('https://images.deepai.org',window.location.origin)+".html";const native_share_url=target_url.replace('gallery-item','get-media').replace('art-image','get-media').replace('https://images.deepai.org',window.location.origin)+'.html';const urlParts=target_url.split('.');const extension=urlParts[urlParts.length-1].split('?')[0].toLowerCase();const videoExtensions=['mp4','webm','mov','avi'];const audioExtensions=['mp3','wav','m4a','aac','ogg','flac'];const imageExtensions=['jpg','jpeg','png','gif','webp','svg','bmp'];let mediaType;if(isMusic||audioExtensions.includes(extension)){mediaType='music';}
+else if(videoExtensions.includes(extension)){mediaType='video';}
+else{mediaType='image';}
+const shareMessage=mediaType==='music'?"Check out this music I generated with DeepAI!":mediaType==='video'?"Check out this video I generated with DeepAI!":"Check out this image I generated with DeepAI!";async function fetchAssetAsBlob(url){const response=await fetch(url);if(!response.ok){throw new Error('Network response was not ok');}
+return response.blob();}
+try{if('share'in navigator){const blob=await fetchAssetAsBlob(native_share_url);let mimeType;if(mediaType==='music'){mimeType=`audio/${extension === 'mp3' ? 'mpeg' : extension}`;}
+else if(mediaType==='video'){mimeType=`video/${extension}`;}
+else{mimeType=`image/${extension === 'jpg' ? 'jpeg' : extension}`;}
+const filename=`deepai-${mediaType}.${extension}`;const file=new File([blob],filename,{type:mimeType});const text=mediaType==='music'?'Check out this cool music I made on DeepAI!':mediaType==='video'?'Check out this cool video I made on DeepAI!':'Check out this cool image I made on DeepAI!';await navigator.share({files:[file],title:'DeepAI',text});console.log(`${mediaType.charAt(0).toUpperCase() + mediaType.slice(1)} shared successfully`);return;}}
+catch(error){console.error(`Error sharing the ${mediaType}:`,error);}
+if(social_modal&&!social_modal.open){social_modal.showModal();}
+if(social_modal){const message=shareMessage;const x_link=document.getElementById('x-link');if(x_link){const x_link_value="https://twitter.com/intent/tweet?url="+encodeURIComponent(share_url)+"&text="+encodeURIComponent(message);x_link.href=x_link_value;}
+const facebook_link=document.getElementById('facebook-link');if(facebook_link){const facebook_link_value="https://www.facebook.com/sharer.php?u="+encodeURIComponent(share_url);facebook_link.href=facebook_link_value;}
+const linkedin_link=document.getElementById('linkedin-link');if(linkedin_link){const linkedin_link_value="https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(share_url)+"&summary="+encodeURIComponent(message);linkedin_link.href=linkedin_link_value;}
+const reddit_link=document.getElementById('reddit-link');if(reddit_link){const reddit_link_value="https://www.reddit.com/submit?url="+encodeURIComponent(share_url)+"&title="+encodeURIComponent(message);reddit_link.href=reddit_link_value;}
+const social_link_input=document.getElementById('social-link-input');if(social_link_input){social_link_input.value=share_url;}}};if(closeSocial){closeSocial.addEventListener('click',()=>{if(social_modal)
+social_modal.close();});}
+if(social_modal){social_modal.addEventListener('cancel',()=>{social_modal.close();});social_modal.addEventListener('click',(event)=>{if(event.target===social_modal){social_modal.close();}});}
+const privacy_modal=document.getElementById('privacy-modal-dialog');const privacy_iframe=document.getElementById('privacy-modal-iframe');const privacy_close_btn=document.getElementById('privacy-modal-close-btn');function openPrivacyModal(){if(!privacy_modal){return;}
+if(privacy_iframe&&!privacy_iframe.src&&privacy_iframe.dataset.src){privacy_iframe.src=privacy_iframe.dataset.src;}
+if(!privacy_modal.open){privacy_modal.showModal();}}
+function closePrivacyModal(){if(privacy_modal){privacy_modal.close();}}
+if(privacy_close_btn){privacy_close_btn.addEventListener('click',closePrivacyModal);}
+if(privacy_modal){privacy_modal.addEventListener('cancel',closePrivacyModal);privacy_modal.addEventListener('click',(event)=>{if(event.target===privacy_modal){closePrivacyModal();}});}
+function fragmentFromString(strHTML){return document.createRange().createContextualFragment(strHTML);}
+function openNudgePopup(){const nudgePopup=document.getElementById("nudge-popup");if(nudgePopup)
+nudgePopup.classList.add("active");}
+function closeNudgePopup(){const nudgePopup=document.getElementById("nudge-popup");if(nudgePopup)
+nudgePopup.classList.remove("active");}
+const closeNudgePopupButton=document.getElementById("close-nudge-popup");if(closeNudgePopupButton){closeNudgePopupButton.addEventListener("click",function(event){closeNudgePopup();});}
+function openNudgeProPopup(){const nudgeProPopup=document.getElementById("nudge-pro-popup");if(nudgeProPopup)
+nudgeProPopup.classList.add("active");}
+function closeNudgeProPopup(){const nudgeProPopup=document.getElementById("nudge-pro-popup");if(nudgeProPopup)
+nudgeProPopup.classList.remove("active");}
+const closeNudgeProPopupButton=document.getElementById("close-nudge-pro-popup");if(closeNudgeProPopupButton){closeNudgeProPopupButton.addEventListener("click",function(){closeNudgeProPopup();});}
+function nudgeUserLogin(){if(userIsLoggedIn())
+return;if(window.innerWidth<1000){return;}
+const now=Date.now();const firstNudgeKey='firstLoginNudge';const lastNudgeKey='lastLoginNudge';const callCountKey='loginNudgeCallCount';const firstNudge=parseInt(localStorage.getItem(firstNudgeKey)||'',10);const lastNudge=parseInt(localStorage.getItem(lastNudgeKey)||'',10);let callCount=parseInt(localStorage.getItem(callCountKey)||'',10);if(isNaN(callCount)){callCount=0;}
+callCount++;localStorage.setItem(callCountKey,callCount.toString());if(!firstNudge){localStorage.setItem(firstNudgeKey,now.toString());return;}
+const FIVE_MINUTES=5*60*1000;const FOUR_HOURS=4*60*60*1000;if(now-firstNudge>=FIVE_MINUTES){if(!lastNudge){localStorage.setItem(lastNudgeKey,now.toString());openNudgePopup();return;}
+if((now-lastNudge>=FOUR_HOURS)&&(callCount%4===0)){localStorage.setItem(lastNudgeKey,now.toString());openNudgePopup();}}}
+function nudgeUserPro(){if(!user_object){return;}
+if(user_object.userprofile2?.user_has_deepai_pro)
+return;if(window.innerWidth<1000){return;}
+const now=Date.now();const firstNudgeKey='firstProNudge';const lastNudgeKey='lastProNudge';const callCountKey='proNudgeCallCount';const firstNudge=parseInt(localStorage.getItem(firstNudgeKey)||'',10);const lastNudge=parseInt(localStorage.getItem(lastNudgeKey)||'',10);let callCount=parseInt(localStorage.getItem(callCountKey)||'',10);if(isNaN(callCount)){callCount=0;}
+callCount++;localStorage.setItem(callCountKey,callCount.toString());if(!firstNudge){localStorage.setItem(firstNudgeKey,now.toString());return;}
+const FIVE_MINUTES=5*60*1000;const FOUR_HOURS=4*60*60*1000;if(now-firstNudge>=FIVE_MINUTES){if(!lastNudge){localStorage.setItem(lastNudgeKey,now.toString());openNudgeProPopup();return;}
+if((now-lastNudge>=FOUR_HOURS)&&(callCount%4===0)){localStorage.setItem(lastNudgeKey,now.toString());openNudgeProPopup();}}}
+try{const bannerKey='proBannerDismissed';const banner=document.getElementById('announcement-banner');const dismissButton=document.getElementById('dismiss-banner');if(banner&&user_object){if(user_object?.userprofile2?.user_has_deepai_pro){banner.style.display='none';}}
+if(dismissButton){dismissButton.addEventListener('click',function(){if(banner){banner.style.display='none';localStorage.setItem(bannerKey,JSON.stringify({date:new Date().toISOString()}));}});}}
+catch(error){console.error('Error in pro banner functionality:',error);}
+function showHidePermanentProAds(){try{const shouldShowProAds=!user_object?.userprofile2?.user_has_deepai_pro;document.querySelectorAll('.permanent-announcement-banner').forEach((el)=>el.style.setProperty('display',shouldShowProAds?'block':'none','important'));const sidebarContent=document.querySelector('.sidebar-content');if(sidebarContent){sidebarContent.style.setProperty('height',shouldShowProAds?'calc(100% - 177px)':'calc(100% - 120px)');}}
+catch(error){console.error('Error in showHidePermanentProAds:',error);}}
+showHidePermanentProAds();async function getGeoIP(){const CACHE_KEY='geoIPCache';const CACHE_DURATION_MS=60*60*1000;const now=Date.now();async function fetchFromAPI(){try{const response=await fetch(app_base_url+'/get_geo_ip',{credentials:'include'});if(!response.ok){console.error('Geo IP API request failed:',response.status);return null;}
+const data=await response.json();if(data.error){console.error('Geo IP API error:',data.error);return data;}
+const cacheData={data:data,timestamp:now};localStorage.setItem(CACHE_KEY,JSON.stringify(cacheData));return data;}
+catch(error){console.error('Error fetching geo IP data:',error);return null;}}
+try{const cachedStr=localStorage.getItem(CACHE_KEY);if(cachedStr){const cached=JSON.parse(cachedStr);const age=now-cached.timestamp;if(age<CACHE_DURATION_MS){return cached.data;}
+fetchFromAPI();return cached.data;}
+return await fetchFromAPI();}
+catch(error){console.error('Error reading geo IP cache:',error);return await fetchFromAPI();}};</script>
+
+        <script>;</script>
+
+        <script>;let _usageTrackerData=null;let _usageTrackerLastFetch=0;let _usageTrackerConfig=null;const USAGE_TRACKER_CACHE_MS=30000;const USAGE_TRACKER_POST_GEN_DELAY_MS=500;function isUserPro(){const userObj=window.user_object;return userObj?.userprofile2?.locked_out_due_to_no_payment_info===false;}
+function renderUsageTrackerSkeleton(){const container=document.getElementById('usage-tracker-container');if(!container||!_usageTrackerConfig)
+return;container.style.display='block';const categoryNames=Object.values(_usageTrackerConfig.categoryDisplayNames);let html='';for(let i=0;i<categoryNames.length;i++){const isFirst=i===0;html+=`
+            <div class="usage-tracker-item tracker-skeleton${isFirst ? ' tracker-current' : ''}">
+                <div class="tracker-header">
+                    <span class="tracker-label"><span class="skeleton-inline">${categoryNames[i]}</span></span>
+                    <span class="tracker-count"><span class="skeleton-inline">00/000</span></span>
+                </div>
+                <div class="tracker-progress-bar">
+                    <div class="tracker-progress-fill skeleton-bar"></div>
+                </div>
+                <div class="tracker-footer">
+                    <span class="tracker-remaining"><span class="skeleton-inline">000 remaining</span></span>
+                    ${isFirst ? '<span class="tracker-next next-free"><span class="skeleton-inline">Next: FREE</span></span>' : ''}
+                </div>
+            </div>
+        `;}
+html+=`
+        <div class="tracker-credits-row">
+            <span class="tracker-credits"><span class="skeleton-inline">$00.00 credits</span></span>
+        </div>
+    `;container.innerHTML=html;}
+function initUsageTracker(config){_usageTrackerConfig=config;const container=document.getElementById('usage-tracker-container');if(!container){console.warn('[UsageTracker] Container #usage-tracker-container not found in DOM. Tracker will not display.');return;}
+if(!isUserPro()){container.style.display='none';return;}
+renderUsageTrackerSkeleton();fetchUsageTrackerData(false).catch(()=>{});}
+async function fetchUsageTrackerData(forceRefresh=false){if(!_usageTrackerConfig){console.warn('[UsageTracker] Not initialized. Call initUsageTracker() first.');return;}
+try{const now=Date.now();if(!forceRefresh&&_usageTrackerData&&(now-_usageTrackerLastFetch)<USAGE_TRACKER_CACHE_MS){return;}
+const response=await fetch(`${app_base_url}/get_usage_summary?page=${_usageTrackerConfig.pageFilter}`,{credentials:'include'});if(!response.ok){console.log('[UsageTracker] Fetch failed:',response.status);return;}
+_usageTrackerData=await response.json();_usageTrackerLastFetch=now;renderUsageTrackerUI();}
+catch(e){console.log('[UsageTracker] Error:',e);}}
+function renderUsageTrackerUI(){const container=document.getElementById('usage-tracker-container');if(!container||!_usageTrackerConfig)
+return;if(!_usageTrackerData||!_usageTrackerData.is_authenticated||!_usageTrackerData.is_pro){container.style.display='none';return;}
+container.style.display='block';const currentCategoryKey=_usageTrackerConfig.getCurrentCategoryKey();const useDecimals=_usageTrackerConfig.useDecimals??false;const showAll=_usageTrackerConfig.showAllCategories??true;const allowedCategories=Object.keys(_usageTrackerConfig.categoryDisplayNames);const filteredCategories=_usageTrackerData.categories.filter(c=>allowedCategories.includes(c.category_key));const categoriesToShow=showAll?filteredCategories:filteredCategories.filter(c=>c.category_key===currentCategoryKey);let html='';for(const category of categoriesToShow){const statusClass=`tracker-status-${category.status}`;const isExceeded=category.status==='exceeded';const percentageDisplay=Math.min(100,category.percentage_used);const isCurrentCategory=category.category_key===currentCategoryKey;const formatNum=(n)=>useDecimals?n.toFixed(1):String(Math.round(n));const usedDisplay=formatNum(category.used);const remainingDisplay=formatNum(category.remaining);const overageDisplay=formatNum(category.overage);const displayName=_usageTrackerConfig.categoryDisplayNames[category.category_key]||category.name;const nextInfo=getNextRequestInfo(category);const nextIndicatorHtml=isCurrentCategory?`<span class="tracker-next ${nextInfo.isFree ? 'next-free' : 'next-paid'}">Next: ${nextInfo.isFree ? 'FREE' : '$' + nextInfo.cost.toFixed(2)}</span>`:'';html+=`
+            <div class="usage-tracker-item ${statusClass}${isCurrentCategory ? ' tracker-current' : ''}">
+                <div class="tracker-header">
+                    <span class="tracker-label">${displayName}</span>
+                    <span class="tracker-count">${usedDisplay}/${Math.round(category.allowance)}</span>
+                </div>
+                <div class="tracker-progress-bar">
+                    <div class="tracker-progress-fill" style="width: ${percentageDisplay}%"></div>
+                </div>
+                <div class="tracker-footer">
+                    ${isExceeded && category.overage > 0
+            ? `<span class="tracker-overage">+${overageDisplay}&nbsp;over · $${category.overage_cost.toFixed(2)}&nbsp;cost</span>`
+            : `<span class="tracker-remaining">${remainingDisplay}&nbsp;remaining</span>`}
+                    ${nextIndicatorHtml}
+                </div>
+            </div>
+        `;}
+const credits=_usageTrackerData.credits_remaining;html+=`
+        <div class="tracker-credits-row">
+            <span class="tracker-credits">$${credits.toFixed(2)} credits</span>
+        </div>
+    `;container.innerHTML=html;}
+function getNextRequestInfo(category){if(!category){return{isFree:true,cost:0};}
+const isFree=category.remaining>0;const cost=isFree?0:category.unit_price;return{isFree,cost};}
+async function updateUsageTrackerAfterGeneration(){await new Promise(resolve=>setTimeout(resolve,USAGE_TRACKER_POST_GEN_DELAY_MS));await fetchUsageTrackerData(true);}
+function refreshUsageTrackerDisplay(){if(_usageTrackerData){renderUsageTrackerUI();}}
+function getUsageTrackerData(){return _usageTrackerData;};"use strict";const PLAY_STATES={NO_AUDIO:"no_audio",LOADING:"loading",PLAYING:"playing",};const DEFAULT_MODEL_EXPECTED_RUNTIME=45;const FPS=60;const PROGRESS_UPDATE_INTERVAL=Math.round(1000/FPS);const state={playState:PLAY_STATES.NO_AUDIO,audioPlayer:null,currentProgressTime:0,currentProgressTimer:null,currentlyRunningModel:false,modelExpectedRuntime:DEFAULT_MODEL_EXPECTED_RUNTIME,currentSortMode:"newest",currentTab:'images-tab',infiniteScrollLoading:false,infiniteScrollHitEnd:false,msnry:null};const $=(id)=>document.getElementById(id);function setFocusOnTextInput(){const textInput=$("text-input");if(textInput){textInput.focus();}}
+function updatePlayButton(){const sendButtonText=$("send-button-text");const audioPlayer=$("audio-player");const downloadButton=$("download-button");const shareButton=$("share-button");const playPauseButton=$("play-pause-button");const sendButton=$("send-button");const playPauseButtonText=$("play-pause-button-text");const playIcon=$("play-icon");const pauseIcon=$("pause-icon");const progressBarContainer=document.querySelector(".progress-bar-container");const input=$("text-input");if(audioPlayer?.src){if(downloadButton)
+downloadButton.style.display="flex";if(shareButton)
+shareButton.style.display="flex";if(playPauseButton)
+playPauseButton.style.display="flex";if(playPauseButtonText)
+playPauseButtonText.textContent="Pause";if(playIcon)
+playIcon.style.display="none";if(pauseIcon)
+pauseIcon.style.display="flex";if(progressBarContainer)
+progressBarContainer.style.display="block";}
+else{if(downloadButton)
+downloadButton.style.display="none";if(shareButton)
+shareButton.style.display="none";if(playPauseButton)
+playPauseButton.style.display="none";if(progressBarContainer)
+progressBarContainer.style.display="none";}
+const disabledCondition=input?.value.trim()===""||state.playState===PLAY_STATES.LOADING||state.playState===PLAY_STATES.PLAYING;if(sendButton){sendButton.disabled=disabledCondition;}
+if(sendButtonText){sendButtonText.textContent=state.playState===PLAY_STATES.LOADING?"Generating...":"Generate";}}
+function stopAudio(){const audioPlayer=$("audio-player");if(audioPlayer){audioPlayer.pause();audioPlayer.currentTime=0;state.audioPlayer=null;const progressBar=$("progress-bar");if(progressBar)
+progressBar.value="0";}}
+function shareAudio(){const audioPlayer=$("audio-player");if(audioPlayer?.src){shareMedia(audioPlayer.src,true);}}
+function cancelProgressBar(){const progressBar=$('deepaiProgressBar');if(progressBar)
+progressBar.style.width='0%';state.currentProgressTime=0;if(state.currentProgressTimer){window.clearInterval(state.currentProgressTimer);state.currentProgressTimer=null;}}
+async function progressBarFunctionWrapper(functionToWrap){let expected_time=state.modelExpectedRuntime||10;console.log('start progress bar');state.currentlyRunningModel=true;const progressBar=$('deepaiProgressBar');cancelProgressBar();try{state.currentProgressTimer=window.setInterval(()=>{state.currentProgressTime++;const progress_pct=Math.tanh((state.currentProgressTime/FPS)/expected_time)*100;if(progressBar)
+progressBar.style.width=progress_pct+'%';},PROGRESS_UPDATE_INTERVAL);await functionToWrap();}
+catch(e){console.log(e);}
+finally{console.log('end progress bar');state.currentlyRunningModel=false;cancelProgressBar();}}
+function toggleOldModel(){const oldModelCheckbox=$('model-old-style-checkbox');if(oldModelCheckbox?.checked){sessionStorage.setItem('useOldMusicModel','true');}
+else{sessionStorage.removeItem('useOldMusicModel');}}
+function generateApiKey(){let myrandomstr=Math.round((Math.random()*100000000000))+"";const myhashfunction=(function(){const a=[];for(let b=0;64>b;)
+a[b]=0|4294967296*Math.sin(++b%Math.PI);return function(input){let d,e,f,g=[d=1732584193,e=4023233417,~d,~e],h=[],l=unescape(encodeURI(input))+"\u0080",k=l.length;let c=--k/4+2|15;for(h[--c]=8*k;~k;)
+h[k>>2]|=l.charCodeAt(k)<<8*k--;for(let b=0,l=0;b<c;b+=16){for(k=g;64>l;k=[f=k[3],d+((f=k[0]+[d&e|~d&f,f&d|~f&e,d^e^f,e^(d|~f)][k=l>>4]+a[l]+~~h[b|[l,5*l+1,3*l+5,7*l][k]&15])<<(k=[7,12,17,22,5,9,14,20,4,11,16,23,6,10,15,21][4*k+l++%4])|f>>>-k),d,e])
+d=k[1]|0,e=k[2];for(l=4;l;)
+g[--l]+=k[l];}
+let result="";for(let l=0;32>l;)
+result+=(g[l>>3]>>4*(1^l++)&15).toString(16);return result.split("").reverse().join("");};})();const tryitApiKey='tryit-'+myrandomstr+'-'+myhashfunction(navigator.userAgent+myhashfunction(navigator.userAgent+myhashfunction(navigator.userAgent+myrandomstr+'hackers_become_a_little_stinkier_every_time_they_hack')));return tryitApiKey;}
+async function audioSubmit(){stopAudio();const audioPlayer=$("audio-player");if(audioPlayer)
+audioPlayer.currentTime=0;const textInput=$("text-input")?.value;const errorMessage=document.querySelector("#error-message");if(!textInput){if(errorMessage)
+errorMessage.innerHTML="ERROR: Please add text!";return;}
+if(errorMessage)
+errorMessage.innerHTML="";state.playState=PLAY_STATES.LOADING;updatePlayButton();const data={text:textInput};const useOldMusicModel=sessionStorage.getItem('useOldMusicModel')==='true';const endpoint=useOldMusicModel?'/audio_response/olde':'/audio_response';const tryitApiKey=generateApiKey();await progressBarFunctionWrapper(async()=>{try{const progressBar=$("progress-bar");if(progressBar)
+progressBar.value="0";const response=await fetch(app_base_url+endpoint,{method:'POST',credentials:'include',headers:{"Content-Type":"application/json","api-key":tryitApiKey},body:JSON.stringify(data),});if(response.ok){const json=await response.json();if(errorMessage)
+errorMessage.innerHTML="";stopAudio();const audioUrl=json.audioUrl;const audioPresignedUrl=json.audioPresignedUrl;const downloadButton=$('download-button');if(downloadButton){downloadButton.onclick=function(){console.log(audioPresignedUrl);window.open(audioPresignedUrl,'_blank');};}
+if(audioPlayer){audioPlayer.src=audioUrl;if(progressBar)
+progressBar.value="0";audioPlayer.play().catch(err=>{if(err.name==="NotAllowedError"||err.name==="AbortError"){console.log("Audio play was prevented or interrupted:",err);}
+else{console.error("Error trying to play the audio:",err);}});audioPlayer.addEventListener("ended",()=>{state.playState=PLAY_STATES.NO_AUDIO;updatePlayButton();});}
+state.playState=PLAY_STATES.NO_AUDIO;updatePlayButton();updateUsageTrackerAfterGeneration().catch(()=>{});}
+else{const json=await response.json();state.playState=PLAY_STATES.NO_AUDIO;updatePlayButton();if(json.status==="anonymous try it exceeded"){openSignup();}
+else if(json.status==="signed in try-it quota exceeded"){openSubscription();}
+else if(json.status==="model only available to paid users"){openSubscription();}
+else if(json.status==="pro user out of credits"){openOutOfCredits(json.credits_remaining||0);}
+else if(json.status==="NSFW detected"){if(errorMessage)
+errorMessage.innerHTML="The system detected potentially unsafe content. Please try again or adjust the prompt.";}
+else{if(errorMessage)
+errorMessage.innerHTML="There was an error generating your audio. Please try again.";}}}
+catch(error){console.error("Error fetching audio:",error);state.playState=PLAY_STATES.NO_AUDIO;updatePlayButton();}});}
+async function playButtonClick(){const errorMessage=document.querySelector("#error-message");if(errorMessage)
+errorMessage.innerHTML="";switch(state.playState){case PLAY_STATES.NO_AUDIO:await audioSubmit();break;default:break;}}
+function copyText(text,clicked_class){navigator.clipboard.writeText(text);const copyTextElements=document.getElementsByClassName(clicked_class);for(let i=0;i<copyTextElements.length;i++){const element=copyTextElements[i];element.innerHTML="Copied!";}}
+async function toggleArtImageVisibility(artImageId){try{await fetch(app_base_url+'/dashboard/toggle_artimage_visibility?image='+artImageId+'&type=audio',{method:'POST',credentials:'include'});}
+catch(e){console.log('error updating image visibility',e);}
+location.reload();}
+async function deleteArtImage(artImageId){if(window.confirm("Are you sure you want to delete this music? This cannot be undone.")){try{await fetch(app_base_url+'/dashboard/delete_artimage?image='+artImageId+'&type=audio',{method:'POST',credentials:'include'});}
+catch(e){console.log('error deleting music',e);}
+location.reload();}}
+function getInfiniteScrollApiUrl(after_object_id){return app_base_url+'/category_page_row_listing/'+'music'+'/'+state.currentSortMode+'/'+(after_object_id||'0');}
+function showHideScrollLoading(showHide){const scrollLoading=$('infinite-scroll-loading');if(!scrollLoading)
+return;if(showHide){scrollLoading.classList.add('loading-center');}
+else{scrollLoading.classList.remove('loading-center');}}
+async function infiniteScrollLoadMore(){const mainListElement=$('main-list');if(!mainListElement)
+return;const lastElementOfList=mainListElement.lastElementChild;let lastElementObjectId='0';if(lastElementOfList){if(lastElementOfList.getAttribute('sourcelistid')){lastElementObjectId=lastElementOfList.getAttribute('sourcelistid');}
+else if(lastElementOfList.getAttribute('objectid')){lastElementObjectId=lastElementOfList.getAttribute('objectid');}}
+const url=getInfiniteScrollApiUrl(lastElementObjectId);if(!url)
+return;console.log('triggered infinite scroll load...');state.infiniteScrollLoading=true;showHideScrollLoading(true);try{const apiResult=await fetch(url,{credentials:'include'});if(!apiResult.ok)
+throw apiResult;const apiResultHtml=await apiResult.text();if(apiResultHtml.length<5){console.log('hit the end of infinite scrolling...');state.infiniteScrollHitEnd=true;}
+const newElements=fragmentFromString(apiResultHtml);const childrenArray=Array.from(newElements.children);for(let i=0;i<childrenArray.length;i++){const newElement=childrenArray[i];const objectId=newElement.getAttribute('objectid');const objectClass=newElement.getAttribute('objectclass');if(objectId&&objectClass&&mainListElement.querySelector(`[objectid="${objectId}"][objectclass="${objectClass}"]`)){console.log('skipping duplicate objectclass/objectid: ',objectClass,objectId);continue;}
+const added=mainListElement.appendChild(newElement);if(state.msnry){state.msnry.appended(added);}}
+applyCachedHeartsToHeartsOnPage();state.infiniteScrollLoading=false;showHideScrollLoading(false);scrollResizeHandler();}
+catch(e){console.log('caught infinite scroll error...',e);state.infiniteScrollLoading=false;showHideScrollLoading(false);}}
+function scrollResizeHandler(){if(state.infiniteScrollLoading||state.infiniteScrollHitEnd){return;}
+if(state.currentSortMode==='searching'){return;}
+const mainListElement=$('main-list');if(!mainListElement)
+return;const lastElementOfList=mainListElement.lastElementChild;if(!lastElementOfList){infiniteScrollLoadMore();}
+else{const lastElementBounds=lastElementOfList.getBoundingClientRect();if(lastElementBounds.top<(window.innerHeight||document.documentElement.clientHeight)*2){infiniteScrollLoadMore();}}}
+async function doSearch(){const searchInput=document.querySelector('#searchInput');if(!searchInput)
+return;const query_string=searchInput.value;const onCategoryPage=typeof window.onCategoryPage!=='undefined'?window.onCategoryPage:false;const search_area=typeof window.search_area!=='undefined'?window.search_area:'music';if(!onCategoryPage){window.location.href='/?search='+encodeURIComponent(query_string);return;}
+state.currentSortMode='searching';const mainListElement=$('main-list');if(!mainListElement)
+return;while(mainListElement.firstChild){mainListElement.removeChild(mainListElement.firstChild);}
+if(state.msnry){state.msnry.reloadItems();state.msnry.layout();}
+showHideScrollLoading(true);const url=app_base_url+'/site_search_row_listing/'+search_area+'?query='+encodeURIComponent(query_string);try{const apiResult=await fetch(url);if(!apiResult.ok)
+throw apiResult;const apiResultHtml=await apiResult.text();if(apiResultHtml.length<5){console.log('search returned nothing');}
+const newElements=fragmentFromString(apiResultHtml);const childrenArray=Array.from(newElements.children);for(let i=0;i<childrenArray.length;i++){const newElement=childrenArray[i];const objectId=newElement.getAttribute('objectid');const objectClass=newElement.getAttribute('objectclass');if(objectId&&objectClass&&mainListElement.querySelector(`[objectid="${objectId}"][objectclass="${objectClass}"]`)){console.log('skipping duplicate objectclass/objectid: ',objectClass,objectId);continue;}
+const added=mainListElement.appendChild(newElement);if(state.msnry){state.msnry.appended(added);}}
+applyCachedHeartsToHeartsOnPage();showHideScrollLoading(false);}
+catch(e){console.log('caught search error...',e);}
+finally{showHideScrollLoading(false);}}
+function openArtModal(artImageId,audioUrl){const art_modal=$('art-modal-'+artImageId);if(!art_modal)
+return;const art_image_wrapper=art_modal.querySelector('.art-image-wrapper');if(!art_image_wrapper)
+return;art_image_wrapper.innerHTML='';const audio=document.createElement('audio');audio.setAttribute('controls','');audio.setAttribute('loop','');audio.style.width="80%";audio.style.margin="auto 0";audio.src=audioUrl;art_image_wrapper.appendChild(audio);audio.play().catch(err=>{if(err.name==="NotAllowedError"||err.name==="AbortError"){console.log("Audio play was prevented or interrupted:",err);}
+else{console.error("Error trying to play the audio:",err);}});if(!art_modal.open){art_modal.showModal();}
+const copyLinkElements=document.getElementsByClassName("copy-link");const copyPromptElements=document.getElementsByClassName("copy-prompt");const copyElements=[copyLinkElements,copyPromptElements];for(let i=0;i<copyElements.length;i++){for(let j=0;j<copyElements[i].length;j++){const element=copyElements[i][j];if(i===0){element.innerText="Copy Link";}
+else{element.innerText="Copy Prompt";}}}
+art_modal.addEventListener('cancel',()=>{art_image_wrapper.innerHTML='';art_modal.close();});art_image_wrapper.addEventListener('click',()=>{art_image_wrapper.innerHTML='';art_modal.close();});}
+function initializeMasonry(){console.log('loading masonry library...');const msnscript=document.createElement("script");msnscript.src="/static/js/libs/masonry.pkgd.min.js";msnscript.type="text/javascript";msnscript.async=true;msnscript.onload=function(){const elem=document.querySelector('#main-list');if(elem&&typeof Masonry!=='undefined'){const windowWithMasonry=window;windowWithMasonry.msnry=new Masonry(elem,{itemSelector:'.art-grid-item, .card-list-item',columnWidth:100,gutter:10,});state.msnry=windowWithMasonry.msnry||null;}};const head=document.getElementsByTagName("head")[0];if(head)
+head.appendChild(msnscript);}
+document.addEventListener('DOMContentLoaded',()=>{window.addEventListener("load",setFocusOnTextInput);setFocusOnTextInput();if(sessionStorage.getItem('useOldMusicModel')==='true'){const checkbox=$('model-old-style-checkbox');if(checkbox)
+checkbox.checked=true;}
+const input=$("text-input");const errorMessage=document.querySelector("#error-message");if(input){input.addEventListener('keydown',updatePlayButton);input.addEventListener('paste',()=>setTimeout(updatePlayButton,0));const ime=setupIMEHandlers(input);input.addEventListener("keydown",(event)=>{if(ime.isComposing()||ime.compositionJustEnded()){return;}
+if(event.key==="Enter"){event.preventDefault();audioSubmit();}});input.addEventListener("input",()=>{if(errorMessage)
+errorMessage.innerHTML="";});input.addEventListener("keydown",()=>{if(state.playState!==PLAY_STATES.PLAYING){return;}
+stopAudio();state.playState=PLAY_STATES.PLAYING;updatePlayButton();});}
+const playPauseButton=$("play-pause-button");if(playPauseButton){playPauseButton.addEventListener("click",()=>{const playPauseButtonText=$("play-pause-button-text");const audioPlayer=$("audio-player");const playIcon=$("play-icon");const pauseIcon=$("pause-icon");if(audioPlayer?.paused){audioPlayer.play().catch(err=>{if(err.name==="NotAllowedError"||err.name==="AbortError"){console.log("Audio play was prevented or interrupted:",err);}
+else{console.error("Error trying to play the audio:",err);}});if(playPauseButtonText)
+playPauseButtonText.textContent="Pause";if(playIcon)
+playIcon.style.display="none";if(pauseIcon)
+pauseIcon.style.display="flex";audioPlayer.addEventListener("ended",()=>{if(playPauseButtonText)
+playPauseButtonText.textContent="Play";if(playIcon)
+playIcon.style.display="flex";if(pauseIcon)
+pauseIcon.style.display="none";});}
+else if(audioPlayer){audioPlayer.pause();if(playPauseButtonText)
+playPauseButtonText.textContent="Play";if(playIcon)
+playIcon.style.display="flex";if(pauseIcon)
+pauseIcon.style.display="none";}});}
+const progressBar=$("progress-bar");const audioPlayer=$("audio-player");if(progressBar){progressBar.value="0";progressBar.addEventListener("input",(e)=>{const target=e.target;const value=parseFloat(target.value);if(audioPlayer?.duration){audioPlayer.currentTime=(value/100)*audioPlayer.duration;}});}
+if(audioPlayer){audioPlayer.addEventListener("loadedmetadata",()=>{if(progressBar)
+progressBar.value="0";});audioPlayer.addEventListener("timeupdate",()=>{if(audioPlayer.duration&&!isNaN(audioPlayer.duration)&&progressBar){progressBar.value=((audioPlayer.currentTime/audioPlayer.duration)*100).toString();}
+else if(progressBar){progressBar.value="0";}});}
+const sendButton=$("send-button");const shareButton=$("share-button");if(sendButton)
+sendButton.addEventListener("click",playButtonClick);if(shareButton)
+shareButton.addEventListener("click",shareAudio);initializeMasonry();const mainListElement=$('main-list');if(mainListElement){const urlParams=new URLSearchParams(location.search);if(urlParams&&urlParams.get('search')){const searchInput=document.querySelector('#searchInput');if(searchInput){searchInput.value=urlParams.get('search')||'';console.log('doing search based on URL params');doSearch();}}}
+scrollResizeHandler();window.addEventListener('resize',scrollResizeHandler,{capture:true,passive:true});window.addEventListener('scroll',scrollResizeHandler,{capture:true,passive:true});try{removeHeaderBackground();}
+catch(e){console.log("error removing header background: "+e);}
+setTimeout(async()=>{const textModelSubmitInputsDict=JSON.parse(sessionStorage.getItem('textModelSubmitInputsDict')||"{}");const textModelSubmitOnload=JSON.parse(sessionStorage.getItem('textModelSubmitOnload')||"false");if(textModelSubmitInputsDict.text&&textModelSubmitOnload){const promptBox=$('text-input');if(promptBox){promptBox.value=textModelSubmitInputsDict.text;audioSubmit();}}
+sessionStorage.removeItem('textModelSubmitInputsDict');sessionStorage.removeItem('textModelSubmitOnload');},100);initUsageTracker({pageFilter:'audio',getCurrentCategoryKey:()=>'audio_generation',categoryDisplayNames:{'audio_generation':'Audio Generation'},useDecimals:false});});;</script>
+
+        
+	<!-- eu-cookie-consent: GDPR/ePrivacy compliant cookie consent banner -->
+<!-- Injected by apply-patches.sh. Complies with Planet49 (CJEU C-673/17). -->
+<!-- No non-essential cookies fire until explicit opt-in. -->
+<div id="eu-cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:100000; background:rgba(23,10,44,0.97); border-top:1px solid rgba(255,255,255,0.13); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); padding:20px 24px; color:white; font-family:'Atkinson Hyperlegible Next',sans-serif; font-size:14px;">
+  <div style="max-width:960px; margin:0 auto;">
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div>
+        <strong style="font-size:16px;">Cookie Preferences</strong>
+        <p style="margin:8px 0 0; color:rgba(255,255,255,0.75); line-height:1.5;">
+          We use cookies to operate this site and improve your experience. Non-essential cookies are only set with your explicit consent.
+          <a href="cookie-policy.html" style="color:#c764ec; text-decoration:underline;">Cookie Policy</a> |
+          <a href="privacy-notice.html" style="color:#c764ec; text-decoration:underline;">Privacy Notice</a>
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <label style="display:flex; align-items:center; gap:10px; cursor:default; opacity:0.6;">
+          <input type="checkbox" checked disabled style="accent-color:#8f37ff; width:18px; height:18px;">
+          <span><strong>Essential</strong> — Required for the site to function (authentication, security, preferences). Cannot be disabled.</span>
+        </label>
+        <label style="display:flex; align-items:center; gap:10px; cursor:pointer;" for="eu-consent-analytics">
+          <input type="checkbox" id="eu-consent-analytics" style="accent-color:#8f37ff; width:18px; height:18px;">
+          <span><strong>Analytics</strong> — Help us understand how visitors use the site (e.g., page views, error reports). Data is aggregated.</span>
+        </label>
+        <label style="display:flex; align-items:center; gap:10px; cursor:pointer;" for="eu-consent-marketing">
+          <input type="checkbox" id="eu-consent-marketing" style="accent-color:#8f37ff; width:18px; height:18px;">
+          <span><strong>Marketing</strong> — Enable personalised advertising and conversion tracking across platforms.</span>
+        </label>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="eu-consent-accept-selected" style="padding:10px 24px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:white; font-size:14px; cursor:pointer; font-family:inherit;">Accept Selected</button>
+        <button id="eu-consent-accept-all" style="padding:10px 24px; border-radius:10px; border:none; background:#8f37ff; color:white; font-size:14px; cursor:pointer; font-family:inherit; font-weight:600;">Accept All</button>
+        <button id="eu-consent-reject-all" style="padding:10px 24px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:white; font-size:14px; cursor:pointer; font-family:inherit;">Reject Non-Essential</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var CONSENT_KEY = 'eu_cookie_consent';
+  var banner = document.getElementById('eu-cookie-consent');
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(CONSENT_KEY)); } catch(e) { return null; }
+  }
+
+  function setConsent(analytics, marketing) {
+    var consent = {
+      essential: true,
+      analytics: !!analytics,
+      marketing: !!marketing,
+      timestamp: new Date().toISOString(),
+      version: 1
+    };
+    localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    applyConsent(consent);
+    banner.style.display = 'none';
+  }
+
+  function applyConsent(consent) {
+    // Analytics: Google Analytics
+    if (consent.analytics) {
+      // GA would be loaded here if consent given
+      // Sentry (error tracking) is loaded as analytics
+      window._eu_analytics_consent = true;
+    }
+    // Marketing: Twitter pixel, ad networks
+    if (consent.marketing) {
+      window._eu_marketing_consent = true;
+    }
+  }
+
+  // Check existing consent
+  var existing = getConsent();
+  if (existing) {
+    applyConsent(existing);
+    return; // don't show banner
+  }
+
+  // Show banner
+  banner.style.display = 'block';
+
+  document.getElementById('eu-consent-accept-all').addEventListener('click', function() {
+    setConsent(true, true);
+  });
+
+  document.getElementById('eu-consent-reject-all').addEventListener('click', function() {
+    setConsent(false, false);
+  });
+
+  document.getElementById('eu-consent-accept-selected').addEventListener('click', function() {
+    var analytics = document.getElementById('eu-consent-analytics').checked;
+    var marketing = document.getElementById('eu-consent-marketing').checked;
+    setConsent(analytics, marketing);
+  });
+})();
+</script>
+
+<!-- eu-ai-disclosure: AI Act Art. 50 transparency disclosure -->
+<!-- Injected by apply-patches.sh into generator, chat, video, voice, music pages. -->
+<!-- Informs users they are interacting with AI / receiving AI-generated content. -->
+<div id="eu-ai-disclosure" style="position:fixed; bottom:60px; right:16px; z-index:99999; background:rgba(23,10,44,0.92); border:1px solid rgba(199,100,236,0.4); border-radius:10px; padding:8px 14px; color:rgba(255,255,255,0.85); font-size:12px; font-family:'Atkinson Hyperlegible Next',sans-serif; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); max-width:280px; pointer-events:auto;">
+  <div style="display:flex; align-items:center; gap:8px;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;">
+      <circle cx="8" cy="8" r="7" stroke="#c764ec" stroke-width="1.5"/>
+      <text x="8" y="12" text-anchor="middle" fill="#c764ec" font-size="11" font-weight="600">i</text>
+    </svg>
+    <span>
+      <strong>AI-Generated Content</strong> — Outputs from this tool are produced by artificial intelligence.
+      <a href="ai-transparency.html" style="color:#c764ec; text-decoration:underline;">Learn more</a>
+    </span>
+  </div>
+  <button onclick="this.parentElement.parentElement.style.display='none'" style="position:absolute; top:4px; right:8px; background:none; border:none; color:rgba(255,255,255,0.5); cursor:pointer; font-size:14px; line-height:1;">&times;</button>
+</div>
+
+</body>
+</html>

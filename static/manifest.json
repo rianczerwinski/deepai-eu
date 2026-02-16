@@ -1,0 +1,15 @@
+{
+  "short_name": "DeepAI",
+  "name": "DeepAI",
+  "icons": [
+    {
+      "src": "static/images/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "/",
+  "theme_color": "#150a2a",
+  "background_color": "#150a2a",
+  "display": "standalone"
+}
