@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>AI Glossary - DeepAI</title>
+
+        <script type="application/ld+json"></script>
+<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="manifest" href="static/manifest.json">
+        <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
+        <script>
+            window.user_paid_for_no_ads = false;
+            window.user_object = undefined;
+            try {
+                var storedUser = localStorage.getItem('user');
+                if (storedUser && storedUser !== "undefined") {
+                    window.user_object = JSON.parse(storedUser);
+                    if (window.user_object?.userprofile2) {
+                        if (window.user_object.userprofile2.locked_out_due_to_no_payment_info === false) {
+                            window.user_paid_for_no_ads = true;
+                        }
+                    }
+                }
+            } catch(e) {
+                console.log('error checking user login for ads removal', e);
+                window.user_object = undefined;
+            }
+        </script>
+
+
+  	<meta name="description" content="AI and Machine Learning Glossary - Definitions of key concepts in artificial intelligence.">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="DeepAI">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="AI Glossary - DeepAI">
+	<meta property="og:description" content="AI and Machine Learning Glossary - Definitions of key concepts in artificial intelligence.">
+	<meta property="og:image" content="">
+
+        <style type="text/css">@font-face{font-family:'Atkinson Hyperlegible Next';font-style:normal;font-weight:400;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPNcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiJn3o.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Atkinson Hyperlegible Next';font-style:normal;font-weight:600;font-display:optional;src:url(https://fonts.gstatic.com/s/atkinsonhyperlegiblenext/v7/NaPNcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiJn3o.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}html{background-color:#170a2c;font-family:'Atkinson Hyperlegible Next',sans-serif;font-synthesis:none}b,strong{font-weight:600}button,input,optgroup,select,textarea{font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:100%;line-height:1.15;margin:0}body{margin:0;padding:0;display:flex;flex-direction:column;min-height:100vh;background:linear-gradient(180deg,#7729aa -13.13%,#170a2d 0.17%,#0a061d 6.9%,rgba(10,6,30,0.99) 36.38%,#010311 98.59%)!important;color:white}a{text-decoration:none;color:#f9ebff}header{height:45px;overflow:hidden;width:100%;z-index:101}header a.logo-link,footer a.logo-link{display:flex;color:white!important;cursor:pointer;margin-right:10px}header nav{display:flex;margin-left:auto;max-height:62px}header ul{list-style-type:none;margin:0;padding:0;display:flex;flex-direction:row;white-space:nowrap;align-items:center;min-width:46px;justify-content:center}header ul li{display:block;float:left;font-size:16px;color:#fff;line-height:25px}a.button{display:flex;padding:6px 19px;font-size:14px;border-radius:45px;border:1px solid #1e79d1;vertical-align:bottom;white-space:nowrap;font-weight:600;color:#1e79d1;margin-left:9px}a.button.highlighted{background-color:#a01ed1;color:white;width:auto;background:linear-gradient(94deg,#c764ec,#4a36b1);height:auto;border:none;cursor:pointer}footer{margin-top:auto;text-align:center}footer p{color:white;font-size:15px}.footer-row{display:flex;position:relative;flex-direction:row;align-items:center;justify-content:space-between;height:50px;background-color:rgba(1,0,9,0);z-index:5;bottom:0px}.leftfooter{margin-left:16px}.leftfooter a{display:flex;flex-direction:row}.leftfooter p,.logo-link p{background:linear-gradient(180deg,#fff 0%,#ebe5fb 50%,#7fabff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;flex-direction:row;font-size:19px;margin:auto;margin-left:10px}.rightfooter{display:flex;flex-direction:row;margin-right:16px;align-items:center}.contact,.press,.legal,.feedback,.xlogo,.linkedinlogo,.instagramlogo,.tiktoklogo,.redditlogo{margin:auto;margin-left:15px;color:rgba(255,255,255,0.65)}.xlogo{height:19px}.instagramlogo,.redditlogo{height:25px}.drop-menu-button{display:block;width:46px;height:45px;padding:0;margin:0;border:none;background:transparent;cursor:pointer}.menu-icon{font-size:30px;font-weight:600;cursor:pointer;vertical-align:middle;pointer-events:none}header .dropdown{position:unset}ul li.dropdown ul{visibility:hidden;opacity:0;display:none;position:absolute;transition:all 0.5s ease;top:auto;z-index:10;right:13px;margin:auto;margin-top:20px;width:296px;border-radius:12px;border:1px solid rgba(255,255,255,0.13);background:rgba(142,142,142,0.02);-webkit-backdrop-filter:blur(114px);backdrop-filter:blur(114px)}.show-dropdown{visibility:visible!important;opacity:1!important;display:block!important}.nav-items{display:flex;flex-direction:row;align-items:center;height:45px;padding:0 8px}.nav-buttons{display:flex;flex-direction:row;align-items:center;margin-left:auto;gap:4px}.menu-options .pages a{display:block;padding:12px 20px;color:rgba(255,255,255,0.85);font-size:14px}.menu-options .pages a:hover{background:rgba(255,255,255,0.05)}.menu-border{border-top:1px solid rgba(255,255,255,0.1);margin:4px 16px}.nav-profile-section{display:none;padding:16px 20px;align-items:center;gap:12px}.nav-usernames{display:flex;flex-direction:column}.nav-profile-button{display:none}.exit{display:flex;justify-content:flex-end;padding:12px 12px 0;cursor:pointer}button.logout{background:none;border:none;color:rgba(255,255,255,0.85);font-size:14px;padding:12px 20px;cursor:pointer;text-align:left;width:100%}button.logout:hover{background:rgba(255,255,255,0.05)}@media screen and (max-width:800px){.logo-link p{display:none}.feedback{display:none}}@media screen and (max-width:939px){.press{display:none}}@media screen and (max-width:950px){.legal{display:none}}@media screen and (max-width:600px){ul li.dropdown ul{right:2%}.contact,.press,.feedback,.legal{margin-left:10px;font-size:12px}.linkedinlogo,.instagramlogo,.tiktoklogo,.redditlogo{margin-left:10px;height:22px}.xlogo{height:18px}}@media screen and (max-width:470px){.leftfooter p{display:none}ul li.dropdown ul{width:96%}}
+.coming-soon-container{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:60px 24px;text-align:center;min-height:60vh}.coming-soon-icon{width:80px;height:80px;margin-bottom:24px;opacity:0.7}.coming-soon-title{font-size:36px;font-weight:600;margin:0 0 16px;background:linear-gradient(135deg,#c764ec,#7fabff);-webkit-background-clip:text;background-clip:text;color:transparent}.coming-soon-subtitle{font-size:18px;color:rgba(255,255,255,0.6);max-width:500px;line-height:1.6;margin:0 0 32px}.coming-soon-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:50px;border:1px solid rgba(143,55,255,0.3);background:rgba(143,55,255,0.1);font-size:14px;color:rgba(255,255,255,0.8)}.coming-soon-pulse{width:8px;height:8px;border-radius:50%;background:#8f37ff;animation:pulse 2s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}.coming-soon-categories{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;max-width:600px}.category-chip{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.5);transition:border-color 0.3s,color 0.3s}.category-chip:hover{border-color:rgba(199,100,236,0.4);color:rgba(255,255,255,0.8)}</style>
+
+	</head>
+	<body>
+
+        <header>
+
+<div class="nav-items">
+    <a class="logo-link" href="index.html">
+      <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.4781 27.6456V24.5259H10.5015V27.5763H13.4781V27.6456Z" fill="white"/>
+        <path d="M33.9079 25.8433C33.8402 26.1899 33.7049 26.6058 33.5696 26.9525C33.5696 27.0218 33.502 27.0911 33.502 27.1605C33.2314 27.8537 32.8931 28.4777 32.5549 29.1016C32.2166 29.5869 31.8784 30.0722 31.5401 30.4881C31.3372 30.6961 31.2019 30.9041 30.9989 31.1121L31.0666 31.0428C30.796 31.3201 30.5254 31.5974 30.1871 31.8747C30.0518 32.0133 29.8489 32.0827 29.7136 32.2213C29.6459 32.2213 29.5783 32.2906 29.5783 32.2906C29.1724 32.5679 28.7665 32.7759 28.2929 32.9839C27.7517 33.2612 27.1429 33.4692 26.534 33.6078C25.9252 33.7465 25.2487 33.8851 24.6398 33.9545C23.8957 34.0238 23.1515 34.0238 22.3397 33.8851C18.8895 33.3999 15.9806 31.3894 14.2217 28.6163C14.6276 29.1016 15.0335 29.5176 15.507 29.8642C16.3188 30.4881 17.2659 30.9734 18.3483 31.1814C18.8219 31.3201 19.3631 31.3201 19.8366 31.3201C19.9719 31.3201 20.1072 31.3201 20.2425 31.3201C20.9867 31.3201 21.7309 31.1814 22.4074 30.9041C22.5427 30.8348 22.6103 30.8348 22.7456 30.7654C22.9486 30.6961 23.2192 30.5575 23.4221 30.4881C23.4898 30.4881 23.4898 30.4188 23.5574 30.4188C25.6546 29.2403 27.2105 27.1605 27.4811 24.526C27.5488 24.0408 27.5488 23.4861 27.5488 23.0009C29.443 23.0009 30.9989 24.1794 31.8107 25.7739C31.8784 25.9819 31.946 26.1899 32.0137 26.3979C32.0137 26.2592 32.0137 26.1899 32.0137 26.0512C32.0137 25.4966 31.946 25.0113 31.8784 24.4567C31.2019 20.7824 28.0223 18.0787 24.2339 18.0787C23.7604 18.0787 23.3545 18.148 22.8809 18.2173C22.8809 18.2173 22.8809 18.2173 22.8133 18.2173C21.4603 18.4253 20.5132 18.8413 19.0248 19.9505C18.416 20.3665 17.1983 21.4757 16.2512 22.3769C15.7776 22.8622 14.9658 22.3769 15.1011 21.6837C15.2364 21.0597 15.4394 20.3665 15.8453 19.6039C13.9511 16.9001 13.9511 13.9884 17.6718 11.4233C19.8366 9.89813 23.4221 9.48217 26.737 10.7301C28.7665 9.62083 31.6754 9.5515 34.3138 12.4632C34.5844 12.7405 34.3814 13.2258 33.9755 13.2258C33.2314 13.2258 32.2166 13.4338 31.4048 14.0577C31.4725 14.1271 31.5401 14.2657 31.6754 14.4044C34.855 18.7026 34.7873 22.7236 33.9079 25.8433Z" fill="white"/>
+      </svg>
+      <P style="display: none;">DeepAI</P>
+    </a>
+    <div class="nav-buttons">
+        <a class="button headerbutton aichat" href="chat/gpt-chat.html">Chat</a>
+        <a class="button headerbutton imagegenerator" href="machine-learning-model/text2img.html">Image Generator</a>
+        <a class="button headerbutton videogenerator" href="video.html">Video</a>
+        <a class="button headerbutton audiogenerator" href="music.html">Music</a>
+        <a class="button headerbutton voicechat" href="voice.html">Voice Chat</a>
+        <a class="button headerbutton photoeditor" href="machine-learning-model/image-editor.html">Photo Editor</a>
+
+        <a class="button login" id="headerLoginButton" onclick="openLogin()">Login</a>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <button class="drop-menu-button" id="dropMenuButton">
+                        <img src="static/images/HiUser.svg" class="menu-icon dropbtn" id="userIconDrop" loading="lazy"/>
+                        <img src="static/images/IoMenu.svg" class="menu-icon dropbtn" id="sandwichIconDrop" loading="lazy"/>
+                    </button>
+                    <ul id="mainNavDropdown">
+                        <div class="exit">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z" fill="white"/>
+                          </svg>
+                        </div>
+                        <div class="menu-options">
+                          <div class="pages">
+                            <a href="machine-learning-model/text2img.html" class="ai-generators">Image Generator</a>
+                            <a href="video.html" class="ai-generators">Video Generator</a>
+                            <a href="music.html" class="ai-generators">Music Generator</a>
+                            <a href="chat/gpt-chat.html" class="ai-generators">Chat</a>
+                            <a href="machine-learning-model/image-editor.html" class="ai-generators">Photo Editor</a>
+                            <a href="pricing.html" class="pricing">Pricing</a>
+                            <a href="definitions.html" class="glossary">Glossary</a>
+                            <a href="docs.html" class="apidocs">Docs</a>
+                            <a href="cookie-policy.html" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
+                            <a href="privacy-policy.html" class="privacy-policy" target="_blank">Privacy Policy</a>
+                          </div>
+                          <div class="menu-settings">
+                            <div class="menu-border"></div>
+                            <button id="login-button-dropdown" onclick="openSignup()" class="logout">
+                              Login
+                            </button>
+                          </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+        </header>
+
+        <div class="coming-soon-container">
+            <img src="static/images/new-glossary.svg" alt="Glossary" class="coming-soon-icon" />
+            <h1 class="coming-soon-title">AI Glossary</h1>
+            <p class="coming-soon-subtitle">
+                A comprehensive glossary of artificial intelligence and machine learning terms, definitions, and concepts.
+            </p>
+            <div class="coming-soon-badge">
+                <span class="coming-soon-pulse"></span>
+                Coming Soon
+            </div>
+            <div class="coming-soon-categories">
+                <span class="category-chip">Neural Networks</span>
+                <span class="category-chip">Natural Language Processing</span>
+                <span class="category-chip">Computer Vision</span>
+                <span class="category-chip">Reinforcement Learning</span>
+                <span class="category-chip">Generative AI</span>
+                <span class="category-chip">Evaluation Metrics</span>
+                <span class="category-chip">Deep Learning</span>
+                <span class="category-chip">Probability &amp; Statistics</span>
+            </div>
+        </div>
+
+		<footer>
+            <div class="footer-row">
+                <div class="leftfooter">
+                    <a href="index.html">
+                        <img src="static/images/SmallFlops.svg" alt="flops" />
+                        <p>Deep AI, Inc. &copy;</p>
+                    </a>
+                </div>
+                <div class="rightfooter">
+                    <a href="feedback.html" class="feedback">Submit Feedback</a>
+                    <a href="mailto:team@deepai.org" class="contact">Contact</a>
+                    <a href="press.html" class="press">Press</a>
+                    <a href="terms-of-service/terms-of-service.html" class="legal">Legal</a>
+                    <a class=" " href="https://twitter.com/DeepAI" target="_blank"><img src="static/images/xLogo.svg" alt="xlogo" class="xlogo" /></a>
+                    <a class=" " href="https://www.linkedin.com/company/deepai" target="_blank"><img src="static/images/linkedinLogo.svg" alt="linkedinlogo" class="linkedinlogo" /></a>
+                    <a class=" " href="https://www.instagram.com/deepai_org/" target="_blank"><img src="static/images/instagramLogo.svg" alt="instagramlogo" class="instagramlogo" /></a>
+                    <a class=" " href="https://www.tiktok.com/@_ai_creations" target="_blank"><img src="static/images/tiktokLogo.svg" alt="tiktoklogo" class="tiktoklogo" /></a>
+                    <a class=" " href="https://www.reddit.com/r/DeepAI/" target="_blank"><img src="static/images/redditLogo.svg" alt="redditlogo" class="redditlogo" /></a>
+                </div>
+            </div>
+
+		<!-- eu-footer-compliance: EU-mandated footer disclosures -->
+<!-- Injected by apply-patches.sh before </footer>. -->
+<!-- Contains: EU Representative, DPO, supervisory authority, Impressum, legal links -->
+<div id="eu-footer-compliance" style="padding:6px 16px; text-align:center; font-size:11px; color:rgba(255,255,255,0.35); font-family:'Atkinson Hyperlegible Next',sans-serif; line-height:1.6;">
+  Deep AI, Inc. | 1968 S. Coast Hwy #3773, Laguna Beach, CA 92651 |
+  EU Rep: <a href="mailto:eu-representative@deepai.org" style="color:rgba(255,255,255,0.45);">[TBD]</a> |
+  DPO: <a href="mailto:dpo@deepai.org" style="color:rgba(255,255,255,0.45);">dpo@deepai.org</a> |
+  <a href="privacy-notice.html" style="color:rgba(255,255,255,0.45);">Privacy</a> |
+  <a href="cookie-policy.html" style="color:rgba(255,255,255,0.45);">Cookies</a> |
+  <a href="dsa-notice.html" style="color:rgba(255,255,255,0.45);">Report Content</a> |
+  <a href="data-rights.html" style="color:rgba(255,255,255,0.45);">Data Rights</a>
+</div>
+
+</footer>
+
+        <script>
+        // Minimal nav dropdown
+        function mainNavDrop() {
+            var dropdown = document.getElementById("mainNavDropdown");
+            if (dropdown) dropdown.classList.toggle("show-dropdown");
+        }
+        var dropMenuButton = document.getElementById("dropMenuButton");
+        if (dropMenuButton) {
+            dropMenuButton.addEventListener("click", function(event) {
+                event.stopPropagation();
+                mainNavDrop();
+            }, false);
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var d = document.getElementById("mainNavDropdown");
+                if (d && d.classList.contains('show-dropdown')) d.classList.remove('show-dropdown');
+            }
+        };
+        // Stub functions referenced by nav
+        function openLogin() {}
+        function openSignup() {}
+        </script>
+	</body>
+</html>
