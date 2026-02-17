@@ -1101,21 +1101,11 @@ a.button.menu {
 <!-- Begin Dolphin -->
 <script>
 (function() {
-  console.log('[DOLPHIN] script running');
   var dolphinEl = document.getElementById('dolphin');
-  if (!dolphinEl) { console.log('[DOLPHIN] element not found!'); return; }
-  console.log('[DOLPHIN] element found, src=' + dolphinEl.src);
+  if (!dolphinEl) { return; }
 
   // Move to body root to avoid clipping
   document.body.appendChild(dolphinEl);
-
-  // DEBUG: show dolphin immediately at center of screen for 3 seconds
-  dolphinEl.style.cssText = 'display:block!important;position:fixed!important;z-index:2147483647!important;width:120px!important;height:auto!important;pointer-events:none!important;left:50vw;top:50vh;border:3px solid red;';
-  console.log('[DOLPHIN] made visible at center, computed display=' + getComputedStyle(dolphinEl).display);
-  setTimeout(function() {
-    dolphinEl.style.cssText = 'display:none;';
-    console.log('[DOLPHIN] hidden after debug flash');
-  }, 3000);
 
   var dolphinVisible = false;
   var following   = false;
@@ -1127,10 +1117,8 @@ a.button.menu {
 
   // Logo click handler
   var logoLink = document.querySelector('.logo-link');
-  console.log('[DOLPHIN] logoLink=' + (logoLink ? 'found' : 'NOT FOUND'));
   if (logoLink) {
     logoLink.addEventListener('click', function(e) {
-      console.log('[DOLPHIN] logo clicked! pathname=' + window.location.pathname);
       e.preventDefault();
       e.stopPropagation();
       toggleDolphin(e);
@@ -1139,7 +1127,6 @@ a.button.menu {
 
   function toggleDolphin(e) {
     dolphinVisible = !dolphinVisible;
-    console.log('[DOLPHIN] toggle, visible=' + dolphinVisible);
     if (dolphinVisible) {
       dolphinEl.style.cssText = 'display:block!important;position:fixed!important;z-index:2147483647!important;width:120px!important;height:auto!important;pointer-events:none!important;';
 
@@ -1150,7 +1137,6 @@ a.button.menu {
 
       dolphinEl.style.left = currentX + 'px';
       dolphinEl.style.top = currentY + 'px';
-      console.log('[DOLPHIN] positioned at ' + currentX + ',' + currentY);
 
       startFollowing();
     } else {
