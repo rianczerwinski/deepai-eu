@@ -184,6 +184,14 @@
         // Stub functions referenced by nav
         function openLogin() {}
         function openSignup() {}
+
+        // Update nav if user is logged in
+        if (window.user_object && window.user_object.pk) {
+            var headerLogin = document.getElementById('headerLoginButton');
+            if (headerLogin) { headerLogin.style.display = 'none'; }
+            var loginDropdown = document.getElementById('login-button-dropdown');
+            if (loginDropdown) { loginDropdown.innerHTML = 'Logout'; loginDropdown.setAttribute('onclick', "localStorage.removeItem('user'); window.location.reload();"); }
+        }
         </script>
 	</body>
 </html>
