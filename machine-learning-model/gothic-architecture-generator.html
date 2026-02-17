@@ -2516,6 +2516,35 @@ editControls.style.display='none';highlightAndSelectEditGenerator('editModelHdBu
 })();
 </script>
 
-<script src="/deepai-eu/static/js/demo-login.js"></script>
+<script src="../static/js/demo-login.js"></script>
+<!-- eu-ai-disclosure: AI Act Art. 50 transparency disclosure -->
+<!-- Injected by apply-patches.sh into generator, chat, video, voice, music pages. -->
+<!-- Informs users they are interacting with AI / receiving AI-generated content. -->
+<div id="eu-ai-disclosure" style="position:fixed; bottom:60px; right:16px; z-index:99999; background:rgba(23,10,44,0.88); border:1px solid rgba(199,100,236,0.3); border-radius:8px; padding:6px 28px 6px 10px; color:rgba(255,255,255,0.7); font-size:11px; font-family:'Atkinson Hyperlegible Next',sans-serif; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); max-width:240px; pointer-events:auto; transition:opacity 0.4s ease;">
+  <div style="display:flex; align-items:center; gap:6px;">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="flex-shrink:0; opacity:0.7;">
+      <circle cx="8" cy="8" r="7" stroke="#c764ec" stroke-width="1.5"/>
+      <text x="8" y="12" text-anchor="middle" fill="#c764ec" font-size="11" font-weight="600">i</text>
+    </svg>
+    <span>AI-generated content. <a href="ai-transparency.html" style="color:#c764ec;">Details</a></span>
+  </div>
+  <button onclick="var d=document.getElementById('eu-ai-disclosure');d.style.opacity='0';setTimeout(function(){d.style.display='none'},400)" style="position:absolute; top:3px; right:6px; background:none; border:none; color:rgba(255,255,255,0.4); cursor:pointer; font-size:13px; line-height:1; padding:2px 4px;">&times;</button>
+</div>
+<script>
+(function(){
+  var d=document.getElementById('eu-ai-disclosure');
+  if(!d)return;
+  var done=false;
+  function dismiss(){
+    if(done)return;done=true;
+    d.style.opacity='0';
+    setTimeout(function(){d.style.display='none'},400);
+  }
+  var t=setTimeout(dismiss,5000);
+  d.addEventListener('mouseenter',function(){d.style.opacity='1';clearTimeout(t)});
+  d.addEventListener('mouseleave',function(){t=setTimeout(dismiss,1500)});
+})();
+</script>
+
 </body>
 </html>

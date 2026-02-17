@@ -51,7 +51,7 @@
       'border:none;border-radius:12px;' +
       'padding:5px 14px;height:32px;' +
       'white-space:nowrap;cursor:pointer;' +
-      'margin-right:8px;' +
+      'margin-right:8px;align-self:center;' +
       'animation:demo-pulse 2s ease-in-out infinite;' +
       'font-family:inherit;letter-spacing:.3px;' +
       'transition:transform .15s ease;' +
