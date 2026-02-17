@@ -40,7 +40,7 @@
         </script>
         
   
-  <link rel="canonical" href="${apiResultHtml[i].url_handle}.html">
+  <link rel="canonical" href="gpt-chat.html">
 
     <meta name="description" content="AI Chat is an AI chatbot that writes text. You can use it to write stories, messages, or programming code.">
     <meta property="og:url" content="chat">
@@ -455,7 +455,7 @@ a.button.menu {
       <P style="display: none;">DeepAI</P>
     </a>
     <div class="nav-buttons">
-        <a class="button headerbutton aichat" href="${apiResultHtml[i].url_handle}.html">Chat</a>
+        <a class="button headerbutton aichat" href="gpt-chat.html">Chat</a>
         <a class="button headerbutton imagegenerator" href="../machine-learning-model/text2img.html">Image Generator</a>
         <a class="button headerbutton videogenerator" href="../video.html">Video</a>
         <a class="button headerbutton audiogenerator" href="../music.html">Music</a>
@@ -486,24 +486,24 @@ a.button.menu {
                           </svg>
                         </div>
                         <div id="navProfileSection" class="nav-profile-section">
-                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/dashboard/profile')" src="static/images/dolphin-icon.jpeg" />
+                          <img class="usericon" id="navUserAvatar" alt="avatar" loading="lazy" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')" src="static/images/dolphin-icon.jpeg" />
                           <div class="nav-usernames">
                             <p class="nav-profilename" id="navUserName"></p>
                             <p class="nav-username" id="navUserEmail"></p>
                           </div>
                         </div>
-                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/dashboard/profile')">Account Settings</button>
+                        <button id="navProfileButton" class="button nav-profile-button" onclick="window.location.replace('/deepai-eu/dashboard/profile.html')">Account Settings</button>
                         <div class="menu-options">
                           <div class="pages">
                             <a href="../machine-learning-model/text2img.html" class="ai-generators">Image Generator</a>
                             <a href="../video.html" class="ai-generators">Video Generator</a>
                             <a href="../music.html" class="ai-generators">Music Generator</a>
-                            <a href="${apiResultHtml[i].url_handle}.html" class="ai-generators">Chat</a>
+                            <a href="gpt-chat.html" class="ai-generators">Chat</a>
                             <a href="../machine-learning-model/image-editor.html" class="ai-generators">Photo Editor</a>
                             <a href="../pricing.html" class="pricing">Pricing</a>
                             <a href="definitions" class="glossary">Glossary</a>
                             <a href="../docs.html" class="apidocs">Docs</a>
-                            <a href="${apiResultHtml[i].url_handle}.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
+                            <a href="gpt-chat.html#" onclick="openPrivacyModal(); return false;" class="privacy-choices">Your Privacy Choices <img src="static/images/privacy-choices-icon.svg" alt="" style="height: 1em; vertical-align: -1px; margin-left: 4px;" /></a>
                             <a href="../privacy-policy.html" class="privacy-policy" target="_blank">Privacy Policy</a>
                           </div>
                           <div class="menu-settings">
@@ -604,7 +604,7 @@ a.button.menu {
 
   <!-- New Chat Button (top-right) -->
   <div class="new-chat-button-container">
-    <a href="${apiResultHtml[i].url_handle}.html" class="new-chat-button">
+    <a href="gpt-chat.html" class="new-chat-button">
       <svg class="plus-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11 3.5L11 18.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M3.5 11L18.5 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1463,8 +1463,8 @@ dropdownUser.style.display="flex";if(profileSecNav)
 profileSecNav.style.display="flex";if(profileButtonNav)
 profileButtonNav.style.display="flex";if(navUsername&&user_object.username)
 navUsername.textContent=user_object.username;if(navUseremail&&user_object.email)
-navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/dashboard/profile')");button.innerHTML="My Profile";}
-const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/dashboard/profile')");signupDropdownLi.innerHTML="My Profile";}
+navUseremail.textContent=user_object.email;for(const signupButton of Array.from(document.getElementsByClassName('button login'))){const button=signupButton;button.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");button.innerHTML="My Profile";}
+const signupDropdownLi=document.getElementById('signup-button-dropdown-li');if(signupDropdownLi){signupDropdownLi.setAttribute('onclick',"window.location.replace('/deepai-eu/dashboard/profile.html')");signupDropdownLi.innerHTML="My Profile";}
 for(const loginButton of Array.from(document.getElementsByClassName('login-button'))){const button=loginButton;button.setAttribute('onclick',"logout()");button.innerHTML="Log Out";}
 const loginDropdown=document.getElementById('login-button-dropdown');if(loginDropdown){loginDropdown.setAttribute('onclick',"logout()");loginDropdown.innerHTML="Logout";}
 applyCachedHeartsToHeartsOnPage();await refreshHeartsFromServer();}
